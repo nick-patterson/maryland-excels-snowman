@@ -1,0 +1,210 @@
+@import "normalize";
+
+@import "bits";
+@import "functions";
+@import "base";
+@import "grid";
+@import "typography";
+
+html {
+  background-color: color(white);
+}
+
+.container {
+  width: 90%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.vertical-align--table {
+  width: 100%;
+  height: 100%;
+  display: table;
+  .vertical-align--table-cell{
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+html, body {
+  height: 100%;
+  text-align: center;
+}
+
+.grid{
+  margin: base(2) 0;
+
+  div {
+    height: base(2);
+    margin-bottom: $gutter-width;
+    background-clip: content-box;
+    background-color: darken(color(white), 12);  
+  }
+}
+
+body {
+  height: 100%;
+}
+
+header {
+  left: 0;
+  width: 100%;
+  background: white url('../images/lightpaperfibers_@2X.png');
+  background-size: 500px 300px;
+  height: 85px;
+  position: relative;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 3px 20px rgba(color(black), .5);
+
+  .header-container {
+    padding: 0 2em;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+    text-align: left;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }  
+  }
+
+  .excels-logo {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -5px;
+
+    img {
+      width: 240px;
+    }
+  }
+}
+
+.unstaged-image {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+}
+
+#main-scene {
+  position: relative;
+  width: 100%;
+  //height: 100%;
+
+  #snowman-canvas {
+    //margin-top: 85px;
+  }
+
+  #build-buttons-container {
+    //display: inline-block;
+    width: 75%;
+    max-width: 1440px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    #build-button-prev {
+      float: left;
+      box-shadow: -3px 3px 10px rgba(color(black), .5);
+    }
+
+    #build-button-next {
+      float: right;
+      box-shadow: 3px 3px 10px rgba(color(black), .5);
+    }
+
+    .build-button {
+      -webkit-appearance: none;
+      appearance: none;
+      //box-shadow: none;
+      background: whitesmoke url('../images/lightpaperfibers_@2X.png');
+      background-size: 500px 300px;
+      border: none;
+      border-radius: 100%;
+      width: 70px;
+      height: 70px;
+      padding: 8px;
+
+      &:focus {
+        outline: none;
+      }
+
+      .build-button-inner {
+        height: 100%;
+        width: 100%;
+        border: 1px solid color(light-gray);
+        border-radius: 100%;
+        color: color(dark-blue);
+        font-size: 50px;
+        line-height: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+#build-toolbar {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  display: block;
+  background: whitesmoke url('../images/lightpaperfibers_@2X.png');
+  background-size: 500px 300px;
+  box-shadow: 0 -3px 20px rgba(color(black), .5);
+
+  .build-toolbar-container {
+    display: table;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 100%;
+    border-left: 1px solid color(light-gray);
+    border-right: 1px solid color(light-gray);
+    background: rgba(color(blue-white),.5);
+    .build-toolbar-button {
+      position: relative;
+      display: table-cell;
+      width: (100 / 7) * 1%;
+      vertical-align: middle;
+      border-right: 1px solid color(light-gray);
+      background: none;
+      transition: background .2s;
+
+      &:hover {
+        background: rgba(color(light-blue), .35);
+        cursor: pointer;
+      }
+
+      &.build-toolbar-button-active {
+        background: rgba(color(light-blue), .65);
+        border-top: 2px solid color(dark-blue);
+        text-align: center;
+        &:before {
+          content: '';
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          width: 0; 
+          height: 0;
+          left: 50%;
+          margin-left: -8px;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;            
+          border-top: 8px solid color(dark-blue);
+        }
+      }
+
+      &.build-toolbar-last-button {
+        border-right: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{% extends "layouts/layout.html" %}
+
+{% block title %}Maryland Excels — Build Your Own Snowman {% endblock %}
+{% block content %}
+  
+  {% include "includes/navigation.html" %}
+
+  <!--IMAGES-->
+
+  <!--SCENES-->
+  <img src="public/images/bg-classic.jpg" id="bg-classic" class="unstaged-image">
+  <img src="public/images/bg-future.jpg" id="bg-future" class="unstaged-image">
+  <img src="public/images/bg-western.jpg" id="bg-western" class="unstaged-image">
+
+  
+  <section id="main-scene">
+    <canvas id="snowman-canvas">
+    </canvas>
+    <div id="build-buttons-container">
+      <button id="build-button-prev" class="build-button">
+         <div class="build-button-inner">
+          <
+        </div>
+      </button>
+      <button id="build-button-next" class="build-button">
+        <div class="build-button-inner">
+         >
+        </div>
+      </button>
+    </div>
+  </section>
+  <div id="build-toolbar">
+    <div class="build-toolbar-container">
+      <div id="hat-button" class="build-toolbar-button build-toolbar-button-active" data-target="hat">
+        <div class="button-text">HAT</div>
+      </div>
+      <div id="face-button" class="build-toolbar-button" data-target="face">
+        <div class="button-text">FACE</div>
+      </div>
+      <div id="head-button" class="build-toolbar-button" data-target="head">
+        <div class="button-text">HEAD</div>
+      </div>
+      <div id="torso-button" class="build-toolbar-button" data-target="torso">
+        <div class="button-text">TORSO</div>
+      </div>
+      <div id="arms-button" class="build-toolbar-button" data-target="arms">
+        <div class="button-text">ARMS</div>
+      </div>
+      <div id="base-button" class="build-toolbar-button" data-target="base">
+        <div class="button-text">BASE</div>
+      </div>
+      <div id="scene-button" class="build-toolbar-button build-toolbar-last-button" data-target="scene">
+        <div class="button-text">SCENE</div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
