@@ -12,6 +12,8 @@ var snowman = {
 		scene: []
 	},
 
+	scale: '',
+
 	current: {
 		hat: 0,
 		face: 0,
@@ -36,10 +38,6 @@ var snowman = {
 
 		// DIMENSION HELPERS
 
-		function getWidthInPercentage(percentage) {
-			return canvas.width * (percentage / 100);
-		}
-
 		function getHeightInPercentage(percentage) {
 			return canvas.height * (percentage / 100);
 		}
@@ -47,16 +45,20 @@ var snowman = {
 
 		// SETUP SNOWMAN
 
-		var theSnowman, theSnowmanTorso, theSnowmanHead, base, torso, leftArm, rightArm, head, face, hat;
+		var theSnowman, theSnowmanTorso, theSnowmanHead, base, torso, leftArm, rightArm, head, face, hat, totalSnowmanHeight;
 
 		theSnowman = new fabric.Group();
 
 		function buildSnowman() {
 
+			theSnowman.forEachObject(function(i){
+				theSnowman.remove(i);
+			});
+
 			base = snowman.snowmanElements.base[snowman.current.base].image;
 			torso = snowman.snowmanElements.torso[snowman.current.torso].image;
-			//leftArm = snowman.snowmanElements.leftArm[snowman.current.leftArm];
-			//rightArm = snowman.snowmanElements.rightArm[snowman.current.rightArm];
+			leftArm = snowman.snowmanElements.arms[snowman.current.arms].left;
+			rightArm = snowman.snowmanElements.arms[snowman.current.arms].right;
 			head = snowman.snowmanElements.head[snowman.current.head].image;
 			face = snowman.snowmanElements.face[snowman.current.face];
 			hat = snowman.snowmanElements.hat[snowman.current.hat];
@@ -64,38 +66,219 @@ var snowman = {
 			theSnowmanTorso = new fabric.Group();
 			theSnowmanHead = new fabric.Group();
 
-			//theSnowmanTorso.add(leftArm);
+			theSnowmanTorso.add(leftArm);
 			theSnowmanTorso.add(torso);
-			//theSnowmanTorso.add(rightArm);
+			theSnowmanTorso.add(rightArm);
 
 			theSnowmanHead.add(head);
-			//theSnowmanHead.add(face);
-			//theSnowmanHead.add(hat);
+			theSnowmanHead.add(face);
+			theSnowmanHead.add(hat);
 
 			theSnowman.add(base);
 			theSnowman.add(theSnowmanTorso);
 			theSnowman.add(theSnowmanHead);
 
+			var baseWidth = base.getWidth();
+			var baseHeight = base.getHeight();
+			base.left = -.5 * baseWidth;
+
 			theSnowmanTorso.originX = 'center';
 			theSnowmanTorso.originY = 'center';
 			var torsoHeight = torso.getHeight();
+			var torsoWidth = torso.getWidth();
 			theSnowmanTorso.top = -.75 * torsoHeight;
+			theSnowmanTorso.left = -.5 * torsoWidth;
 
+			var leftArmWidth = leftArm.getWidth();
+			var leftArmHeight = leftArm.getHeight();
+			var rightArmWidth = rightArm.getWidth();
+			var rightArmHeight = rightArm.getHeight();
+
+
+			// MODIFY HEAD
+
+			theSnowmanHead.forEachObject(function(i){
+				i.setScaleX(.2);
+				i.setScaleY(.2);
+			});
+
+			var headHeight = head.getHeight();
+			var headWidth = head.getWidth();
+			var faceHeight = face.getHeight();
+			var faceWidth = snowman.snowmanElements.face[snowman.current.face].getWidth();	
+
+			face.top = (headHeight / 2) - (faceHeight / 2);
+			face.left = -1 * (faceWidth / 2);
+
+			var hatHeight = hat.getHeight();
+			var hatWidth = hat.getWidth();
+			if (snowman.current.hat === 0){
+				switch (snowman.current.head) {
+					case 0:
+						hat.top = -1 * ((headHeight / 2.5) + (hatHeight / 2));
+						hat.left = -1 * (hatWidth / 2.1);
+					break;
+					case 1:
+						hat.top = -1 * ((headHeight / 2.85) + (hatHeight / 2));
+						hat.left = -1 * (hatWidth / 2.15);
+					break;
+					case 2:
+						hat.top = -1 * ((headHeight / 2.75) + (hatHeight / 2));
+						hat.left = -1 * (hatWidth / 2.3);
+					break;
+					default:
+				}
+			}
+			else {
+				hat.top = -1 * ((headHeight / 2.1) + (hatHeight / 2));
+				hat.left = -1 * (hatWidth / 2.1);
+			}
 
 			theSnowmanHead.originX = 'center';
 			theSnowmanHead.originY = 'center';
-			var headHeight = head.getHeight();
+			head.left = -.5 * headWidth;
 			theSnowmanHead.top = -1 * ((torsoHeight * .75) + (headHeight * .75));
+
+
+			// SPECIAL CASES 
+
+			switch (snowman.current.torso) {
+				case 0:
+					leftArm.top = -1 * (torsoHeight / 1.4);
+					leftArm.left = -1 * ((torsoWidth / 2) + (leftArmWidth / 2));
+					rightArm.top = -1 * (torsoHeight / 2);
+					rightArm.left = (torsoWidth / 1.2);
+					if (snowman.current.head ===1) {
+						theSnowmanHead.left = 6;
+						theSnowmanHead.top = -1 * ((torsoHeight * .75) + (headHeight * .75)) - 8;
+					}
+				break;
+				case 1:
+					leftArm.top = -1 * (torsoHeight / 2);
+					leftArm.left = -1 * (torsoWidth - (leftArmWidth / 9));
+					rightArm.top = -1 * (torsoHeight / 2.75);
+					rightArm.left = (torsoWidth / 1.2);
+					if (snowman.current.head === 1) {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .92));
+					}
+					else {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .8));
+					}
+				break;
+				case 2:
+					if (snowman.current.arms === 1) {
+						leftArm.top = -1 * (torsoHeight / 1.8);
+						leftArm.left = -1 * (torsoWidth / 1.05);
+						rightArm.top = -1 * (torsoHeight / 2.75);
+					}
+					else {
+						leftArm.top = -1 * (torsoHeight / 2);
+						leftArm.left = -1 * torsoWidth;
+						rightArm.top = -1 * (torsoHeight / 2.75);
+					}
+					rightArm.left = (torsoWidth / 1.3);
+					if (snowman.current.head != 1) {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .6));
+					}
+					else {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .7));
+					}
+				break;
+				default:
+			}
+
+			if (snowman.current.arms === 1) {
+				leftArm.bringToFront(theSnowmanTorso);
+			}
+
+			if (snowman.current.head === 1) {
+				theSnowmanHead.sendToBack(theSnowman);
+			}
+
+			totalSnowmanHeight = (baseHeight + torsoHeight + headHeight + hatHeight) / 1.1;
+
+			// PLACE SNOWMAN
+
+			scaleSnowman();
 
 			theSnowman.originX = 'center';
 			theSnowman.originY = 'bottom';
 			theSnowman.selectable = false;
-			theSnowman.left = getWidthInPercentage(50);
-			theSnowman.top = getHeightInPercentage(50) + (theSnowman.height / 2);
+			theSnowman.top = getHeightInPercentage(52);
 
 			canvas.add(theSnowman);
+			theSnowman.centerH();
 
 			theSnowman.bringToFront();
+
+		}
+
+		function scaleSnowman() {
+			snowman.scale = (canvasHeight * .85) / totalSnowmanHeight;
+			TweenMax.to(theSnowman, 1, {scaleY: snowman.scale, scaleX: snowman.scale});	
+		}
+
+
+		function setupSnowmanElement(element, index, sourceToPullOne, sourceToPullTwo) {
+
+			if (element === 'base' || element === 'torso' || element === 'head') {
+				snowman.snowmanElements[element][index] = new Object();
+				snowman.snowmanElements[element][index].image = new fabric.Image(sourceToPullOne[index]);
+				snowman.snowmanElements[element][index].image.selectable = false;
+				snowman.snowmanElements[element][index].image.setOpacity(0);
+				snowman.snowmanElements[element][index].image.OriginY = 'center';
+				snowman.snowmanElements[element][index].image.OriginX = 'center';
+				snowman.snowmanElements[element][index].image.setScaleX(.2);
+				snowman.snowmanElements[element][index].image.setScaleY(.2);
+
+				if (element === 'base'){
+					snowman.snowmanElements[element][index].strength = $(sourceToPullOne[index]).attr('strength');
+				}
+				else {
+					snowman.snowmanElements[element][index].weight = $(sourceToPullOne[index]).attr('weight');
+				}
+
+				snowman.snowmanElements[element][index].image.newOpacity = 0;
+				snowman.snowmanElements[element][0].image.setOpacity(1);
+			}
+			else {
+				if (element === 'arms') {
+					snowman.snowmanElements[element][index] = new Object();
+					snowman.snowmanElements[element][index].left = new fabric.Image(sourceToPullOne[index]);
+					snowman.snowmanElements[element][index].left.selectable = false;
+					snowman.snowmanElements[element][index].left.setOpacity(0);
+					snowman.snowmanElements[element][index].left.OriginY = 'center';
+					snowman.snowmanElements[element][index].left.OriginX = 'center';
+					snowman.snowmanElements[element][index].left.setScaleX(.2);
+					snowman.snowmanElements[element][index].left.setScaleY(.2);
+
+					snowman.snowmanElements[element][index].left.newOpacity = 0;
+					snowman.snowmanElements[element][0].left.setOpacity(1);
+
+					snowman.snowmanElements[element][index].right = new fabric.Image(sourceToPullTwo[index]);
+					snowman.snowmanElements[element][index].right.selectable = false;
+					snowman.snowmanElements[element][index].right.setOpacity(0);
+					snowman.snowmanElements[element][index].right.OriginY = 'center';
+					snowman.snowmanElements[element][index].right.OriginX = 'center';
+					snowman.snowmanElements[element][index].right.setScaleX(.2);
+					snowman.snowmanElements[element][index].right.setScaleY(.2);
+
+					snowman.snowmanElements[element][index].right.newOpacity = 0;
+					snowman.snowmanElements[element][0].right.setOpacity(1);
+				}
+				else {
+					snowman.snowmanElements[element][index] = new fabric.Image(sourceToPullOne[index]);
+					snowman.snowmanElements[element][index].selectable = false;
+					snowman.snowmanElements[element][index].setOpacity(0);
+					snowman.snowmanElements[element][index].OriginY = 'center';
+					snowman.snowmanElements[element][index].OriginX = 'center';
+					snowman.snowmanElements[element][index].setScaleX(.2);
+					snowman.snowmanElements[element][index].setScaleY(.2);
+
+					snowman.snowmanElements[element][index].newOpacity = 0;
+					snowman.snowmanElements[element][0].setOpacity(1);
+				}
+			}
 
 		}
 
@@ -135,7 +318,6 @@ var snowman = {
 				snowman.snowmanElements.scene[i].newOpacity = 0;
 				snowman.snowmanElements.scene[0].setOpacity(1);
 				canvas.add(snowman.snowmanElements.scene[0]);
-
 			}
 		}
 
@@ -151,7 +333,7 @@ var snowman = {
 		function generateBases() {
 			for (i = 0; i < baseSources.length; i++) {
 
-				snowman.snowmanElements.base[i] = new Object();
+				/*snowman.snowmanElements.base[i] = new Object();
 				snowman.snowmanElements.base[i].image = new fabric.Image(baseSources[i]);
 				snowman.snowmanElements.base[i].image.selectable = false;
 				snowman.snowmanElements.base[i].image.setOpacity(0);
@@ -159,36 +341,55 @@ var snowman = {
 				snowman.snowmanElements.base[i].image.OriginX = 'center';
 				snowman.snowmanElements.base[i].image.setScaleX(.2);
 				snowman.snowmanElements.base[i].image.setScaleY(.2);
-				var width = snowman.snowmanElements.base[i].image.getWidth();
-				snowman.snowmanElements.base[i].image.left = -.5 * width;
 
 				snowman.snowmanElements.base[i].strength = $(baseSources[i]).attr('strength');
 
 				snowman.snowmanElements.base[i].image.newOpacity = 0;
-				snowman.snowmanElements.base[0].image.setOpacity(1);
+				snowman.snowmanElements.base[0].image.setOpacity(1);*/
+				setupSnowmanElement('base', i, baseSources);
 			}
 		}
 
 
 		// GENERATE ARMS
 
-		var armsClassic = document.getElementById('arms-classic');
-		var armsFuture = document.getElementById('arms-future');
-		var armsWestern = document.getElementById('arms-western');
+		var leftArmClassic = document.getElementById('left-arm-classic');
+		var leftArmFuture = document.getElementById('left-arm-future');
+		var leftArmWestern = document.getElementById('left-arm-western');
 
-		var armsSources = [armsClassic, armsFuture, armsWestern];
+		var rightArmClassic = document.getElementById('right-arm-classic');
+		var rightArmFuture = document.getElementById('right-arm-future');
+		var rightArmWestern = document.getElementById('right-arm-western');
+
+		var leftArmSources = [leftArmClassic, leftArmFuture, leftArmWestern];
+		var rightArmSources = [rightArmClassic, rightArmFuture, rightArmWestern];
 
 		function generateArms() {
-			for (i = 0; i < armsSources.length; i++) {
+			for (i = 0; i < leftArmSources.length; i++) {
 
-				snowman.snowmanElements.arms[i] = new fabric.Image(armsSources[i]);
-				snowman.snowmanElements.arms[i].selectable = false;
-				snowman.snowmanElements.arms[i].setOpacity(0);
-				snowman.snowmanElements.arms[i].OriginY = 'center';
-				snowman.snowmanElements.arms[i].OriginX = 'center';
+				/*snowman.snowmanElements.arms[i] = new Object();
+				snowman.snowmanElements.arms[i].left = new fabric.Image(leftArmSources[i]);
+				snowman.snowmanElements.arms[i].left.selectable = false;
+				snowman.snowmanElements.arms[i].left.setOpacity(0);
+				snowman.snowmanElements.arms[i].left.OriginY = 'center';
+				snowman.snowmanElements.arms[i].left.OriginX = 'center';
+				snowman.snowmanElements.arms[i].left.setScaleX(.2);
+				snowman.snowmanElements.arms[i].left.setScaleY(.2);
 
-				snowman.snowmanElements.arms[i].newOpacity = 0;
-				snowman.snowmanElements.arms[0].setOpacity(1);
+				snowman.snowmanElements.arms[i].left.newOpacity = 0;
+				snowman.snowmanElements.arms[0].left.setOpacity(1);
+
+				snowman.snowmanElements.arms[i].right = new fabric.Image(rightArmSources[i]);
+				snowman.snowmanElements.arms[i].right.selectable = false;
+				snowman.snowmanElements.arms[i].right.setOpacity(0);
+				snowman.snowmanElements.arms[i].right.OriginY = 'center';
+				snowman.snowmanElements.arms[i].right.OriginX = 'center';
+				snowman.snowmanElements.arms[i].right.setScaleX(.2);
+				snowman.snowmanElements.arms[i].right.setScaleY(.2);
+
+				snowman.snowmanElements.arms[i].right.newOpacity = 0;
+				snowman.snowmanElements.arms[0].right.setOpacity(1);*/
+				setupSnowmanElement('arms', i, leftArmSources, rightArmSources);
 			}
 		}
 
@@ -205,7 +406,7 @@ var snowman = {
 
 			for (i = 0; i < torsoSources.length; i++) {
 
-				snowman.snowmanElements.torso[i] = new Object();
+				/*snowman.snowmanElements.torso[i] = new Object();
 				snowman.snowmanElements.torso[i].image = new fabric.Image(torsoSources[i]);
 				snowman.snowmanElements.torso[i].image.selectable = false;
 				snowman.snowmanElements.torso[i].image.setOpacity(0);
@@ -213,13 +414,12 @@ var snowman = {
 				snowman.snowmanElements.torso[i].image.OriginX = 'center';
 				snowman.snowmanElements.torso[i].image.setScaleX(.2);
 				snowman.snowmanElements.torso[i].image.setScaleY(.2);
-				var width = snowman.snowmanElements.torso[i].image.getWidth();
-				snowman.snowmanElements.torso[i].image.left = -.5 * width;
 
 				snowman.snowmanElements.torso[i].weight = $(torsoSources[i]).attr('weight');
 
 				snowman.snowmanElements.torso[i].image.newOpacity = 0;
-				snowman.snowmanElements.torso[0].image.setOpacity(1);
+				snowman.snowmanElements.torso[0].image.setOpacity(1);*/
+				setupSnowmanElement('torso', i, torsoSources);
 			}
 		}
 
@@ -235,7 +435,7 @@ var snowman = {
 		function generateHeads() {
 			for (i = 0; i < headSources.length; i++) {
 
-				snowman.snowmanElements.head[i] = new Object();
+				/*snowman.snowmanElements.head[i] = new Object();
 				snowman.snowmanElements.head[i].image = new fabric.Image(headSources[i]);
 				snowman.snowmanElements.head[i].image.selectable = false;
 				snowman.snowmanElements.head[i].image.setOpacity(0);
@@ -243,11 +443,62 @@ var snowman = {
 				snowman.snowmanElements.head[i].image.OriginX = 'center';
 				snowman.snowmanElements.head[i].image.setScaleX(.2);
 				snowman.snowmanElements.head[i].image.setScaleY(.2);
-				var width = snowman.snowmanElements.head[i].image.getWidth();
-				snowman.snowmanElements.head[i].image.left = -.5 * width;
 
 				snowman.snowmanElements.head[i].image.newOpacity = 0;
-				snowman.snowmanElements.head[0].image.setOpacity(1);
+				snowman.snowmanElements.head[0].image.setOpacity(1);*/
+				setupSnowmanElement('head', i, headSources);
+			}
+		}
+
+
+		// GENERATE FACES
+
+		var faceClassic = document.getElementById('face-classic');
+		var faceFuture = document.getElementById('face-future');
+		var faceWestern = document.getElementById('face-western');
+
+		var faceSources = [faceClassic, faceFuture, faceWestern];
+
+		function generateFaces() {
+			for (i = 0; i < faceSources.length; i++) {
+
+				/*snowman.snowmanElements.face[i] = new fabric.Image(faceSources[i]);
+				snowman.snowmanElements.face[i].selectable = false;
+				snowman.snowmanElements.face[i].setOpacity(0);
+				snowman.snowmanElements.face[i].OriginY = 'center';
+				snowman.snowmanElements.face[i].OriginX = 'center';
+				snowman.snowmanElements.face[i].setScaleX(.2);
+				snowman.snowmanElements.face[i].setScaleY(.2);
+
+				snowman.snowmanElements.face[i].newOpacity = 0;
+				snowman.snowmanElements.face[0].setOpacity(1);*/
+				setupSnowmanElement('face', i, faceSources);
+			}
+		}
+
+		// GENERATE HATS
+
+		var hatClassic = document.getElementById('hat-classic');
+		var hatFuture = document.getElementById('hat-future');
+		var hatWestern = document.getElementById('hat-western');
+
+		var hatSources = [hatClassic, hatFuture, hatWestern];
+
+		function generateHats() {
+			for (i = 0; i < hatSources.length; i++) {
+
+				/*snowman.snowmanElements.hat[i] = new fabric.Image(hatSources[i]);
+				snowman.snowmanElements.hat[i].selectable = false;
+				snowman.snowmanElements.hat[i].setOpacity(0);
+				snowman.snowmanElements.hat[i].OriginY = 'center';
+				snowman.snowmanElements.hat[i].OriginX = 'center';
+				snowman.snowmanElements.hat[i].setScaleX(.2);
+				snowman.snowmanElements.hat[i].setScaleY(.2);
+				var width = snowman.snowmanElements.hat[i].getWidth();
+
+				snowman.snowmanElements.hat[i].newOpacity = 0;
+				snowman.snowmanElements.hat[0].setOpacity(1);*/
+				setupSnowmanElement('hat', i, hatSources);
 			}
 		}
 
@@ -286,8 +537,32 @@ var snowman = {
 			}
 		}
 
-		function removeOld(element) {
-			canvas.remove(element);
+		function removeOld(element, snowmanElement) {
+			switch (snowmanElement.toString()) {
+				case 'hat':
+					theSnowmanHead.remove(element);
+				break;
+				case 'face':
+					theSnowmanHead.remove(element);
+				break;
+				case 'head':
+					theSnowmanHead.remove(element.image);
+				break;
+				case 'torso':
+					theSnowmanTorso.remove(element.image);
+				break;
+				case 'arms':
+					theSnowmanTorso.remove(element.left);
+					theSnowmanTorso.remove(element.right);
+				break;
+				case 'base':
+					theSnowman.remove(element.image);
+				break;
+				case 'scene':
+					canvas.remove(element);
+				break;
+				default:
+			}
 		}
 
 		function changeElement(element, direction) {
@@ -311,12 +586,28 @@ var snowman = {
 				}
 			}
 
-			canvas.add(snowman.snowmanElements[element][toIndex]);
-			canvas.bringToFront(theSnowman);
-			TweenMax.to(snowman.snowmanElements[element][currentIndex], .75, {opacity: 0, onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex]]});
-			TweenMax.to(snowman.snowmanElements[element][toIndex], .75, {opacity: 1});
+			if (element === 'scene') {
+				canvas.add(snowman.snowmanElements[element][toIndex]);
+			}
 
+			canvas.bringToFront(theSnowman);
 			snowman.current[element] = toIndex;
+
+			if (element === 'arms') {
+				TweenMax.to(snowman.snowmanElements[element][currentIndex].left, .75, {opacity: 0, onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
+				TweenMax.to(snowman.snowmanElements[element][toIndex].left, .75, {opacity: 1});
+				TweenMax.to(snowman.snowmanElements[element][currentIndex].right, .75, {opacity: 0, onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
+				TweenMax.to(snowman.snowmanElements[element][toIndex].right, .75, {opacity: 1});
+			}
+			else if (element != 'base' && element != 'torso' && element != 'head') {
+				TweenMax.to(snowman.snowmanElements[element][currentIndex], .75, {opacity: 0, onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
+				TweenMax.to(snowman.snowmanElements[element][toIndex], .75, {opacity: 1});
+			}
+			else {
+				TweenMax.to(snowman.snowmanElements[element][currentIndex].image, .75, {opacity: 0, onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
+				TweenMax.to(snowman.snowmanElements[element][toIndex].image, .75, {opacity: 1});
+			}
+			buildSnowman();
 		}
 
 
@@ -324,71 +615,47 @@ var snowman = {
 
 		generateScenes();
 		generateBases();
-		//generateArms();
+		generateArms();
 		generateTorsos();
 		generateHeads();
+		generateFaces();
+		generateHats();
 		buildSnowman();
+		scaleSnowman();
 		
 
 		$('.build-button').click(function(event){
-			if ($(this).is('#build-button-prev')) {
-				switch (snowman.toModify) {
-					case 'hat':
-
-					break;
-					case 'face':
-
-					break;
-					case 'head':
-
-					break;
-					case 'torso':
-
-					break;
-					case 'arms':
-
-					break;
-					case 'base':
-
-					break;
-					case 'scene':
-						changeElement('scene', 'prev');
-					default:
-
-				}
+			var direction = $(this).data('direction');
+			switch (snowman.toModify) {
+				case 'hat':
+					changeElement('hat', direction);
+				break;
+				case 'face':
+					changeElement('face', direction);
+				break;
+				case 'head':
+					changeElement('head', direction);
+				break;
+				case 'torso':
+					changeElement('torso', direction);
+				break;
+				case 'arms':
+					changeElement('arms', direction);
+				break;
+				case 'base':
+					changeElement('base', direction);
+				break;
+				case 'scene':
+					changeElement('scene', direction);
+				break;
 			}
-			else {
-				switch (snowman.toModify) {
-					case 'hat':
-
-					break;
-					case 'face':
-
-					break;
-					case 'head':
-
-					break;
-					case 'torso':
-
-					break;
-					case 'arms':
-
-					break;
-					case 'base':
-
-					break;
-					case 'scene':
-						changeElement('scene', 'next');
-					default:
 					
-				}
-			}
 		});
 
 
 		$(window).click(function(event){
 			//TweenMax.to(snowman, 2, {scaleX: 2, scaleY: 2, ease: Power1.easeOut, onUpdate: onUpdateHandler});
-			fall();
+			//fall();
 			//survive();
 		});
 
@@ -423,17 +690,17 @@ var snowman = {
 
 		$(window).resize(function(event){
 			// SIZE CANVAS
-			var canvasHeight = window.innerHeight - ($('header').height() + $('#build-toolbar').height());
+			canvasHeight = window.innerHeight - ($('header').height() + $('#build-toolbar').height());
 			canvas.setDimensions({width: window.innerWidth, height: canvasHeight});
 
 			// PLACE SNOWMAN
-			theSnowman.left = getWidthInPercentage(50);
-			theSnowman.top = getHeightInPercentage(70);
+			theSnowman.centerH();
+			theSnowman.top = getHeightInPercentage(52);
+			scaleSnowman();
 
 			// SIZE BACKGROUNDS
 			for (i = 0; i < sceneSources.length; i++) {
 				var canvasWidth = canvas.width;
-				var canvasHeight = canvas.height;
 				var canvasAspectRatio = canvasWidth / canvasHeight;
 				var width = sceneSources[i].width;
 				var height = sceneSources[i].height;
