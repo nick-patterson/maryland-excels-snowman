@@ -34,6 +34,7 @@ var snowman = {
 		var canvasHeight = window.innerHeight - ($('header').height() + $('#build-toolbar').height());
 		canvas.setDimensions({width: window.innerWidth, height: canvasHeight});
 		canvas.top = 85;
+		canvas.renderOnAddRemove = false;
 
 
 		// DIMENSION HELPERS
@@ -603,6 +604,7 @@ var snowman = {
 		}
 
 		$(window).resize(function(event){
+
 			// SIZE CANVAS
 			canvasHeight = window.innerHeight - ($('header').height() + $('#build-toolbar').height());
 			canvas.setDimensions({width: window.innerWidth, height: canvasHeight});
