@@ -1,8 +1,8 @@
 $baseline: 16px;
-$base-font-size: 16;
+$base-font-size: 18;
 
 $color-map: (
-	white: 			whitesmoke,
+	white: 			white,
 	black: 			#1e2027,
 	text: 			#3a3a3a,
 	blue-white:     #f5f8fa,
@@ -10,3 +10,15 @@ $color-map: (
 	dark-blue:      #05254c,
 	light-gray:     #e0e0e0
 );
+
+@mixin cta($foreground) {
+	padding: 1em 2.25em;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	font-weight: 700;
+	text-decoration: none;
+	color: color($foreground);
+	border-radius: 30px;
+	box-shadow: 3px 3px 10px rgba(color(black), .5);
+	transition: padding .2s;
+}

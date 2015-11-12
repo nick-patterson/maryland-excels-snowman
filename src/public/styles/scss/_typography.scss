@@ -1,15 +1,17 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700);
 
 $open-sans: 'Open Sans', sans-serif;
+$font-main: "verveine";
+$font-secondary: "proxima-nova";
 
 html {
-  color: color(text);
+  color: color(dark-blue);
   font-size: $base-font-size + 0px;
 }
 
 body {
-  line-height: 1.8em;
-  @include font($open-sans, $base-font-size, 300);
+  line-height: 1.6em;
+  @include font($font-secondary, $base-font-size, 300);
 }
 
 ::selection {
@@ -22,20 +24,24 @@ body {
   margin-top: 0;
   margin-bottom: base(1);
   //text-rendering: optimizeLegibility;
-  color:  color(text);
+  color:  color(dark-blue);
   line-height: 1.1em;
-  @include font($open-sans, 16, 300);
+  @include font($font-main, 16, 300);
   &::selection{
     //color: #000;
   }
 }
 
 //Header Sizing
-$headers: (h1: 48, h2: 40, h3: 32, h4: 28, h5: 22, h6: 16);
+$headers: (h1: 52, h2: 48, h3: 40, h4: 32, h5: 28, h6: 22);
 
 @each $header, $size in $headers {
   #{$header} {
     @extend %header;
     @include font-size($size);
   }
+}
+
+h1 {
+  text-shadow: 2px 2px 0 color(light-blue);
 }

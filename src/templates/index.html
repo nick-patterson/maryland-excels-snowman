@@ -5,12 +5,45 @@
   
   {% include "includes/navigation.html" %}
 
-  <!--IMAGES-->
+  <!-- ////////// IMAGES ////////// -->
 
   <!--SCENES-->
-  <img src="public/images/bg-classic.jpg" id="bg-classic" class="unstaged-image">
-  <img src="public/images/bg-future.jpg" id="bg-future" class="unstaged-image">
-  <img src="public/images/bg-western.jpg" id="bg-western" class="unstaged-image">
+  <img src="public/images/scene-classic.jpg" id="scene-classic" class="unstaged-image">
+  <img src="public/images/scene-future.jpg" id="scene-future" class="unstaged-image">
+  <img src="public/images/scene-western.jpg" id="scene-western" class="unstaged-image">
+
+  <!--BASES-->
+  <img src="public/images/base-classic.png" id="base-classic" data-strength="6" class="unstaged-image">
+  <img src="public/images/base-future.png" id="base-future" data-strength="10" class="unstaged-image">
+  <!--<img src="public/images/base-western.png" id="base-western" data-strength="4" class="unstaged-image">-->
+
+  <!--ARMS-->
+  <img src="public/images/left-arm-classic.png" id="left-arm-classic" class="unstaged-image">
+  <img src="public/images/left-arm-future.png" id="left-arm-future" class="unstaged-image">
+  <!--<img src="public/images/left-arm-western.png" id="left-arm-western" class="unstaged-image">-->
+  <img src="public/images/right-arm-classic.png" id="right-arm-classic" class="unstaged-image">
+  <img src="public/images/right-arm-future.png" id="right-arm-future" class="unstaged-image">
+  <!--<img src="public/images/right-arm-western.png" id="right-arm-western" class="unstaged-image">-->
+
+  <!--TORSOS-->
+  <img src="public/images/torso-classic.png" id="torso-classic" data-weight="3" class="unstaged-image">
+  <img src="public/images/torso-future.png" id="torso-future" data-weight="6" class="unstaged-image">
+  <!--<img src="public/images/torso-western.png" id="torso-western" data-weight="1" class="unstaged-image">-->
+
+  <!--HEADS-->
+  <img src="public/images/head-classic.png" id="head-classic" data-weight="2" class="unstaged-image">
+  <img src="public/images/head-future.png" id="head-future" data-weight="4" class="unstaged-image">
+  <!--<img src="public/images/head-western.png" id="head-western" data-weight="0" class="unstaged-image">-->
+
+  <!--FACES-->
+  <img src="public/images/face-classic.png" id="face-classic" class="unstaged-image">
+  <img src="public/images/face-future.png" id="face-future" class="unstaged-image">
+  <!--<img src="public/images/face-western.png" id="face-western" class="unstaged-image">-->
+
+  <!--HATS-->
+  <img src="public/images/hat-classic.png" id="hat-classic" class="unstaged-image">
+  <img src="public/images/hat-future.png" id="hat-future" class="unstaged-image">
+  <!--<img src="public/images/hat-western.png" id="hat-western" class="unstaged-image">-->
 
   
   <section id="main-scene">
@@ -52,6 +85,17 @@
       <div id="scene-button" class="build-toolbar-button build-toolbar-last-button" data-target="scene">
         <div class="button-text">SCENE</div>
       </div>
+    </div>
+  </div>
+  <div id="leave-modal">
+    <div id="leave-modal-inner">
+      <h1>HEY YOU!</h1>
+        <p>If you leave this page without downloading or sharing your snowman, he will be lost forever!</p>
+        <p>Are you sure you want to leave?</p>
+        <div id="leave-cta-container">
+          <a id="stay" class="cta" href="javascript:;">STAY</a>
+          <a id="leave" class="cta" href="javascript:;">LEAVE</a>
+        </div>
     </div>
   </div>
   

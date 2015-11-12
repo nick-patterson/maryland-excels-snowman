@@ -504,15 +504,15 @@ pre, table, fieldset, hr {
 }
 
 html {
-  color: #3a3a3a;
-  font-size: 16px;
+  color: #05254c;
+  font-size: 18px;
 }
 
 body {
-  line-height: 1.8em;
-  font-family: "Open Sans", sans-serif;
+  line-height: 1.6em;
+  font-family: "proxima-nova";
   font-weight: 300;
-  font-size: 16px;
+  font-size: 18px;
   font-size: 1rem;
 }
 
@@ -531,46 +531,50 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 16px;
-  color: #3a3a3a;
+  color: #05254c;
   line-height: 1.1em;
-  font-family: "Open Sans", sans-serif;
+  font-family: "verveine";
   font-weight: 300;
   font-size: 16px;
-  font-size: 1rem;
+  font-size: 0.88888889rem;
 }
 
 h1 {
-  font-size: 48px;
-  font-size: 3rem;
+  font-size: 52px;
+  font-size: 2.88888889rem;
 }
 
 h2 {
-  font-size: 40px;
-  font-size: 2.5rem;
+  font-size: 48px;
+  font-size: 2.66666667rem;
 }
 
 h3 {
-  font-size: 32px;
-  font-size: 2rem;
+  font-size: 40px;
+  font-size: 2.22222222rem;
 }
 
 h4 {
-  font-size: 28px;
-  font-size: 1.75rem;
+  font-size: 32px;
+  font-size: 1.77777778rem;
 }
 
 h5 {
-  font-size: 22px;
-  font-size: 1.375rem;
+  font-size: 28px;
+  font-size: 1.55555556rem;
 }
 
 h6 {
-  font-size: 16px;
-  font-size: 1rem;
+  font-size: 22px;
+  font-size: 1.22222222rem;
+}
+
+h1 {
+  text-shadow: 2px 2px 0 #c7e8ff;
 }
 
 html {
-  background-color: whitesmoke;
+  background-color: white;
 }
 
 .container {
@@ -601,7 +605,7 @@ html, body {
   height: 32px;
   margin-bottom: 20px;
   background-clip: content-box;
-  background-color: #d6d6d6;
+  background-color: #e0e0e0;
 }
 
 body {
@@ -626,6 +630,7 @@ header .header-container {
   max-width: 1440px;
   height: 100%;
   text-align: left;
+  display: table;
 }
 header .header-container:before {
   content: "";
@@ -634,13 +639,29 @@ header .header-container:before {
   height: 100%;
 }
 header .excels-logo {
-  display: inline-block;
+  display: table-cell;
   vertical-align: middle;
   position: relative;
   top: -5px;
 }
 header .excels-logo img {
   width: 240px;
+}
+header .title {
+  font-family: "verveine";
+  color: #05254c;
+  font-size: 2.8em;
+  text-align: right;
+  display: table-cell;
+  vertical-align: middle;
+  text-shadow: 2px 2px 0 #c7e8ff;
+  position: relative;
+  top: 2px;
+}
+header .title small {
+  font-size: .6em;
+  position: relative;
+  top: -3px;
 }
 
 .unstaged-image {
@@ -656,10 +677,11 @@ header .excels-logo img {
 }
 #main-scene #build-buttons-container {
   width: 75%;
-  max-width: 1440px;
+  max-width: 1200px;
   position: absolute;
   top: 50%;
   left: 50%;
+  height: 85px;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -683,6 +705,17 @@ header .excels-logo img {
   width: 70px;
   height: 70px;
   padding: 8px;
+  -webkit-transition: width .2s, height .2s, box-shadow .2s;
+          transition: width .2s, height .2s, box-shadow .2s;
+  vertical-align: middle;
+}
+#main-scene #build-buttons-container .build-button:hover {
+  width: 76px;
+  height: 76px;
+}
+#main-scene #build-buttons-container .build-button:hover .build-button-inner {
+  line-height: 107%;
+  background: #c7e8ff;
 }
 #main-scene #build-buttons-container .build-button:focus {
   outline: none;
@@ -696,6 +729,9 @@ header .excels-logo img {
   font-size: 50px;
   line-height: 100%;
   text-align: center;
+  font-family: "verveine";
+  -webkit-transition: line-height .2s, background .2s;
+          transition: line-height .2s, background .2s;
 }
 
 #build-toolbar {
@@ -733,7 +769,7 @@ header .excels-logo img {
   cursor: pointer;
 }
 #build-toolbar .build-toolbar-container .build-toolbar-button.build-toolbar-button-active {
-  background: rgba(199, 232, 255, 0.65);
+  background: #c7e8ff;
   border-top: 2px solid #05254c;
   text-align: center;
 }
@@ -752,4 +788,98 @@ header .excels-logo img {
 }
 #build-toolbar .build-toolbar-container .build-toolbar-button.build-toolbar-last-button {
   border-right: none;
+}
+
+#leave-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .5s, visibility .5s;
+          transition: opacity .5s, visibility .5s;
+}
+#leave-modal.leave-modal-active {
+  opacity: 1;
+  visibility: visible;
+}
+#leave-modal.leave-modal-active #leave-modal-inner {
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+#leave-modal #leave-modal-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-block;
+  width: 50%;
+  height: 50%;
+  vertical-align: middle;
+  -webkit-transform: translate(-50%, -55%);
+      -ms-transform: translate(-50%, -55%);
+          transform: translate(-50%, -55%);
+  -webkit-transition: -webkit-transform .25s;
+          transition: transform .25s;
+  background: url("../images/ui/ui-snowball.png") center no-repeat;
+  background-size: contain;
+  padding: 3% 12%;
+}
+#leave-modal #leave-modal-inner h1 {
+  margin-top: 10%;
+}
+#leave-modal #leave-modal-inner #leave-cta-container {
+  margin-top: 2em;
+}
+#leave-modal #leave-modal-inner #leave-cta-container .cta:first-of-type {
+  margin-right: .5em;
+}
+
+.cta {
+  padding: 1em 2.25em;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  color: #05254c;
+  border-radius: 30px;
+  box-shadow: 3px 3px 10px rgba(30, 32, 39, 0.5);
+  -webkit-transition: padding .2s;
+          transition: padding .2s;
+  position: relative;
+  z-index: 1;
+}
+.cta:hover {
+  padding: 1.1em 2.5em;
+}
+.cta:before {
+  content: '';
+  background: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 30px;
+  z-index: -1;
+}
+.cta:after {
+  content: '';
+  border: 1px solid #05254c;
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  border-radius: 30px;
+  -webkit-transition: background .2s;
+          transition: background .2s;
+  z-index: -1;
+}
+.cta:hover:after {
+  background: #c7e8ff;
 }
