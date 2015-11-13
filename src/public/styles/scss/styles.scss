@@ -65,6 +65,7 @@ header {
     height: 100%;
     text-align: left;
     display: table;
+    position: relative;
 
     &:before {
       content: "";
@@ -74,18 +75,29 @@ header {
     }  
   }
 
-  .excels-logo {
-    display: table-cell;
-    vertical-align: middle;
-    position: relative;
-    top: -5px;
+  #excels-logo {
+    position: absolute;
+    top: 50%;
+    left: 2em;
+    transform: translate(0,-50%);
+    transition: transform .5s, top .5s, left .5s;
+
+    #excels-tagline {
+      font-size: .8em;
+      color: color(black);
+      margin: 0;
+      line-height: 1.25em;
+      display: none;
+    }
 
     img {
       width: 240px;
+      transition: width .5s;
     }
+
   }
 
-  .title {
+  #title {
     font-family: "verveine";
     color: color(dark-blue);
     font-size: 2.8em;
@@ -95,12 +107,75 @@ header {
     text-shadow: 2px 2px 0 color(light-blue);
     position: relative;
     top: 2px;
+    transform: scale(1,1);
+    transition: transform .5s;
 
     small {
       font-size: .6em;
       position: relative;
       top: -3px;
     }
+  }
+
+  &.header-intro {
+    #title {
+      //display: none;
+      transform: scale(0,0);
+    }
+
+    #excels-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      text-align: center;
+      #excels-tagline {
+        display: block;
+      }
+      img {
+        width: 200px;
+      }
+    }
+  }
+}
+
+.cta {
+  @include cta(dark-blue);
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    padding: 1.1em 2.5em;
+    letter-spacing: .08em;
+  }
+
+  &:before {
+    content: '';
+    background: color(white);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 30px;
+    z-index: -1;
+  }
+
+  &:after {
+    content: '';
+    border: 1px solid color(dark-blue);
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 6px;
+    bottom: 6px;
+    border-radius: 30px;
+    transition: background .2s;
+    z-index: -1;
+  }
+
+  &:hover:after {
+    background: color(light-blue);
   }
 }
 
@@ -111,17 +186,102 @@ header {
   visibility: hidden;
 }
 
-#main-scene {
+.snowball-bg {
+  background: url('../images/ui/ui-snowball.png') center no-repeat;
+  background-size: contain;
+  padding: 3% 12%;
+  margin: 0 auto 2em;
+}
+
+.cta-container {
+  margin-top: 2.5em;
+}
+
+#intro-scene {
+  background: color(dark-blue) url('../images/scene-night.jpg') top center no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 85px;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+
+  #intro-scene-title-container {
+    width: 100%;
+    height: 100%;
+    display: table;
+
+    #intro-scene-title {
+      display: table-cell;
+      vertical-align: middle;
+
+      #intro-scene-title-inner-container {
+        width: 75%;
+        margin: 0 auto;
+        max-width: 1200px;
+        #intro-scene-snowball {
+          text-align: center;
+          padding: 4.5em;
+          small {
+            font-size: .7em;
+          }
+        }
+      }
+      p {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    #msde-link {
+      position: absolute;
+      bottom: 2em;
+      left: 2em;
+      img {
+        width: 125px;
+      }
+    }
+    #cte-link {
+      position: absolute;
+      bottom: 2em;
+      right: 2em;
+      img {
+        width: 185px;
+      }
+    }
+  }
+}
+
+#build-scene {
   position: relative;
   width: 100%;
-  //height: 100%;
+
+  .background-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  #background-slide-1 {
+    background: white url('../images/scene-classic.jpg') center;
+    background-size: cover;
+  }
+  #background-slide-2 {
+    background: white url('../images/scene-future.jpg') center;
+    background-size: cover;
+  }
+  #background-slide-3 {
+    background: white url('../images/scene-western.jpg') center;
+    background-size: cover;
+  }
+
 
   #snowman-canvas {
-    //margin-top: 85px;
   }
 
   #build-buttons-container {
-    //display: inline-block;
     width: 75%;
     max-width: 1200px;
     position: absolute;
@@ -180,6 +340,12 @@ header {
         transition: line-height .2s, background .2s;
       }
     }
+  }
+  .js-to-share-mode {
+    position: absolute;
+    left: auto;
+    right: 2em;
+    top: 2em;
   }
 }
 
@@ -269,63 +435,23 @@ header {
     left: 50%;
     display: inline-block;
     width: 50%;
-    height: 50%;
     vertical-align: middle;
     transform: translate(-50%,-55%);
     transition: transform .25s;
-    background: url('../images/ui/ui-snowball.png') center no-repeat;
-    background-size: contain;
-    padding: 3% 12%;
+
+    #leave-modal-callout {
+      display: table;
+      padding: 4em;
+    }
 
     h1 {
-      margin-top: 10%;
     }
 
     #leave-cta-container {
-      margin-top: 2em;
 
       .cta:first-of-type {
         margin-right: .5em;
       }
     }
-  }
-}
-
-.cta {
-  @include cta(dark-blue);
-  position: relative;
-  z-index: 1;
-
-  &:hover {
-    padding: 1.1em 2.5em;
-  }
-
-  &:before {
-    content: '';
-    background: color(white);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: 30px;
-    z-index: -1;
-  }
-
-  &:after {
-    content: '';
-    border: 1px solid color(dark-blue);
-    position: absolute;
-    left: 6px;
-    right: 6px;
-    top: 6px;
-    bottom: 6px;
-    border-radius: 30px;
-    transition: background .2s;
-    z-index: -1;
-  }
-
-  &:hover:after {
-    background: color(light-blue);
   }
 }

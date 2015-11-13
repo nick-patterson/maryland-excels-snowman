@@ -571,6 +571,22 @@ h6 {
 
 h1 {
   text-shadow: 2px 2px 0 #c7e8ff;
+  line-height: .9em;
+}
+
+p {
+  margin-bottom: .75em;
+  margin-top: 0;
+  font-weight: 500;
+}
+
+.larger-text {
+  font-size: 1.5em;
+}
+
+.white-text {
+  color: white;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
 }
 
 html {
@@ -631,6 +647,7 @@ header .header-container {
   height: 100%;
   text-align: left;
   display: table;
+  position: relative;
 }
 header .header-container:before {
   content: "";
@@ -638,16 +655,29 @@ header .header-container:before {
   vertical-align: middle;
   height: 100%;
 }
-header .excels-logo {
-  display: table-cell;
-  vertical-align: middle;
-  position: relative;
-  top: -5px;
+header #excels-logo {
+  position: absolute;
+  top: 50%;
+  left: 2em;
+  -webkit-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  -webkit-transition: -webkit-transform .5s, top .5s, left .5s;
+          transition: transform .5s, top .5s, left .5s;
 }
-header .excels-logo img {
+header #excels-logo #excels-tagline {
+  font-size: .8em;
+  color: #1e2027;
+  margin: 0;
+  line-height: 1.25em;
+  display: none;
+}
+header #excels-logo img {
   width: 240px;
+  -webkit-transition: width .5s;
+          transition: width .5s;
 }
-header .title {
+header #title {
   font-family: "verveine";
   color: #05254c;
   font-size: 2.8em;
@@ -657,11 +687,83 @@ header .title {
   text-shadow: 2px 2px 0 #c7e8ff;
   position: relative;
   top: 2px;
+  -webkit-transform: scale(1, 1);
+      -ms-transform: scale(1, 1);
+          transform: scale(1, 1);
+  -webkit-transition: -webkit-transform .5s;
+          transition: transform .5s;
 }
-header .title small {
+header #title small {
   font-size: .6em;
   position: relative;
   top: -3px;
+}
+header.header-intro #title {
+  -webkit-transform: scale(0, 0);
+      -ms-transform: scale(0, 0);
+          transform: scale(0, 0);
+}
+header.header-intro #excels-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+header.header-intro #excels-logo #excels-tagline {
+  display: block;
+}
+header.header-intro #excels-logo img {
+  width: 200px;
+}
+
+.cta {
+  padding: 1em 2.25em;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  color: #05254c;
+  border-radius: 30px;
+  box-shadow: 3px 3px 10px rgba(30, 32, 39, 0.5);
+  -webkit-transition: padding .2s, letter-spacing .2s;
+          transition: padding .2s, letter-spacing .2s;
+  letter-spacing: 0;
+  position: relative;
+  z-index: 1;
+}
+.cta:hover {
+  padding: 1.1em 2.5em;
+  letter-spacing: .08em;
+}
+.cta:before {
+  content: '';
+  background: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 30px;
+  z-index: -1;
+}
+.cta:after {
+  content: '';
+  border: 1px solid #05254c;
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  border-radius: 30px;
+  -webkit-transition: background .2s;
+          transition: background .2s;
+  z-index: -1;
+}
+.cta:hover:after {
+  background: #c7e8ff;
 }
 
 .unstaged-image {
@@ -671,11 +773,93 @@ header .title small {
   visibility: hidden;
 }
 
-#main-scene {
+.snowball-bg {
+  background: url("../images/ui/ui-snowball.png") center no-repeat;
+  background-size: contain;
+  padding: 3% 12%;
+  margin: 0 auto 2em;
+}
+
+.cta-container {
+  margin-top: 2.5em;
+}
+
+#intro-scene {
+  background: #05254c url("../images/scene-night.jpg") top center no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 85px;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+}
+#intro-scene #intro-scene-title-container {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+#intro-scene #intro-scene-title-container #intro-scene-title {
+  display: table-cell;
+  vertical-align: middle;
+}
+#intro-scene #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container {
+  width: 75%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+#intro-scene #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
+  text-align: center;
+  padding: 4.5em;
+}
+#intro-scene #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball small {
+  font-size: .7em;
+}
+#intro-scene #intro-scene-title-container #intro-scene-title p {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#intro-scene #intro-scene-title-container #msde-link {
+  position: absolute;
+  bottom: 2em;
+  left: 2em;
+}
+#intro-scene #intro-scene-title-container #msde-link img {
+  width: 125px;
+}
+#intro-scene #intro-scene-title-container #cte-link {
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+}
+#intro-scene #intro-scene-title-container #cte-link img {
+  width: 185px;
+}
+
+#build-scene {
   position: relative;
   width: 100%;
 }
-#main-scene #build-buttons-container {
+#build-scene .background-slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
+#build-scene #background-slide-1 {
+  background: white url("../images/scene-classic.jpg") center;
+  background-size: cover;
+}
+#build-scene #background-slide-2 {
+  background: white url("../images/scene-future.jpg") center;
+  background-size: cover;
+}
+#build-scene #background-slide-3 {
+  background: white url("../images/scene-western.jpg") center;
+  background-size: cover;
+}
+#build-scene #build-buttons-container {
   width: 75%;
   max-width: 1200px;
   position: absolute;
@@ -686,15 +870,15 @@ header .title small {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
-#main-scene #build-buttons-container #build-button-prev {
+#build-scene #build-buttons-container #build-button-prev {
   float: left;
   box-shadow: -3px 3px 10px rgba(30, 32, 39, 0.5);
 }
-#main-scene #build-buttons-container #build-button-next {
+#build-scene #build-buttons-container #build-button-next {
   float: right;
   box-shadow: 3px 3px 10px rgba(30, 32, 39, 0.5);
 }
-#main-scene #build-buttons-container .build-button {
+#build-scene #build-buttons-container .build-button {
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
@@ -709,18 +893,18 @@ header .title small {
           transition: width .2s, height .2s, box-shadow .2s;
   vertical-align: middle;
 }
-#main-scene #build-buttons-container .build-button:hover {
+#build-scene #build-buttons-container .build-button:hover {
   width: 76px;
   height: 76px;
 }
-#main-scene #build-buttons-container .build-button:hover .build-button-inner {
+#build-scene #build-buttons-container .build-button:hover .build-button-inner {
   line-height: 107%;
   background: #c7e8ff;
 }
-#main-scene #build-buttons-container .build-button:focus {
+#build-scene #build-buttons-container .build-button:focus {
   outline: none;
 }
-#main-scene #build-buttons-container .build-button .build-button-inner {
+#build-scene #build-buttons-container .build-button .build-button-inner {
   height: 100%;
   width: 100%;
   border: 1px solid #e0e0e0;
@@ -732,6 +916,12 @@ header .title small {
   font-family: "verveine";
   -webkit-transition: line-height .2s, background .2s;
           transition: line-height .2s, background .2s;
+}
+#build-scene .js-to-share-mode {
+  position: absolute;
+  left: auto;
+  right: 2em;
+  top: 2em;
 }
 
 #build-toolbar {
@@ -818,68 +1008,17 @@ header .title small {
   left: 50%;
   display: inline-block;
   width: 50%;
-  height: 50%;
   vertical-align: middle;
   -webkit-transform: translate(-50%, -55%);
       -ms-transform: translate(-50%, -55%);
           transform: translate(-50%, -55%);
   -webkit-transition: -webkit-transform .25s;
           transition: transform .25s;
-  background: url("../images/ui/ui-snowball.png") center no-repeat;
-  background-size: contain;
-  padding: 3% 12%;
 }
-#leave-modal #leave-modal-inner h1 {
-  margin-top: 10%;
-}
-#leave-modal #leave-modal-inner #leave-cta-container {
-  margin-top: 2em;
+#leave-modal #leave-modal-inner #leave-modal-callout {
+  display: table;
+  padding: 4em;
 }
 #leave-modal #leave-modal-inner #leave-cta-container .cta:first-of-type {
   margin-right: .5em;
-}
-
-.cta {
-  padding: 1em 2.25em;
-  font-size: 1.1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  text-decoration: none;
-  color: #05254c;
-  border-radius: 30px;
-  box-shadow: 3px 3px 10px rgba(30, 32, 39, 0.5);
-  -webkit-transition: padding .2s;
-          transition: padding .2s;
-  position: relative;
-  z-index: 1;
-}
-.cta:hover {
-  padding: 1.1em 2.5em;
-}
-.cta:before {
-  content: '';
-  background: white;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 30px;
-  z-index: -1;
-}
-.cta:after {
-  content: '';
-  border: 1px solid #05254c;
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  top: 6px;
-  bottom: 6px;
-  border-radius: 30px;
-  -webkit-transition: background .2s;
-          transition: background .2s;
-  z-index: -1;
-}
-.cta:hover:after {
-  background: #c7e8ff;
 }

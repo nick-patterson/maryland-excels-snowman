@@ -45,8 +45,37 @@
   <img src="public/images/hat-future.png" id="hat-future" class="unstaged-image">
   <img src="public/images/hat-western.png" id="hat-western" class="unstaged-image">
 
+  <section id="intro-scene">
+    <div id="intro-scene-title-container">
+      <div id="intro-scene-title">
+        <div id="intro-scene-title-inner-container">
+          <div id="intro-scene-snowball" class="snowball-bg">
+            <h1><span class="larger-text">BUILD</span>
+              <br><small>
+              YOUR OWN
+              <br></small>
+              SNOWMAN</h1>
+          </div>
+          <p class="white-text">Snowmen have quality standards, too.</p>
+          <p class="white-text">Test your skills and see: can you can build a high quality snowman?</p>
+          <div class="cta-container">
+            <a href="javascript:;" class="cta js-to-build-mode">Get Started!</a>
+          </div>
+        </div>
+      </div>
+      <a href="http://www.marylandpublicschools.org" id="msde-link"><img src="public/images/msde-logo.jpg" alt="Maryland State Department of Education Logo"></a>
+      <a href="http://education.jhu.edu/research/CTE" id="cte-link"><img src="public/images/cte-logo.png" alt="Johns Hopkins University - Center for Technology in Education Logo"></a>
+    </div>
+  </section>
+
   
-  <section id="main-scene">
+  <section id="build-scene">
+    <div id="background-slide-1" class="background-slide">
+    </div>
+    <div id="background-slide-2" class="background-slide">
+    </div>
+    <div id="background-slide-3" class="background-slide">
+    </div>
     <canvas id="snowman-canvas">
     </canvas>
     <div id="build-buttons-container">
@@ -61,7 +90,9 @@
         </div>
       </button>
     </div>
+    <a class="js-to-share-mode cta" href="javascript:;">TEST YOUR SNOWMAN!</a>
   </section>
+
   <div id="build-toolbar">
     <div class="build-toolbar-container">
       <div id="hat-button" class="build-toolbar-button build-toolbar-button-active" data-target="hat">
@@ -89,13 +120,15 @@
   </div>
   <div id="leave-modal">
     <div id="leave-modal-inner">
-      <h1>HEY YOU!</h1>
-        <p>If you leave this page without downloading or sharing your snowman, he will be lost forever!</p>
-        <p>Are you sure you want to leave?</p>
-        <div id="leave-cta-container">
-          <a id="stay" class="cta" href="javascript:;">STAY</a>
-          <a id="leave" class="cta" href="javascript:;">LEAVE</a>
-        </div>
+      <div id="leave-modal-callout" class="snowball-bg">
+        <h1>HEY YOU!</h1>
+      </div>
+      <p>If you leave this page without downloading or sharing your snowman, he will be lost forever!</p>
+      <p>Are you sure you want to leave?</p>
+      <div id="leave-cta-container" class="cta-container">
+        <a id="stay" class="cta" href="javascript:;">STAY</a>
+        <a id="leave" class="cta" href="javascript:;">LEAVE</a>
+      </div>
     </div>
   </div>
   

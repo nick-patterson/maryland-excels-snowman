@@ -44,4 +44,20 @@ $headers: (h1: 52, h2: 48, h3: 40, h4: 32, h5: 28, h6: 22);
 
 h1 {
   text-shadow: 2px 2px 0 color(light-blue);
+  line-height: .9em;
+}
+
+p {
+  margin-bottom: .75em;
+  margin-top: 0;
+  font-weight: 500;
+}
+
+.larger-text {
+  font-size: 1.5em;
+}
+
+.white-text {
+  color: color(white);
+  text-shadow: 1px 1px 6px rgba(0,0,0,.8);
 }

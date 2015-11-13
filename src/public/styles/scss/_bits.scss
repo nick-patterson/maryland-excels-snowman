@@ -20,5 +20,6 @@ $color-map: (
 	color: color($foreground);
 	border-radius: 30px;
 	box-shadow: 3px 3px 10px rgba(color(black), .5);
-	transition: padding .2s;
+	transition: padding .2s, letter-spacing .2s;
+	letter-spacing: 0;
 }
