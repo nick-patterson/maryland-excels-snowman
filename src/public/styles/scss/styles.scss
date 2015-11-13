@@ -288,7 +288,10 @@ header {
     top: 50%;
     left: 50%;
     height: 85px;
-    transform: translate(-50%,-50%);
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%,-50%) scale(1,1);
+    transition: transform .5s, opacity .5s, visibility .5s;
 
     #build-button-prev {
       float: left;
@@ -347,10 +350,19 @@ header {
     right: 2em;
     top: 2em;
   }
+
+  &.build-scene-inactive {
+    #build-buttons-container {
+      visibility: hidden;
+      opacity: 0;
+      transform: translate(-50%,-50%) scale(0,0);
+    }
+  }
 }
 
 #build-toolbar {
   position: relative;
+  overflow: hidden;
   bottom: 0;
   width: 100%;
   height: 120px;
@@ -368,6 +380,9 @@ header {
     border-left: 1px solid color(light-gray);
     border-right: 1px solid color(light-gray);
     background: rgba(color(blue-white),.5);
+    transform: translate(0,0);
+    transition: transform .2s;
+
     .build-toolbar-button {
       position: relative;
       display: table-cell;
@@ -386,6 +401,7 @@ header {
         background: color(light-blue);
         border-top: 2px solid color(dark-blue);
         text-align: center;
+
         &:before {
           content: '';
           display: inline-block;
@@ -404,6 +420,12 @@ header {
       &.build-toolbar-last-button {
         border-right: none;
       }
+    }
+  }
+
+  &.build-toolbar-inactive {
+    .build-toolbar-container {
+      transform: translate(0,100%);
     }
   }
 }
