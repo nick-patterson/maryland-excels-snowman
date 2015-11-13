@@ -212,7 +212,6 @@ var snowman = {
 
 			canvas.add(theSnowman);
 			theSnowman.centerH();
-
 		}
 
 		function scaleSnowman() {
@@ -611,6 +610,7 @@ var snowman = {
 			$('.js-back-to-build-mode').one('click', function(event){
 				history.go(-1);
 				buildSnowman();
+				canvas.renderAll();
 				$('#build-toolbar').removeClass('build-toolbar-excels-cta build-toolbar-inactive');
 			});
 
