@@ -569,7 +569,7 @@ h6 {
   font-size: 1.22222222rem;
 }
 
-h1 {
+h1, h2 {
   text-shadow: 2px 2px 0 #c7e8ff;
   line-height: .9em;
 }
@@ -728,9 +728,11 @@ header.header-intro #excels-logo img {
   color: #05254c;
   border-radius: 30px;
   box-shadow: 3px 3px 10px rgba(30, 32, 39, 0.5);
-  -webkit-transition: padding .2s, letter-spacing .2s;
-          transition: padding .2s, letter-spacing .2s;
   letter-spacing: 0;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: padding .2s, letter-spacing .2s, opacity .5s, visibility .5s;
+          transition: padding .2s, letter-spacing .2s, opacity .5s, visibility .5s;
   position: relative;
   z-index: 1;
 }
@@ -764,6 +766,10 @@ header.header-intro #excels-logo img {
 }
 .cta:hover:after {
   background: #c7e8ff;
+}
+.cta.cta-hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .unstaged-image {
@@ -927,6 +933,12 @@ header.header-intro #excels-logo img {
   right: 2em;
   top: 2em;
 }
+#build-scene .js-back-to-build-mode {
+  position: absolute;
+  left: auto;
+  left: 2em;
+  top: 2em;
+}
 #build-scene.build-scene-inactive #build-buttons-container {
   visibility: hidden;
   opacity: 0;
@@ -946,11 +958,15 @@ header.header-intro #excels-logo img {
   background-size: 500px 300px;
   box-shadow: 0 -3px 20px rgba(30, 32, 39, 0.5);
 }
-#build-toolbar .build-toolbar-container {
-  display: table;
+#build-toolbar #build-toolbar-container {
   width: 100%;
+  height: 100%;
   max-width: 1440px;
   margin: 0 auto;
+}
+#build-toolbar #build-toolbar-container #build-toolbar-button-container {
+  display: table;
+  width: 100%;
   height: 100%;
   border-left: 1px solid #e0e0e0;
   border-right: 1px solid #e0e0e0;
@@ -961,7 +977,7 @@ header.header-intro #excels-logo img {
   -webkit-transition: -webkit-transform .2s;
           transition: transform .2s;
 }
-#build-toolbar .build-toolbar-container .build-toolbar-button {
+#build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button {
   position: relative;
   display: table-cell;
   width: 14.28571429%;
@@ -971,16 +987,16 @@ header.header-intro #excels-logo img {
   -webkit-transition: background .2s;
           transition: background .2s;
 }
-#build-toolbar .build-toolbar-container .build-toolbar-button:hover {
+#build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button:hover {
   background: rgba(199, 232, 255, 0.35);
   cursor: pointer;
 }
-#build-toolbar .build-toolbar-container .build-toolbar-button.build-toolbar-button-active {
+#build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button.build-toolbar-button-active {
   background: #c7e8ff;
   border-top: 2px solid #05254c;
   text-align: center;
 }
-#build-toolbar .build-toolbar-container .build-toolbar-button.build-toolbar-button-active:before {
+#build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button.build-toolbar-button-active:before {
   content: '';
   display: inline-block;
   position: absolute;
@@ -993,13 +1009,101 @@ header.header-intro #excels-logo img {
   border-right: 8px solid transparent;
   border-top: 8px solid #05254c;
 }
-#build-toolbar .build-toolbar-container .build-toolbar-button.build-toolbar-last-button {
+#build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button.build-toolbar-last-button {
   border-right: none;
 }
-#build-toolbar.build-toolbar-inactive .build-toolbar-container {
+#build-toolbar #build-toolbar-container #testing-indicator {
+  font-size: 2em;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate(0, 300%);
+      -ms-transform: translate(0, 300%);
+          transform: translate(0, 300%);
+  -webkit-transition: -webkit-transform .5s;
+          transition: transform .5s;
+  -webkit-animation: loading .65s ease-in-out infinite alternate;
+          animation: loading .65s ease-in-out infinite alternate;
+}
+#build-toolbar #build-toolbar-container #excels-message-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate(0, 300%);
+      -ms-transform: translate(0, 300%);
+          transform: translate(0, 300%);
+  -webkit-transition: -webkit-transform .5s;
+          transition: transform .5s;
+  display: table;
+}
+#build-toolbar #build-toolbar-container #excels-message-container p {
+  display: table-cell;
+  padding-left: 2em;
+  vertical-align: middle;
+  width: 50%;
+  text-align: left;
+}
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container {
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 2em;
+}
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels {
+  color: white;
+  float: right;
+}
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:before {
+  content: '';
+  background: #b01f27;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 30px;
+  z-index: -1;
+}
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:after {
+  content: '';
+  border: 1px solid white;
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  border-radius: 30px;
+  -webkit-transition: background .2s;
+          transition: background .2s;
+  z-index: -1;
+}
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:hover:after {
+  background: #9a1b22;
+}
+#build-toolbar.build-toolbar-inactive #build-toolbar-container #build-toolbar-button-container {
   -webkit-transform: translate(0, 100%);
       -ms-transform: translate(0, 100%);
           transform: translate(0, 100%);
+}
+#build-toolbar.build-toolbar-inactive #build-toolbar-container #testing-indicator {
+  -webkit-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+#build-toolbar.build-toolbar-excels-cta #build-toolbar-container #build-toolbar-button-container {
+  -webkit-transform: translate(0, 100%);
+      -ms-transform: translate(0, 100%);
+          transform: translate(0, 100%);
+}
+#build-toolbar.build-toolbar-excels-cta #build-toolbar-container #excels-message-container {
+  -webkit-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+          transform: translate(0, -50%);
 }
 
 #leave-modal {
@@ -1043,4 +1147,22 @@ header.header-intro #excels-logo img {
 }
 #leave-modal #leave-modal-inner #leave-cta-container .cta:first-of-type {
   margin-right: .5em;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .4;
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .4;
+  }
 }

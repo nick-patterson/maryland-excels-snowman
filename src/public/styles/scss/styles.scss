@@ -177,6 +177,11 @@ header {
   &:hover:after {
     background: color(light-blue);
   }
+
+  &.cta-hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .unstaged-image {
@@ -351,6 +356,13 @@ header {
     top: 2em;
   }
 
+  .js-back-to-build-mode {
+    position: absolute;
+    left: auto;
+    left: 2em;
+    top: 2em;
+  }
+
   &.build-scene-inactive {
     #build-buttons-container {
       visibility: hidden;
@@ -371,61 +383,150 @@ header {
   background-size: 500px 300px;
   box-shadow: 0 -3px 20px rgba(color(black), .5);
 
-  .build-toolbar-container {
-    display: table;
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    height: 100%;
-    border-left: 1px solid color(light-gray);
-    border-right: 1px solid color(light-gray);
-    background: rgba(color(blue-white),.5);
-    transform: translate(0,0);
-    transition: transform .2s;
-
-    .build-toolbar-button {
-      position: relative;
-      display: table-cell;
-      width: (100 / 7) * 1%;
-      vertical-align: middle;
+  #build-toolbar-container {
+      width: 100%;
+      height: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+    #build-toolbar-button-container {
+      display: table;
+      width: 100%;
+      height: 100%;
+      border-left: 1px solid color(light-gray);
       border-right: 1px solid color(light-gray);
-      background: none;
-      transition: background .2s;
+      background: rgba(color(blue-white),.5);
+      transform: translate(0,0);
+      transition: transform .2s;
 
-      &:hover {
-        background: rgba(color(light-blue), .35);
-        cursor: pointer;
-      }
+      .build-toolbar-button {
+        position: relative;
+        display: table-cell;
+        width: (100 / 7) * 1%;
+        vertical-align: middle;
+        border-right: 1px solid color(light-gray);
+        background: none;
+        transition: background .2s;
 
-      &.build-toolbar-button-active {
-        background: color(light-blue);
-        border-top: 2px solid color(dark-blue);
-        text-align: center;
+        &:hover {
+          background: rgba(color(light-blue), .35);
+          cursor: pointer;
+        }
 
-        &:before {
-          content: '';
-          display: inline-block;
-          position: absolute;
-          top: 0;
-          width: 0; 
-          height: 0;
-          left: 50%;
-          margin-left: -8px;
-          border-left: 8px solid transparent;
-          border-right: 8px solid transparent;            
-          border-top: 8px solid color(dark-blue);
+        &.build-toolbar-button-active {
+          background: color(light-blue);
+          border-top: 2px solid color(dark-blue);
+          text-align: center;
+
+          &:before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            width: 0; 
+            height: 0;
+            left: 50%;
+            margin-left: -8px;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;            
+            border-top: 8px solid color(dark-blue);
+          }
+        }
+
+        &.build-toolbar-last-button {
+          border-right: none;
         }
       }
+    }
 
-      &.build-toolbar-last-button {
-        border-right: none;
+    #testing-indicator {
+      font-size: 2em;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      left: 0;
+      top: 50%;
+      transform: translate(0,300%);
+      transition: transform .5s;
+      animation: loading .65s ease-in-out infinite alternate;
+    }
+
+    #excels-message-container {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      left: 0;
+      top: 50%;
+      transform: translate(0,300%);
+      transition: transform .5s;
+      display: table;
+
+      p {
+        display: table-cell;
+        padding-left: 2em;
+        vertical-align: middle;
+        width: 50%;
+        text-align: left;
+      }
+
+      #excels-cta-container {
+        display: table-cell;
+        vertical-align: middle;
+        padding-right: 2em;
+
+        .cta-excels {
+          color: white;
+          float: right;
+
+          &:before {
+            content: '';
+            background: color(excels-red);
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 30px;
+            z-index: -1;
+          }
+
+          &:after {
+            content: '';
+            border: 1px solid color(white);
+            position: absolute;
+            left: 6px;
+            right: 6px;
+            top: 6px;
+            bottom: 6px;
+            border-radius: 30px;
+            transition: background .2s;
+            z-index: -1;
+          }
+
+          &:hover:after {
+            background: darken(color(excels-red), 5);
+          }
+        }
       }
     }
   }
 
   &.build-toolbar-inactive {
-    .build-toolbar-container {
+    #build-toolbar-container #build-toolbar-button-container {
       transform: translate(0,100%);
+    }
+    #build-toolbar-container #testing-indicator {
+      transform: translate(0,-50%);
+    }
+  }
+
+  &.build-toolbar-excels-cta {
+    #build-toolbar-container #build-toolbar-button-container {
+      transform: translate(0,100%);
+    }
+    #build-toolbar-container #excels-message-container {
+      transform: translate(0,-50%);
     }
   }
 }
@@ -476,4 +577,11 @@ header {
       }
     }
   }
+}
+
+// ANIMATIONS
+
+@keyframes loading {
+  0% {opacity: 1;}
+  100% {opacity: .4;}
 }

@@ -8,7 +8,8 @@ $color-map: (
 	blue-white:     #f5f8fa,
 	light-blue:     #c7e8ff,
 	dark-blue:      #05254c,
-	light-gray:     #e0e0e0
+	light-gray:     #e0e0e0,
+	excels-red:     #b01f27
 );
 
 @mixin cta($foreground) {
@@ -20,6 +21,8 @@ $color-map: (
 	color: color($foreground);
 	border-radius: 30px;
 	box-shadow: 3px 3px 10px rgba(color(black), .5);
-	transition: padding .2s, letter-spacing .2s;
 	letter-spacing: 0;
+	opacity: 1;
+	visibility: visible;
+	transition: padding .2s, letter-spacing .2s, opacity .5s, visibility .5s;
 }

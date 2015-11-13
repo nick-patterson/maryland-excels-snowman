@@ -543,6 +543,7 @@ var snowman = {
 
 
 		$('.js-to-share-mode').click(function(event){
+			toShareMode.goToShareMode();
 			testSnowman();
 		});
 
@@ -550,7 +551,6 @@ var snowman = {
 			var strength = snowman.snowmanElements.base[snowman.current.base].strength;
 			var torsoWeight = snowman.snowmanElements.torso[snowman.current.torso].weight;
 			var headWeight = snowman.snowmanElements.head[snowman.current.head].weight;
-			toShareMode.goToShareMode();
 
 			if (strength >= (torsoWeight + headWeight)) {
 				survive();
@@ -558,13 +558,13 @@ var snowman = {
 			}
 			else {
 				console.log('die');
-				fall();
+				dieHorribly();
 			}
 		}
 
-		function fall() {
+		function dieHorribly() {
 
-			var fall = new TimelineMax({onUpdate: render});
+			var fall = new TimelineMax({onUpdate: render, onComplete: toEndCondition, onCompleteParams: ['fail']});
 			fall.to(theSnowman, 3, {angle: 90, left: '-=' + (theSnowman.width / 2), ease: Elastic.easeIn.config(.8,.2)})
 				.staggerTo([theSnowmanTorso,theSnowmanHead], 2.8, {left: '-=100', ease: Elastic.easeIn.config(.8,.2), delay: .2}, .1, '-=3')
 				.to(base, 1, {top: '-=' + (base.width / 2), ease: Back.easeOut}, '-=.1')
@@ -582,9 +582,38 @@ var snowman = {
 		}
 
 		function survive() {
-			var survive = new TimelineMax({onUpdate: render});
+			var survive = new TimelineMax({onUpdate: render, onComplete: toEndCondition, onCompleteParams: ['success']});
 			survive.to(theSnowman, 3, {angle: 15, repeat: 1, yoyo: true, ease: Elastic.easeIn.config(.8,.2)})
 			       .staggerTo([theSnowmanTorso,theSnowmanHead], 2.8, {left: '+=15', repeat: 1, yoyo: true, ease: Elastic.easeIn.config(.8,.2)}, .1, '-=6');
+		}
+
+		function toEndCondition(condition) {
+
+			$('.js-back-to-build-mode').removeClass('cta-hidden');
+			$('#build-toolbar').addClass('build-toolbar-excels-cta');
+			$('#build-toolbar').removeClass('build-toolbar-inactive');
+
+			function toSuccess() {
+
+			}
+
+			function toFailure() {
+
+			}
+
+			if (condition === 'success') {
+				toSuccess();
+			}
+			else {
+				toFail();
+			}
+
+			$('.js-back-to-build-mode').one('click', function(event){
+				history.go(-1);
+				buildSnowman();
+				$('#build-toolbar').removeClass('build-toolbar-excels-cta build-toolbar-inactive');
+			});
+
 		}
 
 		function render() {
@@ -676,6 +705,7 @@ var toShareMode = {
 		window.history.pushState(snowmanHistory.object, '', snowmanHistory.url);
 		$('#build-scene').toggleClass('build-scene-inactive');
 		$('#build-toolbar').toggleClass('build-toolbar-inactive');
+		$('.js-to-share-mode').toggleClass('cta-hidden');
 	}
 }
 
