@@ -947,7 +947,7 @@ header.header-intro #excels-logo img {
       -ms-transform: translate(-50%, -50%) scale(0, 0);
           transform: translate(-50%, -50%) scale(0, 0);
 }
-#build-scene #success-scene-title {
+#build-scene .end-scene-title {
   position: absolute;
   top: 50%;
   right: 0;
@@ -959,33 +959,38 @@ header.header-intro #excels-logo img {
   -webkit-transition: -webkit-transform .5s;
           transition: transform .5s;
 }
-#build-scene #success-scene-title #success-scene-snowball {
+#build-scene .end-scene-title .end-scene-snowball {
   padding: 5.5em;
   margin-bottom: 4em;
 }
-#build-scene #success-scene-title #success-scene-snowball h2 {
+#build-scene .end-scene-title .end-scene-snowball h2 {
   width: 55%;
   margin: 0 auto;
   font-size: 2em;
 }
-#build-scene #success-scene-title .cta-container {
+#build-scene .end-scene-title .cta-container {
   margin: 0 auto;
   width: 100%;
   text-align: center;
 }
-#build-scene #success-scene-title .cta-container a {
+#build-scene .end-scene-title .cta-container a {
   display: inline-block;
   width: 65%;
   margin: 0 auto;
 }
-#build-scene #success-scene-title .cta-container a.js-download {
+#build-scene .end-scene-title .cta-container a.js-download {
   margin-bottom: 1.5em;
 }
-#build-scene #success-scene-title .cta-container a:hover {
+#build-scene .end-scene-title .cta-container a.js-back-to-build-mode {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+#build-scene .end-scene-title .cta-container a:hover {
   width: 70%;
   padding: 1em 2.25em;
 }
-#build-scene #success-scene-title.success-title-inactive {
+#build-scene .end-scene-title.end-title-inactive {
   -webkit-transform: translate(200%, -50%);
       -ms-transform: translate(200%, -50%);
           transform: translate(200%, -50%);

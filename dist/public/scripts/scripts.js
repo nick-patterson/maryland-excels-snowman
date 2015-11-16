@@ -4,6 +4,8 @@ var snowman = {
 
 	isSharePosition: false,
 
+	isDead: false,
+
 	toModify: '',
 
 	snowmanElements: {
@@ -91,9 +93,11 @@ var snowman = {
 			theSnowman.add(theSnowmanTorso);
 			theSnowman.add(theSnowmanHead);
 
+			base.originX = 'center';
+			base.originY = 'center';
 			var baseWidth = base.getWidth();
 			var baseHeight = base.getHeight();
-			base.left = -.5 * baseWidth;
+			base.top = baseHeight / 2;
 
 			theSnowmanTorso.originX = 'center';
 			theSnowmanTorso.originY = 'center';
@@ -111,8 +115,8 @@ var snowman = {
 			// MODIFY HEAD
 
 			theSnowmanHead.forEachObject(function(i){
-				i.setScaleX(.2);
-				i.setScaleY(.2);
+				i.setScaleX(.4);
+				i.setScaleY(.4);
 			});
 
 			var headHeight = head.getHeight();
@@ -197,6 +201,46 @@ var snowman = {
 						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .7));
 					}
 				break;
+				case 3:
+					leftArm.top = -1 * (torsoHeight / 1.3);
+					leftArm.left = -1 * ((torsoWidth / 2) + (leftArmWidth / 2.5));
+					rightArm.top = -1 * (torsoHeight / 1.8);
+					rightArm.left = (torsoWidth / 1.4);
+					torso.bringToFront(theSnowmanTorso);
+				break;
+				case 4:
+					leftArm.top = -1 * (torsoHeight / 2);
+					leftArm.left = -1 * (torsoWidth - (leftArmWidth / 4.5));
+					rightArm.top = -1 * (torsoHeight / 2.75);
+					rightArm.left = (torsoWidth / 1.2);
+					if (snowman.current.head === 1) {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .92));
+					}
+					else {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .8));
+					}
+					torso.bringToFront(theSnowmanTorso);
+				break;
+				case 5:
+					if (snowman.current.arms === 1) {
+						leftArm.top = -1 * (torsoHeight / 1.8);
+						leftArm.left = -1 * (torsoWidth / 1.15);
+						rightArm.top = -1 * (torsoHeight / 2.75);
+					}
+					else {
+						leftArm.top = -1 * (torsoHeight / 2);
+						leftArm.left = -1 * (torsoWidth / 1.1);
+						rightArm.top = -1 * (torsoHeight / 2.75);
+					}
+					rightArm.left = (torsoWidth / 1.3);
+					if (snowman.current.head != 1) {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .6));
+					}
+					else {
+						theSnowmanHead.top =  -1 * ((torsoHeight * .75) + (headHeight * .7));
+					}
+					torso.bringToFront(theSnowmanTorso);
+				break;
 				default:
 			}
 
@@ -214,8 +258,8 @@ var snowman = {
 
 			scaleSnowman();
 
-			theSnowman.originX = 'center';
-			theSnowman.originY = 'bottom';
+			theSnowman.originX = 'bottom';
+			theSnowman.originY = 'center';
 			theSnowman.selectable = false;
 			theSnowman.top = getHeightInPercentage(52);
 
@@ -238,8 +282,8 @@ var snowman = {
 				snowman.snowmanElements[element][index].image.setOpacity(0);
 				snowman.snowmanElements[element][index].image.OriginY = 'center';
 				snowman.snowmanElements[element][index].image.OriginX = 'center';
-				snowman.snowmanElements[element][index].image.setScaleX(.2);
-				snowman.snowmanElements[element][index].image.setScaleY(.2);
+				snowman.snowmanElements[element][index].image.setScaleX(.4);
+				snowman.snowmanElements[element][index].image.setScaleY(.4);
 
 				if (element === 'base'){
 					snowman.snowmanElements[element][index].strength = $(sourceToPullOne[index]).data('strength');
@@ -259,8 +303,8 @@ var snowman = {
 					snowman.snowmanElements[element][index].left.setOpacity(0);
 					snowman.snowmanElements[element][index].left.OriginY = 'center';
 					snowman.snowmanElements[element][index].left.OriginX = 'center';
-					snowman.snowmanElements[element][index].left.setScaleX(.2);
-					snowman.snowmanElements[element][index].left.setScaleY(.2);
+					snowman.snowmanElements[element][index].left.setScaleX(.4);
+					snowman.snowmanElements[element][index].left.setScaleY(.4);
 
 					snowman.snowmanElements[element][index].left.newOpacity = 0;
 					snowman.snowmanElements[element][0].left.setOpacity(1);
@@ -270,8 +314,8 @@ var snowman = {
 					snowman.snowmanElements[element][index].right.setOpacity(0);
 					snowman.snowmanElements[element][index].right.OriginY = 'center';
 					snowman.snowmanElements[element][index].right.OriginX = 'center';
-					snowman.snowmanElements[element][index].right.setScaleX(.2);
-					snowman.snowmanElements[element][index].right.setScaleY(.2);
+					snowman.snowmanElements[element][index].right.setScaleX(.4);
+					snowman.snowmanElements[element][index].right.setScaleY(.4);
 
 					snowman.snowmanElements[element][index].right.newOpacity = 0;
 					snowman.snowmanElements[element][0].right.setOpacity(1);
@@ -282,8 +326,8 @@ var snowman = {
 					snowman.snowmanElements[element][index].setOpacity(0);
 					snowman.snowmanElements[element][index].OriginY = 'center';
 					snowman.snowmanElements[element][index].OriginX = 'center';
-					snowman.snowmanElements[element][index].setScaleX(.2);
-					snowman.snowmanElements[element][index].setScaleY(.2);
+					snowman.snowmanElements[element][index].setScaleX(.4);
+					snowman.snowmanElements[element][index].setScaleY(.4);
 
 					snowman.snowmanElements[element][index].newOpacity = 0;
 					snowman.snowmanElements[element][0].setOpacity(1);
@@ -347,7 +391,11 @@ var snowman = {
 		var torsoFuture = document.getElementById('torso-future');
 		var torsoWestern = document.getElementById('torso-western');
 
-		var torsoSources = [torsoClassic, torsoFuture, torsoWestern];
+		var torsoClassicHopkins = document.getElementById('torso-classic-hopkins');
+		var torsoFutureHopkins = document.getElementById('torso-future-hopkins');
+		var torsoWesternHopkins = document.getElementById('torso-western-hopkins');
+
+		var torsoSources = [torsoClassic, torsoFuture, torsoWestern, torsoClassicHopkins, torsoFutureHopkins, torsoWesternHopkins];
 
 		function generateTorsos() {
 
@@ -510,15 +558,19 @@ var snowman = {
 
 		// GENERATE FUNCTION CALLS
 
-		generateScenes();
-		generateBases();
-		generateArms();
-		generateTorsos();
-		generateHeads();
-		generateFaces();
-		generateHats();
-		buildSnowman();
-		scaleSnowman();
+		function generateSnowman() {
+			generateScenes();
+			generateBases();
+			generateArms();
+			generateTorsos();
+			generateHeads();
+			generateFaces();
+			generateHats();
+			buildSnowman();
+			scaleSnowman();
+		}
+
+		generateSnowman();
 		
 
 		$('.build-button').click(function(event){
@@ -569,27 +621,25 @@ var snowman = {
 				survive();
 			}
 			else {
-				console.log('die');
+				dieHorribly();
 			}
 		}
 
 		function dieHorribly() {
 
 			var fall = new TimelineMax({onUpdate: render, onComplete: toEndCondition, onCompleteParams: ['fail']});
-			fall.to(theSnowman, 3, {angle: 90, left: '-=' + (theSnowman.width / 2), ease: Elastic.easeIn.config(.8,.2)})
-				.staggerTo([theSnowmanTorso,theSnowmanHead], 2.8, {left: '-=100', ease: Elastic.easeIn.config(.8,.2), delay: .2}, .1, '-=3')
-				.to(base, 1, {top: '-=' + (base.width / 2), ease: Back.easeOut}, '-=.1')
-				.to(base, 1, {angle: 100, ease: Power1.easeOut}, '-=1')
-				.to(base, .5, {left: '-=' + (base.width / 1), repeat: 1, yoyo: true}, '-=1.2')
-				.to(theSnowmanTorso, 1, {top: '+=' + (theSnowmanTorso.width * 3), ease: Power1.easeOut}, '-=1.1')
-				.to(theSnowmanTorso, 2, {angle: 120, scaleX: .8, scaleY: .8, ease: Power1.easeOut}, '-=1.6')
-				.to(theSnowmanTorso, .5, {left: '-=' + (theSnowmanTorso.width / 2), repeat: 1, yoyo: true}, '-=2.2')
-				.to(theSnowmanHead, .5, {left: '-=' + (theSnowmanHead.width * 8), repeat: 1, yoyo: true}, '-=1.4')
-				.to(theSnowmanHead, .85, {left: '+=' + (theSnowmanHead.width * 3)}, '-=.35')
-				.to(theSnowmanHead, 1, {top: '+=' + (theSnowmanHead.width), ease: Power1.easeOut}, '-=1.1')
-				.to(theSnowmanHead, 1.8, {angle: 1640, scaleX: 1.5, scaleY: 1.5, ease: Power1.easeOut}, '-=1.8')
-				.to(theSnowmanHead, 1.5, {left: '+= 50', top: '+=25', scaleX: 2.2, scaleY: 2.2, ease: Power1.easeOut}, '+=1.5');
-				fall.onUpdate = render;
+			fall.to(theSnowman, 3, {angle: 15, repeat: 1, yoyo: true, ease: Elastic.easeIn.config(.8,.2)})
+				.staggerTo([theSnowmanTorso,theSnowmanHead], 2.8, {left: '+=85', repeat: 1, yoyo: true, ease: Elastic.easeIn.config(.8,.2)}, .1, '-=6')
+				.to(base, .5, {top: '-=' + (canvas.height / 2), ease: Power1.easeOut, repeat: 1, yoyo: true})
+				.to(base, 1, {angle: '+=' + 1600, ease: Power1.easeInOut}, '-=1')
+				.to(base, 1, {left: '-=' + (canvas.width / 4), ease: Power1.easeOut}, '-=1')
+				.to(theSnowmanTorso, .5, {top: '-=' + (canvas.height / 1.5), ease: Power1.easeOut, repeat: 1, yoyo: true}, '-=1')
+				.to(theSnowmanTorso, .25, {top: '+=' + (canvas.height / 2.5), ease: Power1.easeOut})
+				.to(theSnowmanTorso, 1.25, {left: '+=' + (canvas.width / 2), angle: '-=' + 195, ease: Power1.easeInOut}, '-=1.25')
+				.to(theSnowmanHead, 1.5, {top: '-=' + (canvas.height * 5), ease: Power1.easeOut, repeat: 1, yoyo: true}, '-=1.25')
+				.to(theSnowmanHead, .25, {angle: '+=' + 180}, '-=1.5')
+				.to(theSnowmanHead, .4, {top: '+=' + (canvas.height / 1.7), ease: Power1.easeOut})
+				.to(theSnowmanHead, 1.5, {top: '+=25', scaleX: '+=.1', scaleY: '+=.1'}, '+=.5');
 		}
 
 		function survive() {
@@ -599,7 +649,6 @@ var snowman = {
 		}
 
 		function toEndCondition(condition) {
-
 			$('.js-back-to-build-mode').removeClass('cta-hidden');
 			$('#build-toolbar').addClass('build-toolbar-excels-cta');
 			$('#build-toolbar').removeClass('build-toolbar-inactive');
@@ -607,26 +656,38 @@ var snowman = {
 			function toSuccess() {
 				snowman.isSharePosition = true;
 				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(15) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
-				$('#success-scene-title').removeClass('success-title-inactive');
+				$('#success-scene-title').removeClass('end-title-inactive');
 			}
 
 			function toFailure() {
-
+				snowman.isSharePosition = true;
+				snowman.isDead = true;
+				TweenMax.to([base,theSnowmanTorso,theSnowmanHead], .75, {left: 0, onUpdate: render}, .2);
+				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(25) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
+				$('#failure-scene-title').removeClass('end-title-inactive');
 			}
 
 			if (condition === 'success') {
 				toSuccess();
 			}
 			else {
-				toFail();
+				toFailure();
 			}
 
 			$('.js-back-to-build-mode').one('click', function(event){
+				if (snowman.isDead) {
+					for (var i in snowman.current) {
+						snowman.current[i] = 0;
+					}
+					generateSnowman();
+					snowman.isDead = false;
+				}
 				$('#build-scene').removeClass('build-scene-inactive');
 				$('#build-toolbar').removeClass('build-toolbar-inactive build-toolbar-excels-cta');
 				$('.js-to-share-mode').removeClass('cta-hidden');
 				$('.js-back-to-build-mode').addClass('cta-hidden');
-				$('#success-scene-title').addClass('success-title-inactive');
+				$('#success-scene-title').addClass('end-title-inactive');
+				$('#failure-scene-title').addClass('end-title-inactive');
 				snowman.isSharePosition = false;
 				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(50), ease: Back.easeInOut, onUpdate: render});
 			});
@@ -665,8 +726,6 @@ var snowman = {
 		});
 
 		window.addEventListener('popstate', function(event){
-			event.preventDefault();
-			$('#leave-modal').addClass('leave-modal-active');
 			if (snowmanHistory.currentState.title) {
 				if(snowmanHistory.currentState.title === 'build') {
 					$('#leave-modal').addClass('leave-modal-active');
@@ -675,17 +734,10 @@ var snowman = {
 					});
 					$('#stay').click(function(){
 						$('#leave-modal').removeClass('leave-modal-active');
-						history.forward();
 						$('#leave').unbind('click');
 						$('#stay').unbind('click');
 					});
 				}
-				else {
-					return true;
-				}
-			}
-			else {
-				return true;
 			}
 		});
 	},

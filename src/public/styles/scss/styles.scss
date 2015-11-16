@@ -372,7 +372,7 @@ header {
     }
   }
 
-  #success-scene-title {
+  .end-scene-title {
     position: absolute;
     top: 50%;
     right: 0;
@@ -381,7 +381,7 @@ header {
     transform: translate(0,-50%);
     transition: transform .5s;
 
-    #success-scene-snowball {
+    .end-scene-snowball {
       padding: 5.5em;
       margin-bottom: 4em;
 
@@ -404,13 +404,19 @@ header {
           margin-bottom: 1.5em;
         }
 
+        &.js-back-to-build-mode {
+          position: relative;
+          top: 0;
+          left: 0;
+        }
+
         &:hover {
           width: 70%;
           padding: 1em 2.25em; 
         }
       }
     }
-    &.success-title-inactive {
+    &.end-title-inactive {
       transform: translate(200%,-50%);
     }
   }
