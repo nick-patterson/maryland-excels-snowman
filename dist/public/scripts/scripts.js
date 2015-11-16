@@ -70,6 +70,9 @@ var snowman = {
 				theSnowman.remove(i);
 			});
 
+			canvas.clear();
+			theSnowman.destroy();
+
 			base = snowman.snowmanElements.base[snowman.current.base].image;
 			torso = snowman.snowmanElements.torso[snowman.current.torso].image;
 			leftArm = snowman.snowmanElements.arms[snowman.current.arms].left;
