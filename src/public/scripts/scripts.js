@@ -2,7 +2,7 @@ var snowman = {
 
 	canvas: '',
 
-	isShare: false,
+	isSharePosition: false,
 
 	toModify: '',
 
@@ -551,11 +551,16 @@ var snowman = {
 
 
 		$('.js-to-share-mode').click(function(event){
-			snowman.toShareMode.goToShareMode();
+			snowman.isSharePosition = true;
 			testSnowman();
 		});
 
 		function testSnowman() {
+
+			$('#build-scene').addClass('build-scene-inactive');
+			$('#build-toolbar').addClass('build-toolbar-inactive');
+			$('.js-to-share-mode').addClass('cta-hidden');
+
 			var strength = snowman.snowmanElements.base[snowman.current.base].strength;
 			var torsoWeight = snowman.snowmanElements.torso[snowman.current.torso].weight;
 			var headWeight = snowman.snowmanElements.head[snowman.current.head].weight;
@@ -617,10 +622,13 @@ var snowman = {
 			}
 
 			$('.js-back-to-build-mode').one('click', function(event){
-				window.history.pushState(snowmanHistory.object, '', snowmanHistory.url);
-				$('#build-scene').toggleClass('build-scene-inactive');
-				$('#build-toolbar').toggleClass('build-toolbar-inactive');
-				$('.js-to-share-mode').toggleClass('cta-hidden');
+				$('#build-scene').removeClass('build-scene-inactive');
+				$('#build-toolbar').removeClass('build-toolbar-inactive build-toolbar-excels-cta');
+				$('.js-to-share-mode').removeClass('cta-hidden');
+				$('.js-back-to-build-mode').addClass('cta-hidden');
+				$('#success-scene-title').addClass('success-title-inactive');
+				snowman.isSharePosition = false;
+				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(50), ease: Back.easeInOut, onUpdate: render});
 			});
 
 		}
