@@ -731,14 +731,14 @@ header.header-intro #excels-logo img {
   letter-spacing: 0;
   opacity: 1;
   visibility: visible;
-  -webkit-transition: padding .2s, letter-spacing .2s, opacity .5s, visibility .5s;
-          transition: padding .2s, letter-spacing .2s, opacity .5s, visibility .5s;
+  -webkit-transition: padding .2s, letter-spacing .2s, opacity .5s, visibility .5s, width .2s;
+          transition: padding .2s, letter-spacing .2s, opacity .5s, visibility .5s, width .2s;
   position: relative;
   z-index: 1;
 }
 .cta:hover {
   padding: 1.1em 2.5em;
-  letter-spacing: .08em;
+  letter-spacing: .05em;
 }
 .cta:before {
   content: '';
@@ -845,6 +845,7 @@ header.header-intro #excels-logo img {
 #build-scene {
   position: relative;
   width: 100%;
+  overflow: hidden;
 }
 #build-scene .background-slide {
   width: 100%;
@@ -945,6 +946,49 @@ header.header-intro #excels-logo img {
   -webkit-transform: translate(-50%, -50%) scale(0, 0);
       -ms-transform: translate(-50%, -50%) scale(0, 0);
           transform: translate(-50%, -50%) scale(0, 0);
+}
+#build-scene #success-scene-title {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 50%;
+  padding: 0 2em;
+  -webkit-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  -webkit-transition: -webkit-transform .5s;
+          transition: transform .5s;
+}
+#build-scene #success-scene-title #success-scene-snowball {
+  padding: 5.5em;
+  margin-bottom: 4em;
+}
+#build-scene #success-scene-title #success-scene-snowball h2 {
+  width: 55%;
+  margin: 0 auto;
+  font-size: 2em;
+}
+#build-scene #success-scene-title .cta-container {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+#build-scene #success-scene-title .cta-container a {
+  display: inline-block;
+  width: 65%;
+  margin: 0 auto;
+}
+#build-scene #success-scene-title .cta-container a.js-download {
+  margin-bottom: 1.5em;
+}
+#build-scene #success-scene-title .cta-container a:hover {
+  width: 70%;
+  padding: 1em 2.25em;
+}
+#build-scene #success-scene-title.success-title-inactive {
+  -webkit-transform: translate(200%, -50%);
+      -ms-transform: translate(200%, -50%);
+          transform: translate(200%, -50%);
 }
 
 #build-toolbar {
@@ -1053,10 +1097,12 @@ header.header-intro #excels-logo img {
   display: table-cell;
   vertical-align: middle;
   padding-right: 2em;
+  padding-left: 2em;
 }
 #build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels {
   color: white;
-  float: right;
+  display: inline-block;
+  width: 65%;
 }
 #build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:before {
   content: '';
@@ -1082,8 +1128,12 @@ header.header-intro #excels-logo img {
           transition: background .2s;
   z-index: -1;
 }
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:hover {
+  width: 70%;
+  padding: 1em 2.25em;
+}
 #build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:hover:after {
-  background: #9a1b22;
+  background: #8d191f;
 }
 #build-toolbar.build-toolbar-inactive #build-toolbar-container #build-toolbar-button-container {
   -webkit-transform: translate(0, 100%);

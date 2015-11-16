@@ -146,7 +146,7 @@ header {
 
   &:hover {
     padding: 1.1em 2.5em;
-    letter-spacing: .08em;
+    letter-spacing: .05em;
   }
 
   &:before {
@@ -260,6 +260,7 @@ header {
 #build-scene {
   position: relative;
   width: 100%;
+  overflow: hidden;
 
   .background-slide {
     width: 100%;
@@ -370,6 +371,49 @@ header {
       transform: translate(-50%,-50%) scale(0,0);
     }
   }
+
+  #success-scene-title {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 50%;
+    padding: 0 2em;
+    transform: translate(0,-50%);
+    transition: transform .5s;
+
+    #success-scene-snowball {
+      padding: 5.5em;
+      margin-bottom: 4em;
+
+      h2 {
+        width: 55%;
+        margin: 0 auto;
+        font-size: 2em;
+      }
+    }
+    .cta-container {
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+      a {
+        display: inline-block;
+        width: 65%;
+        margin: 0 auto;
+
+        &.js-download {
+          margin-bottom: 1.5em;
+        }
+
+        &:hover {
+          width: 70%;
+          padding: 1em 2.25em; 
+        }
+      }
+    }
+    &.success-title-inactive {
+      transform: translate(200%,-50%);
+    }
+  }
 }
 
 #build-toolbar {
@@ -474,10 +518,13 @@ header {
         display: table-cell;
         vertical-align: middle;
         padding-right: 2em;
+        padding-left: 2em;
 
         .cta-excels {
           color: white;
-          float: right;
+          display: inline-block;
+          width: 65%;
+          //float: right;
 
           &:before {
             content: '';
@@ -504,8 +551,13 @@ header {
             z-index: -1;
           }
 
+          &:hover {
+            width: 70%;
+            padding: 1em 2.25em;
+          }
+
           &:hover:after {
-            background: darken(color(excels-red), 5);
+            background: darken(color(excels-red), 8);
           }
         }
       }
