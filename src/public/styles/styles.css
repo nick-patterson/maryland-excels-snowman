@@ -1353,6 +1353,7 @@ header.header-intro #excels-logo img {
           transition: line-height .2s, background .2s;
 }
 #build-scene #js-audio-mute {
+  z-index: 1;
   position: absolute;
   right: 0;
   bottom: 2em;
