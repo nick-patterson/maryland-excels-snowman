@@ -46,14 +46,18 @@ var snowman = {
 		canvas.top = 85;
 		canvas.renderOnAddRemove = false;
 
+		var canvasDownload = new fabric.StaticCanvas('snowman-offscreen-download-canvas');
+		canvasDownload.setDimensions({width: 1500, height: 900});
+		canvasDownload.renderOnAddRemove = false;
+
 
 		// DIMENSION HELPERS
 
-		function getHeightInPercentage(percentage) {
+		function getHeightInPercentage(canvas, percentage) {
 			return canvas.height * (percentage / 100);
 		}
 
-		function getWidthInPercentage(percentage) {
+		function getWidthInPercentage(canvas, percentage) {
 			return canvas.width * (percentage / 100);
 		}
 
@@ -264,7 +268,7 @@ var snowman = {
 			theSnowman.originX = 'bottom';
 			theSnowman.originY = 'center';
 			theSnowman.selectable = false;
-			theSnowman.top = getHeightInPercentage(52);
+			theSnowman.top = getHeightInPercentage(canvas, 52);
 
 			canvas.add(theSnowman);
 			theSnowman.centerH();
@@ -346,6 +350,7 @@ var snowman = {
 			$('.background-slide').each(function(index){
 				snowman.snowmanElements.scene[index] = $(this);
 			});
+			snowman.snowmanElements.scene[0].addClass('background-slide-active');
 			snowman.snowmanElements.scene[0].css({
 				'opacity': 1,
 				'visibility': 'visible'
@@ -539,7 +544,9 @@ var snowman = {
 
 			if (element === 'scene') {
 				TweenMax.to(snowman.snowmanElements[element][currentIndex], .75, {autoAlpha: 0});
+				snowman.snowmanElements[element][currentIndex].removeClass('background-slide-active');
 				TweenMax.to(snowman.snowmanElements[element][toIndex], .75, {autoAlpha: 1});
+				snowman.snowmanElements[element][toIndex].addClass('background-slide-active');
 			}
 			else if (element === 'arms') {
 				TweenMax.to(snowman.snowmanElements[element][currentIndex].left, .75, {opacity: 0, onUpdate: render ,  onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
@@ -604,6 +611,17 @@ var snowman = {
 					
 		});
 
+		// RENDERING
+
+		function render() {
+			canvas.renderAll();
+		}
+
+		render();
+
+
+		//---------- END CONDITIONS ----------------------//
+
 
 		$('.js-to-share-mode').click(function(event){
 			snowman.isSharePosition = true;
@@ -649,6 +667,7 @@ var snowman = {
 			var survive = new TimelineMax({onUpdate: render, onComplete: toEndCondition, onCompleteParams: ['success']});
 			survive.to(theSnowman, 3, {angle: 15, repeat: 1, yoyo: true, ease: Elastic.easeIn.config(.8,.2)})
 			       .staggerTo([theSnowmanTorso,theSnowmanHead], 2.8, {left: '+=15', repeat: 1, yoyo: true, ease: Elastic.easeIn.config(.8,.2)}, .1, '-=6');
+			setupDownload();
 		}
 
 		function toEndCondition(condition) {
@@ -658,7 +677,7 @@ var snowman = {
 
 			function toSuccess() {
 				snowman.isSharePosition = true;
-				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(15) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
+				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 15) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
 				$('#success-scene-title').removeClass('end-title-inactive');
 			}
 
@@ -666,7 +685,7 @@ var snowman = {
 				snowman.isSharePosition = true;
 				snowman.isDead = true;
 				TweenMax.to([base,theSnowmanTorso,theSnowmanHead], .75, {left: 0, onUpdate: render}, .2);
-				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(25) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
+				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 25) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
 				$('#failure-scene-title').removeClass('end-title-inactive');
 			}
 
@@ -677,6 +696,8 @@ var snowman = {
 				toFailure();
 			}
 
+			// RETURN TO BUILD MODE
+
 			$('.js-back-to-build-mode').one('click', function(event){
 				if (snowman.isDead) {
 					for (var i in snowman.current) {
@@ -685,21 +706,64 @@ var snowman = {
 					generateSnowman();
 					snowman.isDead = false;
 				}
-				$('#build-scene').removeClass('build-scene-inactive');
-				$('#build-toolbar').removeClass('build-toolbar-inactive build-toolbar-excels-cta');
-				$('.js-to-share-mode').removeClass('cta-hidden');
-				$('.js-back-to-build-mode').addClass('cta-hidden');
-				$('#success-scene-title').addClass('end-title-inactive');
-				$('#failure-scene-title').addClass('end-title-inactive');
-				snowman.isSharePosition = false;
-				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(50), ease: Back.easeInOut, onUpdate: render});
+				snowman.toBuildMode.backToBuildMode();
+				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 50), ease: Back.easeInOut, onUpdate: render});
+			});
+		}
+
+
+		// SETUP THE SNOWMAN FOR DOWNLOAD
+
+		function setupDownload() {
+			var bgImageUrl = $('.background-slide-active').css('background-image').slice(4,-1).replace(/"/g, "");
+
+			// Create BG Image and Init Download
+			fabric.Image.fromURL(bgImageUrl, function(sceneImage){
+				canvasDownload.add(sceneImage);
+				sceneImage.scaleX = .5;
+				sceneImage.scaleY = .5;
+				pushToDownload();
 			});
 
+			function pushToDownload(oImg) {
+				// DRAW CANVAS
+				var excelsLogo = new fabric.Image('excels-holiday-message');
+				var theSnowmanDownload = fabric.util.object.clone(theSnowman);
+
+				canvasDownload.add(excelsLogo);
+				excelsLogo.originX = 'right';
+				excelsLogo.originY = 'bottom';
+				excelsLogo.scaleX = .9;
+				excelsLogo.scaleY = .9;
+				excelsLogo.left = canvasDownload.width;
+				excelsLogo.top = canvasDownload.height;
+
+				canvasDownload.add(theSnowmanDownload);
+				theSnowmanDownload.scaleX = 1.25;
+				theSnowmanDownload.scaleY = 1.25;
+				theSnowmanDownload.centerH();
+				theSnowmanDownload.top = getHeightInPercentage(canvasDownload, 50);
+				canvasDownload.renderAll();
+
+				// CREATE FILE
+
+				$('.js-download')[0].href = canvasDownload.toDataURL('png');
+
+				function appendDate() {
+					var today = new Date();
+					var dd = today.getDate();
+					var mm = today.getMonth() + 1;
+					var yyyy = today.getFullYear();
+					return date = mm + '_' + dd + '_' + yyyy;
+				}
+
+
+
+				$('.js-download')[0].download = 'My_Snowman_' + appendDate() + '.png';
+			}
 		}
 
-		function render() {
-			canvas.renderAll();
-		}
+		//---------- RESIZING / CHANGING STATES ----------------------//
 
 		$(window).resize(function(event){
 
@@ -709,23 +773,27 @@ var snowman = {
 
 			// PLACE SNOWMAN
 			if (snowman.isSharePosition) {
-				theSnowman.left = getWidthInPercentage(15) + (base.width * base.scaleX / 2);
+				if (snowman.isDead) {
+					theSnowman.left = getWidthInPercentage(canvas, 25) + (base.width * base.scaleX / 2);
+				}
+				else {
+					theSnowman.left = getWidthInPercentage(canvas, 15) + (base.width * base.scaleX / 2);
+				}
 			}
 			else {
 				theSnowman.centerH();
 			}
-			theSnowman.top = getHeightInPercentage(52);
+			theSnowman.top = getHeightInPercentage(canvas, 52);
 			scaleSnowman();
 
 		});
-
-		render();
 
 		$('.js-to-build-mode').click(function(event){
 			$('header').removeClass('header-intro');
 			TweenMax.to('#intro-scene', .5, {autoAlpha: 0});
 			snowmanHistory.object.title = 'build';
 			snowmanHistory.fire();
+			audio.init();
 		});
 
 		window.addEventListener('popstate', function(event){
@@ -756,13 +824,13 @@ var snowman = {
 
 		backToBuildMode: function() {
 			snowman.isSharePosition = true;
-			$('#build-scene').toggleClass('build-scene-inactive');
+			$('#build-scene').removeClass('build-scene-inactive');
 			$('#build-toolbar').removeClass('build-toolbar-excels-cta build-toolbar-inactive');
-			$('.js-to-share-mode').toggleClass('cta-hidden');
-			$('.js-back-to-build-mode').toggleClass('cta-hidden');
-			$('.js-back-to-build-mode').unbind('click');
-			$('#success-scene-title').addClass('success-title-inactive');
-			$('#failure-scene-title').addClass('failure-title-inactive');
+			$('.js-to-share-mode').addClass('cta-hidden');
+			$('.js-back-to-build-mode').addClass('cta-hidden');
+			$('.js-download').unbind('click');
+			$('#success-scene-title').addClass('end-title-inactive');
+			$('#failure-scene-title').addClass('end-title-inactive');
 		}
 	},
 }
@@ -799,9 +867,71 @@ var toolbar = {
 	}
 }
 
+var audio = {
+	init: function() {
+		var song = document.getElementById('audio-song');
+		song.play();
+
+		$('#js-audio-mute').click(function(event){
+			if (!song.muted) {
+				song.muted = true;
+				song.volume = 0;
+				song.pause();
+				$(this).addClass('volume-muted');
+			}
+			else {
+				song.play();
+				song.muted = false;
+				song.volume = 1;
+				$(this).removeClass('volume-muted');
+			}
+		});
+	}
+}
+
+var share = {
+	button: '',
+
+	init: function() {
+		var shareConfig = {
+			ui: {
+			    buttonText:  	'SHARE THIS'
+			  },
+			networks: {
+				googlePlus: {
+			      enabled: 		true
+			    },
+			    twitter: {
+			      enabled:      true
+			    },
+			    facebook: {
+			      enabled:      true,
+			    },
+			    pinterest: {
+			      enabled:      true
+			    },
+			    reddit: {
+			      enabled:  	false
+			    },
+			    linkedin: {
+			      enabled:      true,
+			    },
+			    whatsapp: {
+			      enabled:      false
+			    },
+			    email: {
+			      enabled:      false
+			    }
+			}
+		}
+		share.button = new ShareButton('.js-share', shareConfig);
+	}
+}
+
 $(window).load(function(){
 	snowman.init();
 	toolbar.init();
+	share.init();
 });
 
 

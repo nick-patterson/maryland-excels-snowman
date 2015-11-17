@@ -7,6 +7,9 @@
 
   <!-- ////////// IMAGES ////////// -->
 
+  <!-- EXCELS HOLIDAY MESSAGE -->
+  <img src="public/images/excels-holiday-message.png" id="excels-holiday-message" class="unstaged-image">
+
   <!--SCENES-->
   <img src="public/images/scene-classic.jpg" id="scene-classic" class="unstaged-image">
   <img src="public/images/scene-future.jpg" id="scene-future" class="unstaged-image">
@@ -48,6 +51,11 @@
   <img src="public/images/hat-future.png" id="hat-future" class="unstaged-image">
   <img src="public/images/hat-western.png" id="hat-western" class="unstaged-image">
 
+  <!-- ////////// AUDIO ////////// -->
+  <audio loop id="audio-song">
+    <source src="public/audio/christmas-in-brooklyn.mp3" type="audio/mpeg">
+  </audio>
+
   <section id="intro-scene">
     <div id="intro-scene-title-container">
       <div id="intro-scene-title">
@@ -81,6 +89,8 @@
     </div>
     <canvas id="snowman-canvas">
     </canvas>
+    <canvas id="snowman-offscreen-download-canvas">
+    </canvas>
     <div id="build-buttons-container">
       <button id="build-button-prev" class="build-button" data-direction="prev">
          <div class="build-button-inner">
@@ -95,6 +105,15 @@
     </div>
     <a class="js-to-share-mode cta" href="javascript:;">TEST YOUR SNOWMAN!</a>
     <a class="js-back-to-build-mode cta cta-hidden" href="javascript:;">< BACK</a>
+    <a id="js-audio-mute" href="javascript:;" >
+      <svg width="100%" height="100%" viewBox="0 0 63 72.8">
+        <path class="loud-path" d="M50.5,1.9c11.8,4.7,20.1,16.2,20.1,29.7c0,13.5-8.3,25-20.1,29.7"/>
+        <path class="normal-path" d="M45.7,12.4c7.6,3,13,10.5,13,19.1c0,8.7-5.4,16.1-13,19.1"/>
+        <path class="quiet-path" d="M41.1,23.6c3.1,1.3,5.4,4.3,5.4,7.9c0,3.6-2.2,6.7-5.4,7.9"/>
+        <path class="speaker-path" d="M16.6,22.2l15.7-9.3v37.3l-15.7-9.3V22.2z M2,40.9h14.6V22.2H2V40.9z"/>
+        <path class="muted-path" d="M44.9,39.9l16.7-16.7 M61.6,39.9L44.9,23.2"/>
+      </svg>
+    </a>
 
     <!-- SUCCESS MESSAGE -->
       <div id="success-scene-title" class="end-scene-title end-title-inactive">
@@ -105,8 +124,8 @@
             <h2>You built a quality snowman!</h2>
           </div>
           <div class="cta-container">
-              <a href="javascript:;" class="cta js-download">DOWNLOAD YOUR SNOWMAN</a>
-              <a href="javascript:;" class="cta js-share">SHARE YOUR SNOWMAN</a>
+              <a href="javascript:;" class="cta js-download">DOWNLOAD YOUR SNOWMAN</a><br>
+              <share-button class="js-share">SHARE THIS PAGE</share-button>
           </div>
         </div>
       </div>
@@ -120,7 +139,7 @@
             <h2>Your snowman didn't pass!</h2>
           </div>
           <div class="cta-container">
-              <a href="javascript:;" class="cta js-back-to-build-mode">TRY AGAIN</a>
+              <a href="javascript:;" class="cta try-again js-back-to-build-mode">TRY AGAIN</a>
           </div>
         </div>
       </div>

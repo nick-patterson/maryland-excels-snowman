@@ -5,6 +5,7 @@
 @import "base";
 @import "grid";
 @import "typography";
+@import "share-button";
 
 html {
   background-color: color(white);
@@ -151,7 +152,8 @@ header {
 
   &:before {
     content: '';
-    background: color(white);
+    background: white url('../images/lightpaperfibers_@2X.png');
+    background-size: 500px 300px;
     position: absolute;
     left: 0;
     right: 0;
@@ -273,6 +275,12 @@ header {
     visibility: hidden;
   }
 
+  #snowman-offscreen-download-canvas {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
   #background-slide-1 {
     background: white url('../images/scene-classic.jpg') center;
     background-size: cover;
@@ -284,10 +292,6 @@ header {
   #background-slide-3 {
     background: white url('../images/scene-western.jpg') center;
     background-size: cover;
-  }
-
-
-  #snowman-canvas {
   }
 
   #build-buttons-container {
@@ -353,6 +357,46 @@ header {
       }
     }
   }
+
+  #js-audio-mute {
+    position: absolute;
+    right: 0;
+    bottom: 2em;
+    background: rgba(255,255,255,.85);
+    border: 1px solid color(light-gray);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 1em 2em .75em 1em;
+    width: 92px;
+    height: 65px;
+    transition: background .2s;
+
+    svg {
+      path {
+        stroke: color(dark-blue);
+        stroke-width: 4;
+        fill: none;
+      }
+    }
+
+    &:hover {
+      background: color(light-blue);
+    }
+
+    .muted-path {
+      visibility: hidden;
+    }
+
+    &.volume-muted {
+      .loud-path, .normal-path, .quiet-path {
+        visibility: hidden;
+      }
+      .muted-path {
+        visibility: visible;
+      }
+    }
+  }
+
   .js-to-share-mode {
     position: absolute;
     left: auto;
@@ -385,11 +429,12 @@ header {
     transition: transform .5s;
 
     .end-scene-snowball {
-      padding: 5em;
+      width: 100%;
+      padding: 14%;
       margin-bottom: 4em;
 
       h2 {
-        width: 55%;
+        width: 50%;
         margin: 0 auto;
         font-size: 2em;
       }
@@ -398,9 +443,10 @@ header {
       margin: 0 auto;
       width: 100%;
       text-align: center;
-      a {
-        display: inline-block;
+      a, .js-share {
+        display: inline-block !important;
         width: 65%;
+        max-width: 500px;
         margin: 0 auto;
 
         &.js-download {
@@ -421,6 +467,45 @@ header {
     }
     &.end-title-inactive {
       transform: translate(200%,-50%);
+    }
+
+    @media screen and (max-width: 1576px) {
+      .end-scene-snowball {
+         padding: 10%;
+          margin-bottom: 2em;
+        h2 {
+          width: 40%;
+          font-size: 1.5em;
+          line-height: 1.1em;
+        }
+        .larger-text {
+          font-size: 1.25em;
+        }
+      }
+    }
+
+    @media screen and (min-aspect-ratio: 16/9) {
+      .end-scene-snowball {
+        padding: 10%;
+        margin-bottom: 2em;
+        h2 {
+          width: 40%;
+          font-size: 1.5em;
+          line-height: 1.1em;
+        }
+        .larger-text {
+          font-size: 1.25em;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1151px) {
+        width: 60%;
+        @media screen and (min-aspect-ratio: 4/3) {
+          .end-scene-snowball {
+            padding: 6%;
+          }
+        }
     }
   }
 }
@@ -508,7 +593,6 @@ header {
       height: 100%;
       position: absolute;
       text-align: center;
-      width: 100%;
       left: 0;
       top: 50%;
       transform: translate(0,300%);
@@ -533,6 +617,7 @@ header {
           color: white;
           display: inline-block;
           width: 65%;
+          max-width: 500px;
           //float: right;
 
           &:before {
@@ -568,6 +653,14 @@ header {
           &:hover:after {
             background: darken(color(excels-red), 8);
           }
+        }
+      }
+      @media screen and (max-width: 1151px) {
+        #excels-cta-container {
+          width: 60%;
+        }
+        p {
+          width: 40%;
         }
       }
     }
