@@ -826,7 +826,7 @@ var snowman = {
 			snowman.isSharePosition = true;
 			$('#build-scene').removeClass('build-scene-inactive');
 			$('#build-toolbar').removeClass('build-toolbar-excels-cta build-toolbar-inactive');
-			$('.js-to-share-mode').addClass('cta-hidden');
+			$('.js-to-share-mode').removeClass('cta-hidden');
 			$('.js-back-to-build-mode').addClass('cta-hidden');
 			$('.js-download').unbind('click');
 			$('#success-scene-title').addClass('end-title-inactive');
