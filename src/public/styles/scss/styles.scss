@@ -766,7 +766,7 @@ header {
         }
 
         &.build-toolbar-button-active {
-          background: color(light-blue);
+          background: lighten(color(light-blue), 5);
           border-top: 2px solid color(dark-blue);
           text-align: center;
 
@@ -787,6 +787,26 @@ header {
 
         &.build-toolbar-last-button {
           border-right: none;
+        }
+
+        .build-toolbar-button-image {
+          width: 35%;
+          margin-bottom: -.5em;
+          @media screen and (max-width: 1151px) {
+            width: 40%;
+            margin-bottom: -.35em;
+            @media screen and (max-width: 630px) {
+              width: 45%;
+              margin-bottom: -.25em;
+              @media screen and (max-width: 540px) {
+                width: 70%;
+                @media screen and (max-width: 445px) {
+                  width: 100%;
+                  margin-bottom: -.5em;
+                }
+              }
+            }
+          }
         }
       }
     }

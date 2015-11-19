@@ -1744,7 +1744,7 @@ header.header-intro #excels-logo img {
   cursor: pointer;
 }
 #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button.build-toolbar-button-active {
-  background: #c7e8ff;
+  background: #e1f2ff;
   border-top: 2px solid #05254c;
   text-align: center;
 }
@@ -1764,6 +1764,36 @@ header.header-intro #excels-logo img {
 #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button.build-toolbar-last-button {
   border-right: none;
 }
+#build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button .build-toolbar-button-image {
+  width: 35%;
+  margin-bottom: -.5em;
+}
+@media screen and (max-width: 1151px) {
+  #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button .build-toolbar-button-image {
+    width: 40%;
+    margin-bottom: -.35em;
+  }
+}
+@media screen and (max-width: 1151px) and (max-width: 630px) {
+  #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button .build-toolbar-button-image {
+    width: 45%;
+    margin-bottom: -.25em;
+  }
+}
+
+@media screen and (max-width: 1151px) and (max-width: 630px) and (max-width: 540px) {
+  #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button .build-toolbar-button-image {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1151px) and (max-width: 630px) and (max-width: 540px) and (max-width: 445px) {
+  #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button .build-toolbar-button-image {
+    width: 100%;
+    margin-bottom: -.5em;
+  }
+}
+
 #build-toolbar #build-toolbar-container #testing-indicator {
   font-size: 2em;
   position: absolute;
