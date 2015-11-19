@@ -28,7 +28,7 @@ html {
 }
 
 html, body {
-  height: 100%;
+  //height: 100%;
   text-align: center;
 }
 
@@ -44,7 +44,7 @@ html, body {
 }
 
 body {
-  height: 100%;
+  //height: 100%;
 }
 
 header {
@@ -77,11 +77,13 @@ header {
   }
 
   #excels-logo {
+    visibility: visible;
+    opacity: 1;
     position: absolute;
     top: 50%;
     left: 2em;
     transform: translate(0,-50%);
-    transition: transform .5s, top .5s, left .5s;
+    transition: transform .5s, top .5s, left .5s, visibility .5s, opacity .5s;
 
     #excels-tagline {
       font-size: .8em;
@@ -107,9 +109,9 @@ header {
     vertical-align: middle;
     text-shadow: 2px 2px 0 color(light-blue);
     position: relative;
-    top: 2px;
+    top: 5px;
     transform: scale(1,1);
-    transition: transform .5s;
+    transition: transform .5s, font-size .5s;
 
     small {
       font-size: .6em;
@@ -120,11 +122,12 @@ header {
 
   &.header-intro {
     #title {
-      //display: none;
       transform: scale(0,0);
     }
 
     #excels-logo {
+      visibility: visible;
+      opacity: 1;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -135,6 +138,27 @@ header {
       }
       img {
         width: 200px;
+      }
+    }
+  }
+  @media screen and (max-width: 630px) {
+    #excels-logo {
+      img {
+        width: 160px;
+      }
+    }
+    #title {
+      font-size: 1.85em;
+    }
+    @media screen and (max-width: 445px) {
+      #excels-logo {
+        visibility: hidden;
+        opacity: 0;
+      }
+      #title {
+        width: 100%;
+        text-align: center;
+        font-size: 2.5em;
       }
     }
   }
@@ -184,6 +208,9 @@ header {
     opacity: 0;
     visibility: hidden;
   }
+  @media screen and (max-width: 880px) {
+    font-size: .95em;
+  }
 }
 
 .unstaged-image {
@@ -229,13 +256,17 @@ header {
         #intro-scene-snowball {
           text-align: center;
           padding: 4.5em;
-          small {
-            font-size: .7em;
+          h1 {
+            padding-top: .25em;
+            small {
+              font-size: .7em;
+            }
           }
         }
       }
       p {
         width: 75%;
+        font-size: 1.1em;
         margin-left: auto;
         margin-right: auto;
       }
@@ -246,6 +277,7 @@ header {
       left: 2em;
       img {
         width: 125px;
+        transition: width .5s;
       }
     }
     #cte-link {
@@ -257,6 +289,53 @@ header {
         padding: .5em;
         background: rgba(255,255,255,.85);
         border-radius: 2px;
+        transition: width .5s;
+      }
+    }
+  }
+  @media screen and (min-aspect-ratio: 16/10) {
+    #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
+      padding: 3em;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
+      padding: 4em;
+      h1 {
+        font-size: 3em;
+        padding-top: .5em;
+      }
+    }
+    #msde-link {
+      img {
+        width: 110px;
+      }
+    }
+    #cte-link {
+      img {
+        width: 150px;
+      }
+    }
+  }
+  @media screen and (max-width: 680px) {
+    #intro-scene-title-container {
+      #intro-scene-title {
+        #intro-scene-title-inner-container {
+          width: 100%;
+          padding: 0 2em;
+          #intro-scene-snowball {
+            padding: 2.5em;
+            h1 {
+              font-size: 2.5em;
+            }
+            p {
+              width: 100%;
+            }
+          }
+        }
+      }
+      #msde-link, #cte-link {
+        display: none;
       }
     }
   }
@@ -356,6 +435,16 @@ header {
         transition: line-height .2s, background .2s;
       }
     }
+    @media screen and (max-width: 880px) {
+      .build-button {
+        width: 48px;
+        height: 48px;
+        padding: 6px;
+        .build-button-inner {
+          font-size: 34px;
+        }
+      }
+    }
   }
 
   #js-audio-mute {
@@ -395,6 +484,11 @@ header {
       .muted-path {
         visibility: visible;
       }
+    }
+    @media screen and (max-width: 992px) {
+      width: 75px;
+      height: 45px;
+      padding: .7em 2em .5em .5em;
     }
   }
 
@@ -501,12 +595,23 @@ header {
     }
 
     @media screen and (max-width: 1151px) {
-        width: 60%;
-        @media screen and (min-aspect-ratio: 4/3) {
-          .end-scene-snowball {
-            padding: 6%;
+      width: 60%;
+      @media screen and (min-aspect-ratio: 4/3) {
+        .end-scene-snowball {
+          padding: 6%;
+        }
+      }
+      @media screen and (max-width: 880px) {
+        width: 100%;
+        .end-scene-snowball {
+          h1 {
+            padding-top: .25em;
+          }
+          img {
+            display: none;
           }
         }
+      }
     }
   }
 }
@@ -606,6 +711,16 @@ header {
         vertical-align: middle;
         width: 50%;
         text-align: left;
+        .excels-message-normal-name {
+          display: inline;
+        }
+        .excels-message-cta-name {
+          display: none;
+          a {
+            color: color(excels-red);
+            text-decoration: underline;
+          }
+        }
       }
 
       #excels-cta-container {
@@ -663,6 +778,23 @@ header {
         p {
           width: 40%;
         }
+        @media screen and (max-width: 880px) {
+          #excels-cta-container {
+            display: none;
+            width: 100%;
+          }
+          p {
+            width: 100%;
+            text-align: center;
+            padding-right: 2em;
+            .excels-message-normal-name {
+              display: none;
+            }
+            .excels-message-cta-name {
+              display: inline;
+            }
+          }
+        }
       }
     }
   }
@@ -683,6 +815,9 @@ header {
     #build-toolbar-container #excels-message-container {
       transform: translate(0,-50%);
     }
+  }
+  @media screen and (max-width: 880px) {
+    height: 90px;
   }
 }
 

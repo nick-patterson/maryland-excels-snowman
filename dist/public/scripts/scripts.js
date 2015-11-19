@@ -677,15 +677,26 @@ var snowman = {
 
 			function toSuccess() {
 				snowman.isSharePosition = true;
-				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 15) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
+				if (window.innerWidth > 880) {
+					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 15) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
+				}
+				else {
+					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 15) * -5, ease: Back.easeInOut, onUpdate: render});
+				}			
 				$('#success-scene-title').removeClass('end-title-inactive');
 			}
 
 			function toFailure() {
 				snowman.isSharePosition = true;
 				snowman.isDead = true;
-				TweenMax.to([base,theSnowmanTorso,theSnowmanHead], .75, {left: 0, onUpdate: render}, .2);
-				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 25) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
+				if (window.innerWidth > 880) {
+					TweenMax.to([base,theSnowmanTorso,theSnowmanHead], .75, {left: 0, onUpdate: render}, .2);
+					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 25) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
+				}
+				else {
+					TweenMax.to([base,theSnowmanTorso,theSnowmanHead], .75, {left: 0, onUpdate: render}, .2);
+					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 25) * -2, ease: Back.easeInOut, onUpdate: render});
+				}
 				$('#failure-scene-title').removeClass('end-title-inactive');
 			}
 
@@ -706,6 +717,7 @@ var snowman = {
 					generateSnowman();
 					snowman.isDead = false;
 				}
+				snowman.isSharePosition = false;
 				snowman.toBuildMode.backToBuildMode();
 				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 50), ease: Back.easeInOut, onUpdate: render});
 			});
