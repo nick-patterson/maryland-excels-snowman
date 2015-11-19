@@ -1500,7 +1500,7 @@ header.header-intro #excels-logo img {
 #build-scene #build-buttons-container .build-button .build-button-inner {
   height: 100%;
   width: 100%;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #05254c;
   border-radius: 100%;
   color: #05254c;
   font-size: 50px;
@@ -1744,7 +1744,7 @@ header.header-intro #excels-logo img {
   cursor: pointer;
 }
 #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button.build-toolbar-button-active {
-  background: #e1f2ff;
+  background: #c7e8ff;
   border-top: 2px solid #05254c;
   text-align: center;
 }
