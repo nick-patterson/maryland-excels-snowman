@@ -82,6 +82,7 @@ header {
     position: absolute;
     top: 50%;
     left: 2em;
+    z-index: 1;
     transform: translate(0,-50%);
     transition: transform .5s, top .5s, left .5s, visibility .5s, opacity .5s;
 
