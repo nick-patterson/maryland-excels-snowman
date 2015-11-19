@@ -1846,6 +1846,12 @@ header.header-intro #excels-logo img {
   padding-right: 2em;
   padding-left: 2em;
 }
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels {
+  width: 65%;
+}
+#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:hover {
+  width: 70%;
+}
 @media screen and (max-width: 1151px) {
   #build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container {
     width: 60%;

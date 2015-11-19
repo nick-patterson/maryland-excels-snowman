@@ -857,6 +857,12 @@ header {
         vertical-align: middle;
         padding-right: 2em;
         padding-left: 2em;
+        .cta-excels {
+          width: 65%;
+          &:hover {
+            width: 70%;
+          }
+        }
       }
       @media screen and (max-width: 1151px) {
         #excels-cta-container {
