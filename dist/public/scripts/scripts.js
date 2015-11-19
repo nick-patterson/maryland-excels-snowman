@@ -632,7 +632,9 @@ var snowman = {
 
 			$('#build-scene').addClass('build-scene-inactive');
 			$('#build-toolbar').addClass('build-toolbar-inactive');
-			$('.js-to-share-mode').addClass('cta-hidden');
+			$('.js-to-share-mode:not(.header-cta)').addClass('cta-hidden');
+			$('header').find('.js-to-share-mode').addClass('cta-disabled');
+			$('header').find('.js-to-share-mode').html('Testing...');
 
 			var strength = snowman.snowmanElements.base[snowman.current.base].strength;
 			var torsoWeight = snowman.snowmanElements.torso[snowman.current.torso].weight;
@@ -674,6 +676,9 @@ var snowman = {
 			$('.js-back-to-build-mode').removeClass('cta-hidden');
 			$('#build-toolbar').addClass('build-toolbar-excels-cta');
 			$('#build-toolbar').removeClass('build-toolbar-inactive');
+			$('header').find('.js-to-share-mode').addClass('cta-hidden');
+			$('header').find('.js-to-share-mode').removeClass('cta-disabled');
+			$('header').find('.js-to-share-mode').html('TEST YOUR SNOWMAN');
 
 			function toSuccess() {
 				snowman.isSharePosition = true;
@@ -681,7 +686,7 @@ var snowman = {
 					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 15) + (base.width * base.scaleX / 2), ease: Back.easeInOut, onUpdate: render});
 				}
 				else {
-					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 15) * -5, ease: Back.easeInOut, onUpdate: render});
+					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 15) * -4, ease: Back.easeInOut, onUpdate: render});
 				}			
 				$('#success-scene-title').removeClass('end-title-inactive');
 			}
@@ -695,7 +700,7 @@ var snowman = {
 				}
 				else {
 					TweenMax.to([base,theSnowmanTorso,theSnowmanHead], .75, {left: 0, onUpdate: render}, .2);
-					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 25) * -2, ease: Back.easeInOut, onUpdate: render});
+					TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 25) * -4, ease: Back.easeInOut, onUpdate: render});
 				}
 				$('#failure-scene-title').removeClass('end-title-inactive');
 			}
@@ -717,7 +722,6 @@ var snowman = {
 					generateSnowman();
 					snowman.isDead = false;
 				}
-				snowman.isSharePosition = false;
 				snowman.toBuildMode.backToBuildMode();
 				TweenMax.to(theSnowman, .75, {left: getWidthInPercentage(canvas, 50), ease: Back.easeInOut, onUpdate: render});
 			});
@@ -786,10 +790,20 @@ var snowman = {
 			// PLACE SNOWMAN
 			if (snowman.isSharePosition) {
 				if (snowman.isDead) {
-					theSnowman.left = getWidthInPercentage(canvas, 25) + (base.width * base.scaleX / 2);
+					if (window.innerWidth > 880) {
+						theSnowman.left = getWidthInPercentage(canvas, 25) + (base.width * base.scaleX / 2);
+					}
+					else {
+						theSnowman.left = getWidthInPercentage(canvas, 25) * -4;
+					}
 				}
 				else {
-					theSnowman.left = getWidthInPercentage(canvas, 15) + (base.width * base.scaleX / 2);
+					if (window.innerWidth > 880) {
+						theSnowman.left = getWidthInPercentage(canvas, 15) + (base.width * base.scaleX / 2);
+					}
+					else {
+						theSnowman.left = getWidthInPercentage(canvas, 15) * -4;
+					}
 				}
 			}
 			else {
@@ -801,6 +815,7 @@ var snowman = {
 		});
 
 		$('.js-to-build-mode').click(function(event){
+			$(this).css('display', 'none');
 			$('header').removeClass('header-intro');
 			TweenMax.to('#intro-scene', .5, {autoAlpha: 0});
 			snowmanHistory.object.title = 'build';
@@ -835,7 +850,7 @@ var snowman = {
 	toBuildMode: {
 
 		backToBuildMode: function() {
-			snowman.isSharePosition = true;
+			snowman.isSharePosition = false;
 			$('#build-scene').removeClass('build-scene-inactive');
 			$('#build-toolbar').removeClass('build-toolbar-excels-cta build-toolbar-inactive');
 			$('.js-to-share-mode').removeClass('cta-hidden');
@@ -940,10 +955,23 @@ var share = {
 	}
 }
 
+var tutorial = {
+	init: function() {
+		$('.tutorial-element').find('.tutorial-confirm').click(function(event){
+			$(this).closest('.tutorial-element').addClass('tutorial-element-inactive');
+
+			if($(this).closest('.tutorial-element').is('#toolbar-tutorial-elements')) {
+				$('#build-button-tutorial-elements').removeClass('tutorial-element-hidden-box');
+			}
+		});
+	}
+}
+
 $(window).load(function(){
 	snowman.init();
 	toolbar.init();
 	share.init();
+	tutorial.init();
 });
 
 

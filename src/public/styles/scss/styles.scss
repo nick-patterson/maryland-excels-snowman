@@ -120,11 +120,25 @@ header {
     }
   }
 
+  #header-cta-container {
+    display: none;
+    position: relative;
+    width: 50%;
+    .header-cta {
+      width: 100%;
+      &.cta-hidden {
+        display: none;
+      }
+    }
+  }
+
   &.header-intro {
     #title {
       transform: scale(0,0);
     }
-
+    #header-cta-container {
+      display: none;
+    }
     #excels-logo {
       visibility: visible;
       opacity: 1;
@@ -143,22 +157,41 @@ header {
   }
   @media screen and (max-width: 630px) {
     #excels-logo {
-      img {
-        width: 160px;
-      }
+      visibility: hidden;
+      opacity: 0;
     }
     #title {
-      font-size: 1.85em;
+      text-align: left;
+      width: 50%;
+      font-size: 2em;
     }
-    @media screen and (max-width: 445px) {
-      #excels-logo {
-        visibility: hidden;
-        opacity: 0;
-      }
+    #header-cta-container {
+      display: table-cell;
+    }
+    @media screen and (max-width: 540px) {
       #title {
-        width: 100%;
-        text-align: center;
-        font-size: 2.5em;
+        width: 35%;
+        top: 0;
+        font-size: 2.25em;
+        small {
+          font-size: .5em;
+        }
+      }
+      #header-cta-container {
+        width: 65%
+      }
+      @media screen and (max-width: 445px) {
+        #title {
+          font-size: 1.8em;
+        }
+        @media screen and (max-width: 380px) {
+          #title {
+            display: none;
+          }
+          #header-cta-container {
+            width: 100%;
+          }
+        }
       }
     }
   }
@@ -218,6 +251,62 @@ header {
   top: -9999px;
   left: -9999px;
   visibility: hidden;
+}
+
+.cta-excels {
+  color: white;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  max-width: 500px;
+  //float: right;
+
+  &:before {
+    content: '';
+    background: color(excels-red);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 30px;
+    z-index: -1;
+  }
+
+  &:after {
+    content: '';
+    border: 1px solid color(white);
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 6px;
+    bottom: 6px;
+    border-radius: 30px;
+    transition: background .2s;
+    z-index: -1;
+  }
+
+  &:hover {
+    width: 70%;
+    padding: 1em 2.25em;
+  }
+
+  &:hover:after {
+    background: darken(color(excels-red), 8);
+  }
+
+  &.cta-disabled {
+    opacity: .35;
+    &:hover {
+      cursor: progress;
+      letter-spacing: 0;
+      width: 100%;
+      padding: 1em 2.25em;
+    }
+    &:hover:after {
+      background: none;
+    }
+  }
 }
 
 .snowball-bg {
@@ -440,6 +529,15 @@ header {
         width: 48px;
         height: 48px;
         padding: 6px;
+        &:hover {
+          width: 55px;
+          height: 55px;
+          .build-button-inner {
+            font-size: 36px;
+            line-height: 107%;
+            background: color(light-blue);
+          }
+        }
         .build-button-inner {
           font-size: 34px;
         }
@@ -497,6 +595,9 @@ header {
     left: auto;
     right: 2em;
     top: 2em;
+    @media screen and (max-width: 630px) {
+      display: none;
+    }
   }
 
   .js-back-to-build-mode {
@@ -504,6 +605,11 @@ header {
     left: auto;
     left: 2em;
     top: 2em;
+    @media screen and (max-width: 630px) {
+      &:not(.try-again) {
+        display: none;
+      }
+    }
   }
 
   &.build-scene-inactive {
@@ -643,6 +749,8 @@ header {
       transition: transform .2s;
 
       .build-toolbar-button {
+        font-family: 'verveine';
+        font-size: 1.25em;
         position: relative;
         display: table-cell;
         width: (100 / 7) * 1%;
@@ -728,48 +836,6 @@ header {
         vertical-align: middle;
         padding-right: 2em;
         padding-left: 2em;
-
-        .cta-excels {
-          color: white;
-          display: inline-block;
-          width: 65%;
-          max-width: 500px;
-          //float: right;
-
-          &:before {
-            content: '';
-            background: color(excels-red);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            border-radius: 30px;
-            z-index: -1;
-          }
-
-          &:after {
-            content: '';
-            border: 1px solid color(white);
-            position: absolute;
-            left: 6px;
-            right: 6px;
-            top: 6px;
-            bottom: 6px;
-            border-radius: 30px;
-            transition: background .2s;
-            z-index: -1;
-          }
-
-          &:hover {
-            width: 70%;
-            padding: 1em 2.25em;
-          }
-
-          &:hover:after {
-            background: darken(color(excels-red), 8);
-          }
-        }
       }
       @media screen and (max-width: 1151px) {
         #excels-cta-container {
@@ -818,6 +884,130 @@ header {
   }
   @media screen and (max-width: 880px) {
     height: 90px;
+  }
+}
+
+.tutorial-element {
+  position: absolute;
+  z-index: 1;
+  transition: opacity .5s, visibility .5s, transform .5s;
+
+  &#toolbar-tutorial-elements {
+    bottom: 100px;
+    left: 50%;
+    margin-left: -15px;
+    @media screen and (max-width: 880px) {
+      bottom: 70px;
+    }
+  }
+  &#build-button-tutorial-elements {
+    top: 45px;
+    right: 45px;
+    @media screen and (max-width: 880px) {
+      top: 25px;
+      right: 25px;
+    }
+  }
+  
+  &.tutorial-element-inactive {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(0,4px);
+  }  
+
+  &.tutorial-element-hidden-box {
+    .tutorial-text-box {
+      visibility: hidden;
+      opacity: 0;
+      transform: transition(0,0);
+    }
+  }
+
+  .tutorial-bubble-outer {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: color(excels-red);
+    animation: tutorial-float 4s infinite ease-in-out;
+    .tutorial-bubble-inner {
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      width: 28px;
+      height: 28px;
+      border-radius: 100%;
+      background: transparent;
+      border: 3px solid white;
+    }
+  }
+  .tutorial-text-box {
+    position: absolute;
+    background: color(excels-red);
+    padding: 1.5em;
+    width: 300px;
+    transform: translate(-50%,0px);
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    transition: transform .2s, opacity .2s, visibility .2s;
+    animation: tutorial-text-box 4s infinite ease-in-out;
+
+    &#toolbar-tutorial-text-box {
+      left: 50%;
+      top: -9.5em;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -9px;
+        left: 50%;
+        margin-left: -10px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid color(excels-red);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+    }
+    &#build-button-tutorial-text-box {
+      left: -13em;
+      top: -2.75em;
+      &:after {
+        content: '';
+        position: absolute;
+        right: -9px;
+        top: 50%;
+        margin-top: -10px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 10px solid color(excels-red);
+        border-bottom: 10px solid transparent;
+      }
+    }
+
+    &.tutorial-text-box-inactive {
+      visibility: hidden;
+      opacity: 0;
+      transform: translate (0,0);
+    }
+
+    .tutorial-confirm {
+      color: white;
+      display: block;
+      margin-top: .5em;
+      padding: .25em;
+      background: darken(color(excels-red), 5);
+      border: 1px solid darken(color(excels-red), 10);
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background .2s;
+
+      &:hover {
+        background: darken(color(excels-red), 10);
+      }
+    }
   }
 }
 
@@ -875,3 +1065,33 @@ header {
   0% {opacity: 1;}
   100% {opacity: .4;}
 }
+
+@keyframes tutorial-float {
+  0% {background: color(excels-red);}
+
+  50% {transform: scale(1.1,1.1);
+        background: #d71621;
+      }
+
+  100% {transform: scale(1,1);
+        background: color(excels-red);
+      }
+}
+
+@keyframes tutorial-text-box {
+  0% {}
+
+  50% {transform: translate(-50%,-5px);}
+
+  100% {}
+}
+
+
+
+
+
+
+
+
+
+

@@ -1110,10 +1110,24 @@ header #title small {
   position: relative;
   top: -3px;
 }
+header #header-cta-container {
+  display: none;
+  position: relative;
+  width: 50%;
+}
+header #header-cta-container .header-cta {
+  width: 100%;
+}
+header #header-cta-container .header-cta.cta-hidden {
+  display: none;
+}
 header.header-intro #title {
   -webkit-transform: scale(0, 0);
       -ms-transform: scale(0, 0);
           transform: scale(0, 0);
+}
+header.header-intro #header-cta-container {
+  display: none;
 }
 header.header-intro #excels-logo {
   visibility: visible;
@@ -1133,22 +1147,45 @@ header.header-intro #excels-logo img {
   width: 200px;
 }
 @media screen and (max-width: 630px) {
-  header #excels-logo img {
-    width: 160px;
-  }
-  header #title {
-    font-size: 1.85em;
-  }
-}
-@media screen and (max-width: 630px) and (max-width: 445px) {
   header #excels-logo {
     visibility: hidden;
     opacity: 0;
   }
   header #title {
+    text-align: left;
+    width: 50%;
+    font-size: 2em;
+  }
+  header #header-cta-container {
+    display: table-cell;
+  }
+}
+@media screen and (max-width: 630px) and (max-width: 540px) {
+  header #title {
+    width: 35%;
+    top: 0;
+    font-size: 2.25em;
+  }
+  header #title small {
+    font-size: .5em;
+  }
+  header #header-cta-container {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 630px) and (max-width: 540px) and (max-width: 445px) {
+  header #title {
+    font-size: 1.8em;
+  }
+}
+
+@media screen and (max-width: 630px) and (max-width: 540px) and (max-width: 445px) and (max-width: 380px) {
+  header #title {
+    display: none;
+  }
+  header #header-cta-container {
     width: 100%;
-    text-align: center;
-    font-size: 2.5em;
   }
 }
 
@@ -1216,6 +1253,57 @@ header.header-intro #excels-logo img {
   top: -9999px;
   left: -9999px;
   visibility: hidden;
+}
+
+.cta-excels {
+  color: white;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  max-width: 500px;
+}
+.cta-excels:before {
+  content: '';
+  background: #b01f27;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 30px;
+  z-index: -1;
+}
+.cta-excels:after {
+  content: '';
+  border: 1px solid white;
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  border-radius: 30px;
+  -webkit-transition: background .2s;
+          transition: background .2s;
+  z-index: -1;
+}
+.cta-excels:hover {
+  width: 70%;
+  padding: 1em 2.25em;
+}
+.cta-excels:hover:after {
+  background: #8d191f;
+}
+.cta-excels.cta-disabled {
+  opacity: .35;
+}
+.cta-excels.cta-disabled:hover {
+  cursor: progress;
+  letter-spacing: 0;
+  width: 100%;
+  padding: 1em 2.25em;
+}
+.cta-excels.cta-disabled:hover:after {
+  background: none;
 }
 
 .snowball-bg {
@@ -1427,6 +1515,15 @@ header.header-intro #excels-logo img {
     height: 48px;
     padding: 6px;
   }
+  #build-scene #build-buttons-container .build-button:hover {
+    width: 55px;
+    height: 55px;
+  }
+  #build-scene #build-buttons-container .build-button:hover .build-button-inner {
+    font-size: 36px;
+    line-height: 107%;
+    background: #c7e8ff;
+  }
   #build-scene #build-buttons-container .build-button .build-button-inner {
     font-size: 34px;
   }
@@ -1476,11 +1573,21 @@ header.header-intro #excels-logo img {
   right: 2em;
   top: 2em;
 }
+@media screen and (max-width: 630px) {
+  #build-scene .js-to-share-mode {
+    display: none;
+  }
+}
 #build-scene .js-back-to-build-mode {
   position: absolute;
   left: auto;
   left: 2em;
   top: 2em;
+}
+@media screen and (max-width: 630px) {
+  #build-scene .js-back-to-build-mode:not(.try-again) {
+    display: none;
+  }
 }
 #build-scene.build-scene-inactive #build-buttons-container {
   visibility: hidden;
@@ -1620,6 +1727,8 @@ header.header-intro #excels-logo img {
           transition: transform .2s;
 }
 #build-toolbar #build-toolbar-container #build-toolbar-button-container .build-toolbar-button {
+  font-family: 'verveine';
+  font-size: 1.25em;
   position: relative;
   display: table-cell;
   width: 14.28571429%;
@@ -1706,43 +1815,6 @@ header.header-intro #excels-logo img {
   padding-right: 2em;
   padding-left: 2em;
 }
-#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels {
-  color: white;
-  display: inline-block;
-  width: 65%;
-  max-width: 500px;
-}
-#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:before {
-  content: '';
-  background: #b01f27;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 30px;
-  z-index: -1;
-}
-#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:after {
-  content: '';
-  border: 1px solid white;
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  top: 6px;
-  bottom: 6px;
-  border-radius: 30px;
-  -webkit-transition: background .2s;
-          transition: background .2s;
-  z-index: -1;
-}
-#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:hover {
-  width: 70%;
-  padding: 1em 2.25em;
-}
-#build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container .cta-excels:hover:after {
-  background: #8d191f;
-}
 @media screen and (max-width: 1151px) {
   #build-toolbar #build-toolbar-container #excels-message-container #excels-cta-container {
     width: 60%;
@@ -1793,6 +1865,137 @@ header.header-intro #excels-logo img {
   #build-toolbar {
     height: 90px;
   }
+}
+
+.tutorial-element {
+  position: absolute;
+  z-index: 1;
+  -webkit-transition: opacity .5s, visibility .5s, -webkit-transform .5s;
+          transition: opacity .5s, visibility .5s, transform .5s;
+}
+.tutorial-element#toolbar-tutorial-elements {
+  bottom: 100px;
+  left: 50%;
+  margin-left: -15px;
+}
+@media screen and (max-width: 880px) {
+  .tutorial-element#toolbar-tutorial-elements {
+    bottom: 70px;
+  }
+}
+.tutorial-element#build-button-tutorial-elements {
+  top: 45px;
+  right: 45px;
+}
+@media screen and (max-width: 880px) {
+  .tutorial-element#build-button-tutorial-elements {
+    top: 25px;
+    right: 25px;
+  }
+}
+.tutorial-element.tutorial-element-inactive {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transform: translate(0, 4px);
+      -ms-transform: translate(0, 4px);
+          transform: translate(0, 4px);
+}
+.tutorial-element.tutorial-element-hidden-box .tutorial-text-box {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transform: transition(0, 0);
+      -ms-transform: transition(0, 0);
+          transform: transition(0, 0);
+}
+.tutorial-element .tutorial-bubble-outer {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #b01f27;
+  -webkit-animation: tutorial-float 4s infinite ease-in-out;
+          animation: tutorial-float 4s infinite ease-in-out;
+}
+.tutorial-element .tutorial-bubble-outer .tutorial-bubble-inner {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  background: transparent;
+  border: 3px solid white;
+}
+.tutorial-element .tutorial-text-box {
+  position: absolute;
+  background: #b01f27;
+  padding: 1.5em;
+  width: 300px;
+  -webkit-transform: translate(-50%, 0px);
+      -ms-transform: translate(-50%, 0px);
+          transform: translate(-50%, 0px);
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-transition: -webkit-transform .2s, opacity .2s, visibility .2s;
+          transition: transform .2s, opacity .2s, visibility .2s;
+  -webkit-animation: tutorial-text-box 4s infinite ease-in-out;
+          animation: tutorial-text-box 4s infinite ease-in-out;
+}
+.tutorial-element .tutorial-text-box#toolbar-tutorial-text-box {
+  left: 50%;
+  top: -9.5em;
+}
+.tutorial-element .tutorial-text-box#toolbar-tutorial-text-box:after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #b01f27;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.tutorial-element .tutorial-text-box#build-button-tutorial-text-box {
+  left: -13em;
+  top: -2.75em;
+}
+.tutorial-element .tutorial-text-box#build-button-tutorial-text-box:after {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: 50%;
+  margin-top: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 10px solid #b01f27;
+  border-bottom: 10px solid transparent;
+}
+.tutorial-element .tutorial-text-box.tutorial-text-box-inactive {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transform: translate 0, 0;
+      -ms-transform: translate 0, 0;
+          transform: translate 0, 0;
+}
+.tutorial-element .tutorial-text-box .tutorial-confirm {
+  color: white;
+  display: block;
+  margin-top: .5em;
+  padding: .25em;
+  background: #9a1b22;
+  border: 1px solid #85171d;
+  border-radius: 5px;
+  text-decoration: none;
+  -webkit-transition: background .2s;
+          transition: background .2s;
+}
+.tutorial-element .tutorial-text-box .tutorial-confirm:hover {
+  background: #85171d;
 }
 
 #leave-modal {
@@ -1853,5 +2056,47 @@ header.header-intro #excels-logo img {
   }
   100% {
     opacity: .4;
+  }
+}
+@-webkit-keyframes tutorial-float {
+  0% {
+    background: #b01f27;
+  }
+  50% {
+    -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+    background: #d71621;
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    background: #b01f27;
+  }
+}
+@keyframes tutorial-float {
+  0% {
+    background: #b01f27;
+  }
+  50% {
+    -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+    background: #d71621;
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    background: #b01f27;
+  }
+}
+@-webkit-keyframes tutorial-text-box {
+  50% {
+    -webkit-transform: translate(-50%, -5px);
+            transform: translate(-50%, -5px);
+  }
+}
+@keyframes tutorial-text-box {
+  50% {
+    -webkit-transform: translate(-50%, -5px);
+            transform: translate(-50%, -5px);
   }
 }
