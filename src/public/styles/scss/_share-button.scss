@@ -43,6 +43,9 @@ share-button {
     opacity: 0;
     visibility: hidden;
   }
+  @media screen and (max-width: 880px) {
+    font-size: .95em;
+  }
 }
 share-button .sb-social {
   position: absolute;

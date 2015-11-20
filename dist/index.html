@@ -5,7 +5,7 @@
     <title>Maryland Excels — Build Your Own Snowman </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Snowmen have quality standards, too. Do you have the skills to build a quality snowman?">
-    <meta name="image" content="public/images/social/social-western.png">
+    <meta name="og:image" content="public/images/social/social-western.png">
 
     <script src="https://use.typekit.net/agz1avx.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -32,11 +32,11 @@
   		</p>
   	</div>
   	<div id="title">
-  		BUILD <small>YOUR OWN</small> SNOWMAN!
+  		BUILD <br class="title-break"><small>YOUR OWN</small> SNOWMAN!
   	</div>
     <div id="header-cta-container">
-      <a class="cta cta-excels header-cta js-to-share-mode" href="javascript:;">TEST YOUR SNOWMAN ></a>
-      <a class="cta cta-excels header-cta js-back-to-build-mode cta-hidden" href="javascript:;">< BACK</a>
+      <a class="cta cta-excels header-cta js-to-share-mode" href="javascript:;">Test<span class="your"> Your</span> Snowman ></a>
+      <a class="cta cta-excels header-cta js-back-to-build-mode cta-hidden" href="javascript:;">< Back</a>
     </div>
   </div>
 </header>
@@ -97,11 +97,11 @@
       <div id="intro-scene-title">
         <div id="intro-scene-title-inner-container">
           <div id="intro-scene-snowball" class="snowball-bg">
-            <h1><span class="larger-text">BUILD</span>
+            <h1><span class="larger-text">Build</span>
               <br><small>
-              YOUR OWN
+              Your Own
               <br></small>
-              SNOWMAN</h1>
+              Snowman</h1>
           </div>
           <p class="white-text">Snowmen have quality standards, too.</p>
           <p class="white-text">Test your skills and see: can you can build a high quality snowman?</p>
@@ -149,8 +149,8 @@
         </div>
       </div>
     </div>
-    <a class="js-to-share-mode cta" href="javascript:;">TEST YOUR SNOWMAN!</a>
-    <a class="js-back-to-build-mode cta cta-hidden" href="javascript:;">< BACK</a>
+    <a class="js-to-share-mode cta" href="javascript:;">Test Your Snowman ></a>
+    <a class="js-back-to-build-mode cta cta-hidden" href="javascript:;">< Back</a>
     <a id="js-audio-mute" href="javascript:;" >
       <svg width="100%" height="100%" viewBox="0 0 63 72.8">
         <path class="loud-path" d="M50.5,1.9c11.8,4.7,20.1,16.2,20.1,29.7c0,13.5-8.3,25-20.1,29.7"/>
@@ -170,8 +170,8 @@
             <h2>You built a quality snowman!</h2>
           </div>
           <div class="cta-container">
-              <a href="javascript:;" class="cta js-download">DOWNLOAD YOUR SNOWMAN</a><br>
-              <share-button class="js-share">SHARE THIS PAGE</share-button>
+              <a href="javascript:;" class="cta js-download">Download <span class="your">Your </span>Snowman</a><br>
+              <share-button class="js-share">Share This Page</share-button>
           </div>
         </div>
       </div>
@@ -185,7 +185,7 @@
             <h2>Your snowman didn't pass!</h2>
           </div>
           <div class="cta-container">
-              <a href="javascript:;" class="cta try-again js-back-to-build-mode">TRY AGAIN</a>
+              <a href="javascript:;" class="cta try-again js-back-to-build-mode">Try Again</a>
           </div>
         </div>
       </div>
@@ -223,11 +223,11 @@
           <div class="button-text">SCENE</div>
         </div>
       </div>
-      <h2 id="testing-indicator">TESTING YOUR SNOWMAN'S QUALITY....</h2>
+      <h2 id="testing-indicator">Testing Your Snowman's Quality....</h2>
       <div id="excels-message-container">
         <p>Check out <span class="excels-message-normal-name">Maryland EXCELS</span><span class="excels-message-cta-name"><a href="http://www.marylandexcels.org" target="_blank">Maryland EXCELS</a></span> to learn more about quality child care and school-age education and to locate a quality rated program near you!</p>
         <div id="excels-cta-container">
-          <a class="cta cta-excels" href="http://www.marylandexcels.org" target="_blank">VISIT MARYLANDEXCELS.ORG</a>
+          <a class="cta cta-excels" href="http://www.marylandexcels.org" target="_blank">Visit MarylandEXCELS.org</a>
         </div>
       </div>
     </div>
@@ -243,16 +243,28 @@
     </div>
   </div>
 
-  <div id="leave-modal">
-    <div id="leave-modal-inner">
+  <div id="leave-modal" class="modal">
+    <div id="leave-modal-inner" class="modal-inner">
       <div id="leave-modal-callout" class="snowball-bg">
-        <h1>HEY YOU!</h1>
+        <h1>Hey You!</h1>
       </div>
       <p>If you leave this page without downloading or sharing your snowman, he will be lost forever!</p>
       <p>Are you sure you want to leave?</p>
       <div id="leave-cta-container" class="cta-container">
-        <a id="stay" class="cta" href="javascript:;">STAY</a>
-        <a id="leave" class="cta" href="javascript:;">LEAVE</a>
+        <a id="stay" class="cta" href="javascript:;">Stay</a>
+        <a id="leave" class="cta" href="javascript:;">Leave</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="device-rotate-modal" class="modal">
+    <div id="device-rotate-modal-inner" class="modal-inner">
+      <div id="device-rotate-modal-callout">
+        <div id="rotate-device-image-container">
+          <img id="rotate-device-device" src="public/images/ui/rotate-device-device.png" alt="Icon of Smart Device">
+          <img id="rotate-device-face" src="public/images/ui/rotate-device-face.png" alt="Snowman says: Rotate your device!">
+        </div>
+        <h1>Please Rotate Your Device!</h1>
       </div>
     </div>
   </div>

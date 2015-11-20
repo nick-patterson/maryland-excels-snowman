@@ -47,6 +47,12 @@ body {
   //height: 100%;
 }
 
+
+
+//===========================================================//
+//========== NAV ============================================//
+//===========================================================//
+
 header {
   left: 0;
   width: 100%;
@@ -114,6 +120,10 @@ header {
     transform: scale(1,1);
     transition: transform .5s, font-size .5s;
 
+    .title-break {
+      display: none;
+    }
+
     small {
       font-size: .6em;
       position: relative;
@@ -165,21 +175,25 @@ header {
       text-align: left;
       width: 50%;
       font-size: 2em;
+      padding-right: 1em;
     }
     #header-cta-container {
       display: table-cell;
     }
     @media screen and (max-width: 540px) {
       #title {
-        width: 35%;
+        width: 40%;
         top: 0;
         font-size: 2.25em;
         small {
-          font-size: .5em;
+          font-size: .45em;
         }
       }
       #header-cta-container {
-        width: 65%
+        width: 60%;
+        .your {
+          display: none;
+        }
       }
       @media screen and (max-width: 445px) {
         #title {
@@ -187,10 +201,26 @@ header {
         }
         @media screen and (max-width: 380px) {
           #title {
-            display: none;
+            width: 10%;
+            font-size: 1.35em;
+            text-align: center;
+            line-height: .75em;
+            .title-break {
+              display: inline;
+            }
+            small {
+              font-size: .75em;
+              line-height: 1.25em;
+              vertical-align: middle;
+              display: block;
+              margin-top: .4em;
+            }
           }
           #header-cta-container {
-            width: 100%;
+            width: 90%;
+            .your {
+              display: none;
+            }
           }
         }
       }
@@ -260,7 +290,6 @@ header {
   width: 100%;
   text-align: center;
   max-width: 500px;
-  //float: right;
 
   &:before {
     content: '';
@@ -320,6 +349,12 @@ header {
 .cta-container {
   margin-top: 2.5em;
 }
+
+
+
+//===========================================================//
+//========== INTRO SCENE ====================================//
+//===========================================================//
 
 #intro-scene {
   background: color(dark-blue) url('../images/scene-night.jpg') top center no-repeat;
@@ -396,14 +431,14 @@ header {
         padding-top: .5em;
       }
     }
-    #msde-link {
+    #intro-scene-title-container #msde-link {
       img {
         width: 110px;
       }
     }
-    #cte-link {
+    #intro-scene-title-container #cte-link {
       img {
-        width: 150px;
+        width: 140px;
       }
     }
   }
@@ -412,7 +447,7 @@ header {
       #intro-scene-title {
         #intro-scene-title-inner-container {
           width: 100%;
-          padding: 0 2em;
+          padding: 0;
           #intro-scene-snowball {
             padding: 2.5em;
             h1 {
@@ -428,8 +463,29 @@ header {
         display: none;
       }
     }
+    @media screen and (max-width: 480px) {
+      #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
+        padding: 2em;
+        h1 {
+          font-size: 2em;
+          padding-top: .5em;
+        }
+      }
+    }
+  }
+  @media screen and (max-height: 600px) and (max-width: 1000px) {
+    #msde-link, #cte-link {
+      top: 2em;
+      bottom: auto;
+    }
   }
 }
+
+
+
+//===========================================================//
+//========== BUILD SCENE ====================================//
+//===========================================================//
 
 #build-scene {
   position: relative;
@@ -526,6 +582,8 @@ header {
       }
     }
     @media screen and (max-width: 880px) {
+      width: 100%;
+      padding: 0 2em;
       .build-button {
         width: 48px;
         height: 48px;
@@ -588,6 +646,10 @@ header {
       width: 75px;
       height: 45px;
       padding: .7em 2em .5em .5em;
+      @media screen and (max-width: 445px) {
+         width: 60px;
+        padding: .7em 1em .5em .5em;
+      }
     }
   }
 
@@ -718,10 +780,33 @@ header {
             display: none;
           }
         }
+        @media screen and (max-width: 445px) {
+          .end-scene-snowball {
+            padding: 2em;
+            h1 {
+              font-size: 3em;
+              padding-top: .5em;
+            }
+            h2 {
+              width: 60%;
+            }
+          }
+          .cta-container {
+            .your {
+              display: none;
+            }
+          }
+        }
       }
     }
   }
 }
+
+
+
+//===========================================================//
+//========== BUILD TOOLBAR ==================================//
+//===========================================================//
 
 #build-toolbar {
   position: relative;
@@ -877,6 +962,7 @@ header {
             width: 100%;
           }
           p {
+            line-height: 1.5em;
             width: 100%;
             text-align: center;
             padding-right: 2em;
@@ -885,6 +971,11 @@ header {
             }
             .excels-message-cta-name {
               display: inline;
+            }
+          }
+          @media screen and (max-width: 365px) {
+            p {
+              line-height: 1.4em;
             }
           }
         }
@@ -914,6 +1005,12 @@ header {
   }
 }
 
+
+
+//===========================================================//
+//========== TUTORIAL =======================================//
+//===========================================================//
+
 .tutorial-element {
   position: absolute;
   z-index: 1;
@@ -922,7 +1019,7 @@ header {
   &#toolbar-tutorial-elements {
     bottom: 100px;
     left: 50%;
-    margin-left: -15px;
+    margin-left: -20px;
     @media screen and (max-width: 880px) {
       bottom: 70px;
     }
@@ -933,6 +1030,16 @@ header {
     @media screen and (max-width: 880px) {
       top: 25px;
       right: 25px;
+      @media screen and (max-width: 480px) {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        .tutorial-bubble-outer{
+          position: absolute;
+          top: 0;
+          right: 25px;
+        }
+      }
     }
   }
   
@@ -957,6 +1064,10 @@ header {
     border-radius: 100%;
     background: color(excels-red);
     animation: tutorial-float 4s infinite ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+    }
     .tutorial-bubble-inner {
       position: absolute;
       left: 6px;
@@ -978,7 +1089,7 @@ header {
     border-radius: 10px;
     font-size: 14px;
     line-height: 20px;
-    transition: transform .2s, opacity .2s, visibility .2s;
+    transition: transform .2s, opacity .2s, visibility .2s, top .2s, left.2s;
     animation: tutorial-text-box 4s infinite ease-in-out;
 
     &#toolbar-tutorial-text-box {
@@ -1012,12 +1123,24 @@ header {
         border-left: 10px solid color(excels-red);
         border-bottom: 10px solid transparent;
       }
+      @media screen and (max-width: 480px) {
+        left: 50%;
+        top: -10em;
+        &:after {
+          right: 10px;
+          top: auto;
+          bottom: -9px;
+          border-top: 10px solid color(excels-red);
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: none;
+        }
+      }
     }
 
     &.tutorial-text-box-inactive {
       visibility: hidden;
       opacity: 0;
-      transform: translate (0,0);
     }
 
     .tutorial-confirm {
@@ -1038,7 +1161,13 @@ header {
   }
 }
 
-#leave-modal {
+
+
+//===========================================================//
+//========== MODALS =========================================//
+//===========================================================//
+
+.modal {
   position: absolute;
   top: 0;
   left: 0;
@@ -1046,20 +1175,59 @@ header {
   width: 100%;
   height: 100%;
   background: rgba(255,255,255,.85);
-  visibility: hidden;
-  opacity: 0;
+  display: none;
   transition: opacity .5s, visibility .5s;
 
-  &.leave-modal-active {
+  &#device-rotate-modal {
+    background: color(dark-blue);
+    z-index: 2;
+    display: none;
+
+    #device-rotate-modal-inner {
+      padding: 2em;
+      max-height: 100%;
+      #device-rotate-modal-callout {
+        #rotate-device-image-container {
+          margin: 0 auto;
+          width: 80%;
+          padding-top: 80%;
+          position: relative;
+          img {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            &#rotate-device-device {
+              animation: rotate-device-device 2s alternate infinite ease-in-out;
+            }
+            &#rotate-device-face {
+              animation: rotate-device-face 2s alternate infinite ease-in-out;
+            }
+          }
+        }
+        h1 {
+          color: color(light-blue);
+          text-shadow: none;
+          animation: loading .65s ease-in-out infinite alternate;
+        }
+      }
+    }
+    @media screen and (max-height: 767px) and (orientation: 'landscape') {
+      display: block;
+    }
+  }
+
+  &.modal-active {
     opacity: 1;
     visibility: visible;
+    display: block;
 
     #leave-modal-inner {
       transform: translate(-50%,-50%);
     }
   }
 
-  #leave-modal-inner {
+  .modal-inner {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1072,9 +1240,6 @@ header {
     #leave-modal-callout {
       display: table;
       padding: 4em;
-    }
-
-    h1 {
     }
 
     #leave-cta-container {
@@ -1111,6 +1276,18 @@ header {
   50% {transform: translate(-50%,-5px);}
 
   100% {}
+}
+
+@keyframes rotate-device-device {
+  0% {}
+
+  100% {transform: rotate(90deg);}
+}
+
+@keyframes rotate-device-face {
+  0% {}
+
+  100% {transform: translate(0,-5px);}
 }
 
 
