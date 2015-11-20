@@ -349,12 +349,9 @@ var snowman = {
 		function generateScenes() {
 			$('.background-slide').each(function(index){
 				snowman.snowmanElements.scene[index] = $(this);
+				$(this).addClass('background-slide-inactive');
 			});
-			snowman.snowmanElements.scene[0].addClass('background-slide-active');
-			snowman.snowmanElements.scene[0].css({
-				'opacity': 1,
-				'visibility': 'visible'
-			});
+			snowman.snowmanElements.scene[0].removeClass('background-slide-inactive');
 		}
 
 
@@ -544,10 +541,10 @@ var snowman = {
 			snowman.current[element] = toIndex;
 
 			if (element === 'scene') {
-				TweenMax.to(snowman.snowmanElements[element][currentIndex], 0.75, {autoAlpha: 0});
-				snowman.snowmanElements[element][currentIndex].removeClass('background-slide-active');
-				TweenMax.to(snowman.snowmanElements[element][toIndex], 0.75, {autoAlpha: 1});
-				snowman.snowmanElements[element][toIndex].addClass('background-slide-active');
+				//TweenMax.to(snowman.snowmanElements[element][currentIndex], 0.75, {autoAlpha: 0});
+				snowman.snowmanElements[element][currentIndex].addClass('background-slide-inactive');
+				//TweenMax.to(snowman.snowmanElements[element][toIndex], 0.75, {autoAlpha: 1});
+				snowman.snowmanElements[element][toIndex].removeClass('background-slide-inactive');
 			}
 			else if (element === 'arms') {
 				TweenMax.to(snowman.snowmanElements[element][currentIndex].left, 0.75, {opacity: 0, onUpdate: render ,  onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
@@ -828,7 +825,7 @@ var snowman = {
 
 		$('.js-to-build-mode').click(function(event){
 			$('header').removeClass('header-intro');
-			TweenMax.to('#intro-scene', 0.5, {autoAlpha: 0, onComplete: function(){$('#intro-scene').css('display', 'none');}});
+			$('#intro-scene').addClass('intro-scene-inactive');
 			snowmanHistory.object.title = 'build';
 			snowmanHistory.fire();
 			audio.init();

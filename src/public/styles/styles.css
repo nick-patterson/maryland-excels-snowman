@@ -1360,6 +1360,8 @@ header.header-intro #excels-logo img {
   bottom: 0;
   width: 100%;
   z-index: 2;
+  visibility: visible;
+  opacity: 1;
 }
 #intro-scene #intro-scene-title-container {
   width: 100%;
@@ -1413,6 +1415,10 @@ header.header-intro #excels-logo img {
   border-radius: 2px;
   -webkit-transition: width .5s;
           transition: width .5s;
+}
+#intro-scene.intro-scene-inactive {
+  -webkit-animation: auto-alpha .5s 1 forwards;
+          animation: auto-alpha .5s 1 forwards;
 }
 @media screen and (min-aspect-ratio: 16 / 10) {
   #intro-scene #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
@@ -1478,6 +1484,12 @@ header.header-intro #excels-logo img {
   width: 100%;
   height: 100%;
   position: absolute;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity .75s, visibility .75s;
+          transition: opacity .75s, visibility .75s;
+}
+#build-scene .background-slide.background-slide-inactive {
   opacity: 0;
   visibility: hidden;
 }
@@ -2311,5 +2323,27 @@ header.header-intro #excels-logo img {
   100% {
     -webkit-transform: translate(0, -5px);
             transform: translate(0, -5px);
+  }
+}
+@-webkit-keyframes auto-alpha {
+  99% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+@keyframes auto-alpha {
+  99% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
   }
 }

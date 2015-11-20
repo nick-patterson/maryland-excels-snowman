@@ -44,8 +44,8 @@ gulp.task('serve', ['sass'], function() {
 gulp.task('scripts', function(){
   gulp.src(src.js)
     .pipe(plumber())
-    //.pipe(uglify())
-    //.pipe(concat('scripts.min.js'))
+    .pipe(uglify())
+    .pipe(concat('scripts.min.js'))
     .pipe(gulp.dest('./dist/public/scripts/'));
 });
 

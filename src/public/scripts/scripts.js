@@ -349,12 +349,9 @@ var snowman = {
 		function generateScenes() {
 			$('.background-slide').each(function(index){
 				snowman.snowmanElements.scene[index] = $(this);
+				$(this).addClass('background-slide-inactive');
 			});
-			snowman.snowmanElements.scene[0].addClass('background-slide-active');
-			snowman.snowmanElements.scene[0].css({
-				'opacity': 1,
-				'visibility': 'visible'
-			});
+			snowman.snowmanElements.scene[0].removeClass('background-slide-inactive');
 		}
 
 
@@ -544,10 +541,10 @@ var snowman = {
 			snowman.current[element] = toIndex;
 
 			if (element === 'scene') {
-				TweenMax.to(snowman.snowmanElements[element][currentIndex], 0.75, {autoAlpha: 0});
-				snowman.snowmanElements[element][currentIndex].removeClass('background-slide-active');
-				TweenMax.to(snowman.snowmanElements[element][toIndex], 0.75, {autoAlpha: 1});
-				snowman.snowmanElements[element][toIndex].addClass('background-slide-active');
+				//TweenMax.to(snowman.snowmanElements[element][currentIndex], 0.75, {autoAlpha: 0});
+				snowman.snowmanElements[element][currentIndex].addClass('background-slide-inactive');
+				//TweenMax.to(snowman.snowmanElements[element][toIndex], 0.75, {autoAlpha: 1});
+				snowman.snowmanElements[element][toIndex].removeClass('background-slide-inactive');
 			}
 			else if (element === 'arms') {
 				TweenMax.to(snowman.snowmanElements[element][currentIndex].left, 0.75, {opacity: 0, onUpdate: render ,  onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
@@ -828,7 +825,7 @@ var snowman = {
 
 		$('.js-to-build-mode').click(function(event){
 			$('header').removeClass('header-intro');
-			TweenMax.to('#intro-scene', 0.5, {autoAlpha: 0, onComplete: function(){$('#intro-scene').css('display', 'none');}});
+			$('#intro-scene').addClass('intro-scene-inactive');
 			snowmanHistory.object.title = 'build';
 			snowmanHistory.fire();
 			audio.init();
@@ -981,9 +978,37 @@ var tutorial = {
 	}
 };
 
+var reduceBgImages = {
+	hasBeenChanged: false,
+	init: function() {
+		if (window.innerWidth < 992 && reduceBgImages.hasBeenChanged === false) {
+			$('#background-slide-classic').css('background', 'white url("../images/scene-classic-small.jpg") center;');
+			$('#background-slide-future').css('background', 'white url("../images/scene-future-small.jpg") center;');
+			$('#background-slide-western').css('background', 'white url("../images/scene-western-small.jpg") center;');
+			$('#intro-scene').css('background', '#05254c url("../images/scene-night.jpg") top center no-repeat;');
+			reduceBgImages.hasBeenChanged = true;
+		}
+	}
+};
+
 $(window).load(function(){
 	snowman.init();
 	toolbar.init();
 	share.init();
 	tutorial.init();
+	reduceBgImages.init();
 });
+
+$(window).resize(function(event){
+	reduceBgImages.init();
+	if (window.innerWidth >= 992 && reduceBgImages.hasBeenChanged === true) {
+		$('#background-slide-classic #background-slide-future #background-slide-western #intro-scene').css('background', '');
+		reduceBgImages.hasBeenChanged = false;
+	}
+});
+
+
+
+
+
+

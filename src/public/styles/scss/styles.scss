@@ -364,6 +364,8 @@ header {
   bottom: 0;
   width: 100%;
   z-index: 2;
+  visibility: visible;
+  opacity: 1;
 
   #intro-scene-title-container {
     width: 100%;
@@ -417,6 +419,9 @@ header {
         transition: width .5s;
       }
     }
+  }
+  &.intro-scene-inactive {
+    animation: auto-alpha .5s 1 forwards;
   }
   @media screen and (min-aspect-ratio: 16/10) {
     #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
@@ -496,8 +501,13 @@ header {
     width: 100%;
     height: 100%;
     position: absolute;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .75s, visibility .75s;
+    &.background-slide-inactive {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 
   #snowman-offscreen-download-canvas {
@@ -1288,6 +1298,21 @@ header {
   0% {}
 
   100% {transform: translate(0,-5px);}
+}
+
+@keyframes auto-alpha {
+  0% {}
+
+  99% {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  100% {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
 
