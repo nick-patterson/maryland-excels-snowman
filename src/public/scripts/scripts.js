@@ -782,10 +782,8 @@ var snowman = {
 					return date;
 				}
 
-				var downloadAttributeSupported = ('download' in document.createElement('a'));
-
-				if (downloadAttibuteSupported) {
-					$('.js-download')[0].download = 'My_Snowman_' + appendDate() + '.png';
+				if ('download' in document.createElement('a')) {
+					$('.js-download')[0].download = 'My_Snowman_' + appendDate() + '.jpg';
 				}
 				else {
 					$('.js-download')[0].target = '_blank';

@@ -599,6 +599,12 @@ p {
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
 }
 
+.verviene {
+  font-family: "verveine";
+  font-size: 1.4em;
+  padding-left: .1em;
+}
+
 share-button {
   padding: 1em 2.25em;
   font-size: 1.1em;
