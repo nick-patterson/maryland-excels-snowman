@@ -2016,6 +2016,7 @@ header.header-intro #excels-logo img {
 @media screen and (max-width: 880px) {
   .tutorial-element#toolbar-tutorial-elements {
     bottom: 70px;
+    margin-left: -15px;
   }
 }
 .tutorial-element#build-button-tutorial-elements {
@@ -2025,7 +2026,7 @@ header.header-intro #excels-logo img {
 @media screen and (max-width: 880px) {
   .tutorial-element#build-button-tutorial-elements {
     top: 25px;
-    right: 25px;
+    right: 55px;
   }
 }
 @media screen and (max-width: 880px) and (max-width: 480px) {
@@ -2037,10 +2038,25 @@ header.header-intro #excels-logo img {
   .tutorial-element#build-button-tutorial-elements .tutorial-bubble-outer {
     position: absolute;
     top: 0;
-    right: 25px;
+    right: 55px;
   }
 }
 
+.tutorial-element#snowman-tutorial-elements {
+  top: 65%;
+  left: 50%;
+}
+.tutorial-element#snowman-tutorial-elements .tutorial-bubble-outer {
+  margin-left: -20px;
+}
+@media screen and (max-width: 880px) {
+  .tutorial-element#snowman-tutorial-elements .tutorial-bubble-outer {
+    margin-left: -15px;
+  }
+}
+.tutorial-element#snowman-tutorial-elements .tutorial-text-box {
+  top: -450%;
+}
 .tutorial-element.tutorial-element-inactive {
   visibility: hidden;
   opacity: 0;
@@ -2076,6 +2092,18 @@ header.header-intro #excels-logo img {
   border-radius: 100%;
   background: transparent;
   border: 3px solid white;
+}
+@media screen and (max-width: 880px) {
+  .tutorial-element .tutorial-bubble-outer {
+    width: 30px;
+    height: 30px;
+  }
+  .tutorial-element .tutorial-bubble-outer .tutorial-bubble-inner {
+    width: 22px;
+    height: 22px;
+    top: 4px;
+    left: 4px;
+  }
 }
 .tutorial-element .tutorial-text-box {
   position: absolute;
@@ -2141,6 +2169,18 @@ header.header-intro #excels-logo img {
     border-bottom: none;
   }
 }
+.tutorial-element .tutorial-text-box#snowman-tutorial-text-box:after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #b01f27;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
 .tutorial-element .tutorial-text-box.tutorial-text-box-inactive {
   -webkit-animation: auto-alpha .5s 1 forwards;
           animation: auto-alpha .5s 1 forwards;
@@ -2184,8 +2224,8 @@ header.header-intro #excels-logo img {
 }
 .modal#device-rotate-modal #device-rotate-modal-inner #device-rotate-modal-callout #rotate-device-image-container {
   margin: 0 auto;
-  width: 80%;
-  padding-top: 80%;
+  width: 60%;
+  padding-top: 60%;
   position: relative;
 }
 .modal#device-rotate-modal #device-rotate-modal-inner #device-rotate-modal-callout #rotate-device-image-container img {
@@ -2212,6 +2252,16 @@ header.header-intro #excels-logo img {
   .modal#device-rotate-modal {
     display: block;
   }
+}
+.modal#loading-modal {
+  z-index: 2;
+  background: #05254c;
+}
+.modal#loading-modal #loading-modal-inner h1 {
+  color: #c7e8ff;
+  text-shadow: none;
+  -webkit-animation: loading .65s ease-in-out infinite alternate;
+          animation: loading .65s ease-in-out infinite alternate;
 }
 .modal.modal-active {
   opacity: 1;
@@ -2242,6 +2292,12 @@ header.header-intro #excels-logo img {
 }
 .modal .modal-inner #leave-cta-container .cta:first-of-type {
   margin-right: .5em;
+}
+@media screen and (max-width: 480px) {
+  .modal .modal-inner#leave-modal-inner {
+    width: 100%;
+    padding: 0 2em;
+  }
 }
 
 @-webkit-keyframes loading {

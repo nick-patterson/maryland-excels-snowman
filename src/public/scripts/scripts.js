@@ -45,6 +45,7 @@ var snowman = {
 		canvas.setDimensions({width: window.innerWidth, height: canvasHeight});
 		canvas.top = 85;
 		canvas.renderOnAddRemove = false;
+		canvas.selection = false;
 
 		var canvasDownload = new fabric.StaticCanvas('snowman-offscreen-download-canvas');
 		canvasDownload.setDimensions({width: 1500, height: 900});
@@ -584,30 +585,24 @@ var snowman = {
 
 		$('.build-button').click(function(event){
 			var direction = $(this).data('direction');
-			switch (snowman.toModify) {
-				case 'hat':
-					changeElement('hat', direction);
-				break;
-				case 'face':
-					changeElement('face', direction);
-				break;
-				case 'head':
-					changeElement('head', direction);
-				break;
-				case 'torso':
-					changeElement('torso', direction);
-				break;
-				case 'arms':
-					changeElement('arms', direction);
-				break;
-				case 'base':
-					changeElement('base', direction);
-				break;
-				case 'scene':
-					changeElement('scene', direction);
-				break;
-			}
-					
+			changeElement(snowman.toModify, direction);			
+		});
+
+		$('#build-scene').bind('touchstart', function(event){
+			var start = event.originalEvent.touches[0].pageX;
+			$('#build-scene').bind('touchend', function(event){
+				var end = event.originalEvent.changedTouches[0].pageX;
+				var direction = '';
+				if (end < start && start - end > 25) {
+					direction = 'next';
+					changeElement(snowman.toModify, direction);
+				}
+				else if (end > start && end - start > 25) {
+					direction = 'prev';
+					changeElement(snowman.toModify, direction);
+				}
+				$('#build-scene').unbind('touchend');
+			});
 		});
 
 		// RENDERING
@@ -974,11 +969,15 @@ var tutorial = {
 		$('.tutorial-element').find('.tutorial-confirm').click(function(event){
 			$(this).closest('.tutorial-element').addClass('tutorial-element-inactive');
 
+			if ($(this).closest('.tutorial-element').is('#snowman-tutorial-elements')) {
+				$('#toolbar-tutorial-elements').removeClass('tutorial-element-hidden-box');
+			}
 			if($(this).closest('.tutorial-element').is('#toolbar-tutorial-elements')) {
 				$('#build-button-tutorial-elements').removeClass('tutorial-element-hidden-box');
 			}
 		});
 		$('.tutorial-bubble-outer').click(function(event){
+			$('.tutorial-element').not($(this).closest('.tutorial-element')).addClass('tutorial-element-hidden-box');
 			$(this).closest('.tutorial-element').toggleClass('tutorial-element-hidden-box');
 		});
 	}
@@ -1003,6 +1002,7 @@ $(window).load(function(){
 	share.init();
 	tutorial.init();
 	reduceBgImages.init();
+	$('#loading-modal').removeClass('modal-active');
 });
 
 $(window).resize(function(event){

@@ -1035,14 +1035,16 @@ header {
     margin-left: -20px;
     @media screen and (max-width: 880px) {
       bottom: 70px;
+      margin-left: -15px;
     }
   }
+
   &#build-button-tutorial-elements {
     top: 45px;
     right: 45px;
     @media screen and (max-width: 880px) {
       top: 25px;
-      right: 25px;
+      right: 55px;
       @media screen and (max-width: 480px) {
         left: 0;
         width: 100%;
@@ -1050,9 +1052,23 @@ header {
         .tutorial-bubble-outer{
           position: absolute;
           top: 0;
-          right: 25px;
+          right: 55px;
         }
       }
+    }
+  }
+
+  &#snowman-tutorial-elements {
+    top: 65%;
+    left: 50%;
+    .tutorial-bubble-outer {
+      margin-left: -20px;
+      @media screen and (max-width: 880px) {
+        margin-left: -15px;
+      }
+    }
+    .tutorial-text-box {
+      top: -450%;
     }
   }
   
@@ -1090,6 +1106,16 @@ header {
       border-radius: 100%;
       background: transparent;
       border: 3px solid white;
+    }
+    @media screen and (max-width: 880px) {
+      width: 30px;
+      height: 30px;
+      .tutorial-bubble-inner {
+        width: 22px;
+        height: 22px;
+        top: 4px;
+        left: 4px;
+      }
     }
   }
   .tutorial-text-box {
@@ -1151,6 +1177,21 @@ header {
       }
     }
 
+    &#snowman-tutorial-text-box {
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -9px;
+        left: 50%;
+        margin-left: -10px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid color(excels-red);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+    }
+
     &.tutorial-text-box-inactive {
       animation: auto-alpha .5s 1 forwards;
     }
@@ -1201,8 +1242,8 @@ header {
       #device-rotate-modal-callout {
         #rotate-device-image-container {
           margin: 0 auto;
-          width: 80%;
-          padding-top: 80%;
+          width: 60%;
+          padding-top: 60%;
           position: relative;
           img {
             width: 100%;
@@ -1226,6 +1267,18 @@ header {
     }
     @media screen and (max-height: 600px) and (orientation: 'landscape') {
       display: block;
+    }
+  }
+
+  &#loading-modal {
+    z-index: 2;
+    background: color(dark-blue);
+    #loading-modal-inner {
+      h1 {
+        color: color(light-blue);
+        text-shadow: none;
+        animation: loading .65s ease-in-out infinite alternate; 
+      }
     }
   }
 
@@ -1258,6 +1311,12 @@ header {
 
       .cta:first-of-type {
         margin-right: .5em;
+      }
+    }
+    @media screen and (max-width: 480px) {
+      &#leave-modal-inner {
+        width: 100%;
+        padding: 0 2em;
       }
     }
   }
