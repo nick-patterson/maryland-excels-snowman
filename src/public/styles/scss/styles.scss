@@ -630,6 +630,11 @@ header {
     width: 92px;
     height: 65px;
     transition: background .2s;
+    cursor: pointer;
+
+    * {
+      cursor: pointer;
+    }
 
     svg {
       path {

@@ -5,10 +5,31 @@
     <title>Maryland Excels — Build Your Own Snowman </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Snowmen have quality standards, too. Do you have the skills to build a quality snowman?">
-    <meta name="og:image" content="public/images/social/social-western.png">
+    <meta property="og:title" content="Maryland Excels - Build Your Own Snowman">
+    <meta property="og:description" content="Snowmen have quality standards, too. Do you have the skills to build a quality snowman?">
+    <meta property="og:url" content="http://uat.15foursandbox.com/buildasnowman/">
+    <meta property="og:image" content="http://uat.15foursandbox.com/buildasnowman/public/images/social-classic.jpg">
 
     <script src="https://use.typekit.net/agz1avx.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1521351971514372',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <link rel="stylesheet" href="public/styles/styles.min.css">
     
@@ -162,7 +183,7 @@
       </div>
     </div>
       <div id="snowman-tutorial-text-box" class="tutorial-text-box">
-        Quality snowmen know what they can handle. Keep physics in mind
+        Only a Quality snowman will stay standing. Keep physics in mind as you build your own.
         <a href="javascript:;" class="tutorial-confirm">OK!</a>
       </div>
     </div>

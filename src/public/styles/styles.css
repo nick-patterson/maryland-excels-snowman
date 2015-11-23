@@ -1611,6 +1611,10 @@ header.header-intro #excels-logo img {
   height: 65px;
   -webkit-transition: background .2s;
           transition: background .2s;
+  cursor: pointer;
+}
+#build-scene #js-audio-mute * {
+  cursor: pointer;
 }
 #build-scene #js-audio-mute svg path {
   stroke: #05254c;

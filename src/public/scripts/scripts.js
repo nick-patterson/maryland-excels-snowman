@@ -823,13 +823,13 @@ var snowman = {
 
 		});
 
-		$('.js-to-build-mode').click(function(event){
+		$('.js-to-build-mode').one('click', function(event){
 			$('header').removeClass('header-intro');
 			$('#intro-scene').addClass('intro-scene-inactive');
 			window.setTimeout(function(){$('#intro-scene').hide();}, 500);
 			snowmanHistory.object.title = 'build';
 			snowmanHistory.fire();
-			audio.init();
+			document.getElementById('audio-song').play();
 		});
 
 		window.addEventListener('popstate', function(event){
@@ -840,6 +840,7 @@ var snowman = {
 						history.go(-1);
 					});
 					$('#stay').click(function(){
+						snowmanHistory.fire();
 						$('#leave-modal').removeClass('modal-active');
 						$('#leave').unbind('click');
 						$('#stay').unbind('click');
@@ -895,7 +896,7 @@ var snowmanHistory = {
 var toolbar = {
 
 	init: function() {
-		$('.build-toolbar-button').click(function(){
+		$('.build-toolbar-button').bind('click', function(){
 			$('.build-toolbar-button').not($(this)).removeClass('build-toolbar-button-active');
 			$(this).addClass('build-toolbar-button-active');
 			snowman.toModify = $(this).data('target');
@@ -906,22 +907,22 @@ var toolbar = {
 var audio = {
 	init: function() {
 		var song = document.getElementById('audio-song');
-		song.play();
 
-		$('#js-audio-mute').click(function(event){
-			if (!song.muted) {
-				song.muted = true;
-				song.volume = 0;
-				song.pause();
-				$(this).addClass('volume-muted');
-			}
-			else {
-				song.play();
-				song.muted = false;
-				song.volume = 1;
-				$(this).removeClass('volume-muted');
-			}
-		});
+		function addClick(){
+			$('#js-audio-mute').bind('click', function(event){
+				if (!$(this).hasClass('volume-muted')) {
+					$(this).addClass('volume-muted');
+					song.muted = true;
+					song.pause();
+				}
+				else if ($(this).hasClass('volume-muted')) {
+					$(this).removeClass('volume-muted');
+					song.muted = false;
+					song.play();
+				}
+			});
+		}
+		addClick();
 	}
 };
 
@@ -942,9 +943,10 @@ var share = {
 			    },
 			    facebook: {
 			      enabled:      true,
+			      app_id:       '1521351971514372',
 			    },
 			    pinterest: {
-			      enabled:      true
+			      enabled:      true,
 			    },
 			    reddit: {
 			      enabled:  	false
@@ -1002,6 +1004,7 @@ $(window).load(function(){
 	share.init();
 	tutorial.init();
 	reduceBgImages.init();
+	audio.init();
 	$('#loading-modal').removeClass('modal-active');
 });
 
