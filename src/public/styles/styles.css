@@ -2262,8 +2262,11 @@ header.header-intro #excels-logo img {
   background: #05254c;
 }
 .modal#loading-modal #loading-modal-inner h1 {
+  font-size: 2.5em;
+  width: 100%;
   color: #c7e8ff;
   text-shadow: none;
+  text-align: center;
   -webkit-animation: loading .65s ease-in-out infinite alternate;
           animation: loading .65s ease-in-out infinite alternate;
 }

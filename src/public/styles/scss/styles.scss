@@ -1280,8 +1280,11 @@ header {
     background: color(dark-blue);
     #loading-modal-inner {
       h1 {
+        font-size: 2.5em;
+        width: 100%;
         color: color(light-blue);
         text-shadow: none;
+        text-align: center;
         animation: loading .65s ease-in-out infinite alternate; 
       }
     }
