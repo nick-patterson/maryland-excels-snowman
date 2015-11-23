@@ -366,6 +366,12 @@ header {
   z-index: 2;
   visibility: visible;
   opacity: 1;
+  transition: opacity .5s, visibility .5s;
+
+  &.intro-scene-inactive {
+    visibility: hidden;
+    opacity: 0;
+  }
 
   #intro-scene-title-container {
     width: 100%;
@@ -419,9 +425,6 @@ header {
         transition: width .5s;
       }
     }
-  }
-  &.intro-scene-inactive {
-    animation: auto-alpha .5s 1 forwards;
   }
   @media screen and (min-aspect-ratio: 16/10) {
     #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
@@ -516,15 +519,15 @@ header {
     left: -9999px;
   }
 
-  #background-slide-1 {
+  #background-slide-classic {
     background: white url('../images/scene-classic.jpg') center;
     background-size: cover;
   }
-  #background-slide-2 {
+  #background-slide-future {
     background: white url('../images/scene-future.jpg') center;
     background-size: cover;
   }
-  #background-slide-3 {
+  #background-slide-western {
     background: white url('../images/scene-western.jpg') center;
     background-size: cover;
   }
@@ -1149,8 +1152,7 @@ header {
     }
 
     &.tutorial-text-box-inactive {
-      visibility: hidden;
-      opacity: 0;
+      animation: auto-alpha .5s 1 forwards;
     }
 
     .tutorial-confirm {
@@ -1222,7 +1224,7 @@ header {
         }
       }
     }
-    @media screen and (max-height: 767px) and (orientation: 'landscape') {
+    @media screen and (max-height: 600px) and (orientation: 'landscape') {
       display: block;
     }
   }
@@ -1298,21 +1300,6 @@ header {
   0% {}
 
   100% {transform: translate(0,-5px);}
-}
-
-@keyframes auto-alpha {
-  0% {}
-
-  99% {
-    visibility: hidden;
-    opacity: 0;
-  }
-
-  100% {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-  }
 }
 
 

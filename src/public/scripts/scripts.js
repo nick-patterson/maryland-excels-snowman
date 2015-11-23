@@ -352,6 +352,7 @@ var snowman = {
 				$(this).addClass('background-slide-inactive');
 			});
 			snowman.snowmanElements.scene[0].removeClass('background-slide-inactive');
+			snowman.snowmanElements.scene[0].addClass('background-slide-active');
 		}
 
 
@@ -541,10 +542,10 @@ var snowman = {
 			snowman.current[element] = toIndex;
 
 			if (element === 'scene') {
-				//TweenMax.to(snowman.snowmanElements[element][currentIndex], 0.75, {autoAlpha: 0});
 				snowman.snowmanElements[element][currentIndex].addClass('background-slide-inactive');
-				//TweenMax.to(snowman.snowmanElements[element][toIndex], 0.75, {autoAlpha: 1});
+				snowman.snowmanElements[element][currentIndex].removeClass('background-slide-active');
 				snowman.snowmanElements[element][toIndex].removeClass('background-slide-inactive');
+				snowman.snowmanElements[element][toIndex].addClass('background-slide-active');
 			}
 			else if (element === 'arms') {
 				TweenMax.to(snowman.snowmanElements[element][currentIndex].left, 0.75, {opacity: 0, onUpdate: render ,  onComplete: removeOld, onCompleteParams: [snowman.snowmanElements[element][currentIndex], element]});
@@ -621,7 +622,7 @@ var snowman = {
 		//---------- END CONDITIONS ----------------------//
 
 
-		$('.js-to-share-mode').click(function(event){
+		$('.js-to-share-mode').one('click', function(event){
 			snowman.isSharePosition = true;
 			testSnowman();
 		});
@@ -723,6 +724,10 @@ var snowman = {
 				}
 				snowman.toBuildMode.backToBuildMode();
 				TweenMax.to(theSnowman, 0.75, {left: getWidthInPercentage(canvas, 50), ease: Back.easeInOut, onUpdate: render});
+				$('.js-to-share-mode').one('click', function(event){
+					snowman.isSharePosition = true;
+					testSnowman();
+				});
 			});
 		}
 
@@ -826,6 +831,7 @@ var snowman = {
 		$('.js-to-build-mode').click(function(event){
 			$('header').removeClass('header-intro');
 			$('#intro-scene').addClass('intro-scene-inactive');
+			window.setTimeout(function(){$('#intro-scene').hide();}, 500);
 			snowmanHistory.object.title = 'build';
 			snowmanHistory.fire();
 			audio.init();

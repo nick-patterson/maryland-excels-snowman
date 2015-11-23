@@ -1362,6 +1362,12 @@ header.header-intro #excels-logo img {
   z-index: 2;
   visibility: visible;
   opacity: 1;
+  -webkit-transition: opacity .5s, visibility .5s;
+          transition: opacity .5s, visibility .5s;
+}
+#intro-scene.intro-scene-inactive {
+  visibility: hidden;
+  opacity: 0;
 }
 #intro-scene #intro-scene-title-container {
   width: 100%;
@@ -1415,10 +1421,6 @@ header.header-intro #excels-logo img {
   border-radius: 2px;
   -webkit-transition: width .5s;
           transition: width .5s;
-}
-#intro-scene.intro-scene-inactive {
-  -webkit-animation: auto-alpha .5s 1 forwards;
-          animation: auto-alpha .5s 1 forwards;
 }
 @media screen and (min-aspect-ratio: 16 / 10) {
   #intro-scene #intro-scene-title-container #intro-scene-title #intro-scene-title-inner-container #intro-scene-snowball {
@@ -1498,15 +1500,15 @@ header.header-intro #excels-logo img {
   top: -9999px;
   left: -9999px;
 }
-#build-scene #background-slide-1 {
+#build-scene #background-slide-classic {
   background: white url("../images/scene-classic.jpg") center;
   background-size: cover;
 }
-#build-scene #background-slide-2 {
+#build-scene #background-slide-future {
   background: white url("../images/scene-future.jpg") center;
   background-size: cover;
 }
-#build-scene #background-slide-3 {
+#build-scene #background-slide-western {
   background: white url("../images/scene-western.jpg") center;
   background-size: cover;
 }
@@ -2140,8 +2142,8 @@ header.header-intro #excels-logo img {
   }
 }
 .tutorial-element .tutorial-text-box.tutorial-text-box-inactive {
-  visibility: hidden;
-  opacity: 0;
+  -webkit-animation: auto-alpha .5s 1 forwards;
+          animation: auto-alpha .5s 1 forwards;
 }
 .tutorial-element .tutorial-text-box .tutorial-confirm {
   color: white;
@@ -2206,7 +2208,7 @@ header.header-intro #excels-logo img {
   -webkit-animation: loading .65s ease-in-out infinite alternate;
           animation: loading .65s ease-in-out infinite alternate;
 }
-@media screen and (max-height: 767px) and (orientation: landscape) {
+@media screen and (max-height: 600px) and (orientation: landscape) {
   .modal#device-rotate-modal {
     display: block;
   }
@@ -2323,27 +2325,5 @@ header.header-intro #excels-logo img {
   100% {
     -webkit-transform: translate(0, -5px);
             transform: translate(0, -5px);
-  }
-}
-@-webkit-keyframes auto-alpha {
-  99% {
-    visibility: hidden;
-    opacity: 0;
-  }
-  100% {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-  }
-}
-@keyframes auto-alpha {
-  99% {
-    visibility: hidden;
-    opacity: 0;
-  }
-  100% {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
   }
 }
