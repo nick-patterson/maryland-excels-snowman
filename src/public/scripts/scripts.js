@@ -583,7 +583,7 @@ var snowman = {
 		generateSnowman();
 		
 
-		$('.build-button').click(function(event){
+		$('.build-button').bind(theUniqueEvent, function(event){
 			var direction = $(this).data('direction');
 			changeElement(snowman.toModify, direction);			
 		});
@@ -617,7 +617,7 @@ var snowman = {
 		//---------- END CONDITIONS ----------------------//
 
 
-		$('.js-to-share-mode').one('click', function(event){
+		$('.js-to-share-mode').one(theUniqueEvent, function(event){
 			snowman.isSharePosition = true;
 			testSnowman();
 		});
@@ -709,7 +709,7 @@ var snowman = {
 
 			// RETURN TO BUILD MODE
 
-			$('.js-back-to-build-mode').one('click', function(event){
+			$('.js-back-to-build-mode').one(theUniqueEvent, function(event){
 				if (snowman.isDead) {
 					for (var i in snowman.current) {
 						snowman.current[i] = 0;
@@ -719,7 +719,7 @@ var snowman = {
 				}
 				snowman.toBuildMode.backToBuildMode();
 				TweenMax.to(theSnowman, 0.75, {left: getWidthInPercentage(canvas, 50), ease: Back.easeInOut, onUpdate: render});
-				$('.js-to-share-mode').one('click', function(event){
+				$('.js-to-share-mode').one(theUniqueEvent, function(event){
 					snowman.isSharePosition = true;
 					testSnowman();
 				});
@@ -823,7 +823,7 @@ var snowman = {
 
 		});
 
-		$('.js-to-build-mode').one('click', function(event){
+		$('.js-to-build-mode').one(theUniqueEvent, function(event){
 			$('header').removeClass('header-intro');
 			$('#intro-scene').addClass('intro-scene-inactive');
 			window.setTimeout(function(){$('#intro-scene').hide();}, 500);
@@ -836,14 +836,14 @@ var snowman = {
 			if (snowmanHistory.currentState.title) {
 				if(snowmanHistory.currentState.title === 'build') {
 					$('#leave-modal').addClass('modal-active');
-					$('#leave').click(function(){
+					$('#leave').bind(theUniqueEvent, function(){
 						history.go(-1);
 					});
-					$('#stay').click(function(){
+					$('#stay').bind(theUniqueEvent, function(){
 						snowmanHistory.fire();
 						$('#leave-modal').removeClass('modal-active');
-						$('#leave').unbind('click');
-						$('#stay').unbind('click');
+						$('#leave').unbind(theUniqueEvent);
+						$('#stay').unbind(theUniqueEvent);
 					});
 				}
 			}
@@ -865,7 +865,7 @@ var snowman = {
 			$('#build-toolbar').removeClass('build-toolbar-excels-cta build-toolbar-inactive');
 			$('.js-to-share-mode').removeClass('cta-hidden');
 			$('.js-back-to-build-mode').addClass('cta-hidden');
-			$('.js-download').unbind('click');
+			$('.js-download').unbind(theUniqueEvent);
 			$('#success-scene-title').addClass('end-title-inactive');
 			$('#failure-scene-title').addClass('end-title-inactive');
 		}
@@ -896,7 +896,7 @@ var snowmanHistory = {
 var toolbar = {
 
 	init: function() {
-		$('.build-toolbar-button').bind('click', function(){
+		$('.build-toolbar-button').bind(theUniqueEvent, function(){
 			$('.build-toolbar-button').not($(this)).removeClass('build-toolbar-button-active');
 			$(this).addClass('build-toolbar-button-active');
 			snowman.toModify = $(this).data('target');
@@ -909,7 +909,7 @@ var audio = {
 		var song = document.getElementById('audio-song');
 
 		function addClick(){
-			$('#js-audio-mute').bind('click', function(event){
+			$('#js-audio-mute').bind(theUniqueEvent, function(event){
 				if (!$(this).hasClass('volume-muted')) {
 					$(this).addClass('volume-muted');
 					song.muted = true;
@@ -968,7 +968,7 @@ var share = {
 
 var tutorial = {
 	init: function() {
-		$('.tutorial-element').find('.tutorial-confirm').click(function(event){
+		$('.tutorial-element').find('.tutorial-confirm').bind(theUniqueEvent, function(event){
 			$(this).closest('.tutorial-element').addClass('tutorial-element-inactive');
 
 			if ($(this).closest('.tutorial-element').is('#snowman-tutorial-elements')) {
@@ -978,7 +978,7 @@ var tutorial = {
 				$('#build-button-tutorial-elements').removeClass('tutorial-element-hidden-box');
 			}
 		});
-		$('.tutorial-bubble-outer').click(function(event){
+		$('.tutorial-bubble-outer').bind(theUniqueEvent, function(event){
 			$('.tutorial-element').not($(this).closest('.tutorial-element')).addClass('tutorial-element-hidden-box');
 			$(this).closest('.tutorial-element').toggleClass('tutorial-element-hidden-box');
 		});
@@ -998,7 +998,14 @@ var reduceBgImages = {
 	}
 };
 
+function isTouchDevice() {
+  return 'ontouchstart' in window || 'onmsgesturechange' in window;
+}
+
+theUniqueEvent = (isTouchDevice() === true) ? "touchstart" : "click";
+
 $(window).load(function(){
+
 	snowman.init();
 	toolbar.init();
 	share.init();
