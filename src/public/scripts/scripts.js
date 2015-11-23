@@ -823,7 +823,7 @@ var snowman = {
 
 		});
 
-		$('.js-to-build-mode').one(theUniqueEvent, function(event){
+		$('.js-to-build-mode').one('click', function(event){
 			$('header').removeClass('header-intro');
 			$('#intro-scene').addClass('intro-scene-inactive');
 			window.setTimeout(function(){$('#intro-scene').hide();}, 500);
@@ -907,6 +907,7 @@ var toolbar = {
 var audio = {
 	init: function() {
 		var song = document.getElementById('audio-song');
+		song.play();
 
 		function addClick(){
 			$('#js-audio-mute').bind(theUniqueEvent, function(event){
@@ -1002,7 +1003,9 @@ function isTouchDevice() {
   return 'ontouchstart' in window || 'onmsgesturechange' in window;
 }
 
-theUniqueEvent = (isTouchDevice() === true) ? "touchstart" : "click";
+var isTouchEnabled = isTouchDevice();
+
+theUniqueEvent = (isTouchEnabled === true) ? "touchstart" : "click";
 
 $(window).load(function(){
 
