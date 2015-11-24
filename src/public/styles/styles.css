@@ -2423,6 +2423,21 @@ header.header-intro #excels-logo img {
     display: block;
   }
 }
+.modal#download-image-modal img {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.modal#download-image-modal a {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  color: #b01f27;
+  background: white;
+  padding: .5em 1em;
+}
 .modal#loading-modal {
   z-index: 2;
   background: #05254c;

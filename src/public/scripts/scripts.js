@@ -765,10 +765,12 @@ var snowman = {
 
 				// CREATE FILE
 
-				$('.js-download')[0].href = canvasDownload.toDataURL({
+				var imageData = canvasDownload.toDataURL({
 					format: 'jpeg',
 					quality: 0.5
 				});
+
+				$('.js-download')[0].href = imageData;
 
 				function appendDate() {
 					var today = new Date();
@@ -783,7 +785,14 @@ var snowman = {
 					$('.js-download')[0].download = 'My_Snowman_' + appendDate() + '.jpg';
 				}
 				else {
-					$('.js-download')[0].target = '_blank';
+					$('#download-image-modal').find('img').attr('src', imageData);
+					$('.js-download').bind('vclick', function(event){
+						event.preventDefault();
+						$('#download-image-modal').addClass('modal-active');
+					});
+					$('.modal-close').bind('vclick',function(event){
+						$('#download-image-modal').removeClass('modal-active');
+					});
 				}
 			}
 		}
@@ -861,11 +870,14 @@ var snowman = {
 
 		backToBuildMode: function() {
 			snowman.isSharePosition = false;
+			if ('download' in document.createElement('a')) {
+				$('.modal-close').unbind('vclick');
+				$('.js-download').unbind('vclick');
+			}
 			$('#build-scene').removeClass('build-scene-inactive');
 			$('#build-toolbar').removeClass('build-toolbar-excels-cta build-toolbar-inactive');
 			$('.js-to-share-mode').removeClass('cta-hidden');
 			$('.js-back-to-build-mode').addClass('cta-hidden');
-			$('.js-download').unbind('vclick');
 			$('#success-scene-title').addClass('end-title-inactive');
 			$('#failure-scene-title').addClass('end-title-inactive');
 		}
