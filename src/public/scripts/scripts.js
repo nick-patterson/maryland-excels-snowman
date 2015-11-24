@@ -922,7 +922,14 @@ var audio = {
 				}
 			});
 		}
+
 		addClick();
+
+		$('.external-link').bind('click', function(event){
+			$('#js-audio-mute').addClass('volume-muted');
+			song.muted = true;
+			song.pause();
+		});
 	}
 };
 
