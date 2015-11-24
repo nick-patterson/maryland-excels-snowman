@@ -62,7 +62,7 @@ gulp.task('sass', function() {
             sound: 'Basso'
         })(err);
     })
-    .pipe(autoprefixer())
+    .pipe(autoprefixer({browsers: ['last 20 versions', 'ff >= 9', 'ie >= 6', 'ios 6', 'android 4']}))
     .pipe(gulp.dest('src/public/styles'))
     .pipe(minifycss({ keepSpecialComments: 0 }))
     .pipe(rename({suffix: '.min' }))

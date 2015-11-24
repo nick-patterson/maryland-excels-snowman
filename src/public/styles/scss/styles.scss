@@ -1330,6 +1330,10 @@ header {
   }
 }
 
+.ui-loader {
+  display: none;
+}
+
 // ANIMATIONS
 
 @keyframes loading {
