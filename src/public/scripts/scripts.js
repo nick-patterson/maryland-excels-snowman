@@ -908,28 +908,25 @@ var audio = {
 	init: function() {
 		var song = document.getElementById('audio-song');
 
-		function addClick(){
-			$('#js-audio-mute').bind('click', function(event){
-				if (!$(this).hasClass('volume-muted')) {
-					$(this).addClass('volume-muted');
-					song.muted = true;
-					song.pause();
-				}
-				else if ($(this).hasClass('volume-muted')) {
-					$(this).removeClass('volume-muted');
-					song.muted = false;
-					song.play();
-				}
-			});
-		}
-
-		addClick();
-
-		$('.external-link').bind('click', function(event){
-			$('#js-audio-mute').addClass('volume-muted');
-			song.muted = true;
-			song.pause();
+		$('#js-audio-mute').bind('click', function(event){
+			if (!$(this).hasClass('volume-muted')) {
+				$(this).addClass('volume-muted');
+				song.muted = true;
+				song.pause();
+			}
+			else if ($(this).hasClass('volume-muted')) {
+				$(this).removeClass('volume-muted');
+				song.muted = false;
+				song.play();
+			}
 		});
+	},
+
+	mute: function() {
+		var song = document.getElementById('audio-song');
+		$('#js-audio-mute').addClass('volume-muted');
+		song.muted = true;
+		song.pause();
 	}
 };
 
@@ -943,23 +940,28 @@ var share = {
 			  },
 			networks: {
 				googlePlus: {
-			      enabled: 		true
+			      enabled: 		true,
+			      before:       function(){audio.mute();}
 			    },
 			    twitter: {
-			      enabled:      true
+			      enabled:      true,
+			      before:       function(){audio.mute();}
 			    },
 			    facebook: {
 			      enabled:      true,
 			      app_id:       '1521351971514372',
+			      before:        function(){audio.mute();}
 			    },
 			    pinterest: {
 			      enabled:      true,
+			      before:       function(){audio.mute();}
 			    },
 			    reddit: {
 			      enabled:  	false
 			    },
 			    linkedin: {
 			      enabled:      true,
+			      before:       function(){audio.mute();}
 			    },
 			    whatsapp: {
 			      enabled:      false
